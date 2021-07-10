@@ -1,0 +1,35 @@
+# dont checkin any files from testdata folder as these are large generated data sets for and from tests (but include folder and README.md)
+testdata/**
+!testdata/README.md
+
+*.log
+.gradle
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+.DS_Store
+pom.xml.versionsBackup
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+**/out/
+
+### NetBeans ###
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+**/target/
+
