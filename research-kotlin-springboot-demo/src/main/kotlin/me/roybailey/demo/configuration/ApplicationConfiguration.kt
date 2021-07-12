@@ -11,16 +11,16 @@ import org.springframework.web.client.RestTemplate
 
 
 @Configuration
-class ApplicationConfiguration {
+open class ApplicationConfiguration {
 
     @Value("\${starwars.api.planets.uri}")
     lateinit var starwarsApiPlanetUri: String
 
     @Bean
-    fun restTemplateBuilder() = RestTemplateBuilder()
+    open fun restTemplateBuilder() = RestTemplateBuilder()
 
     @Bean
-    fun starwarsRestPlanets(builder: RestTemplateBuilder): RestTemplate =
+    open fun starwarsRestPlanets(builder: RestTemplateBuilder): RestTemplate =
         builder.rootUri(starwarsApiPlanetUri)
             .additionalInterceptors(ClientHttpRequestInterceptor { request: HttpRequest, body: ByteArray?, execution: ClientHttpRequestExecution ->
                 // request.getHeaders().add("Bearer", "token");

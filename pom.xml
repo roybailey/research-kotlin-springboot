@@ -1,239 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+    <groupId>me.roybailey</groupId>
+    <artifactId>research-kotlin-springboot-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-	<groupId>me.roybailey</groupId>
-	<artifactId>research-kotlin-springboot</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>research-kotlin-springboot</name>
-	<description>Demo project for Spring Boot</description>
+    <name>research-kotlin-springboot-parent</name>
+    <description>Kotlin SpringBoot Parent</description>
 
-	<properties>
-		<java.version>11</java.version>
-		<kotlin.version>1.5.10</kotlin.version>
-		<testcontainers.version>1.15.3</testcontainers.version>
-		<!-- logging -->
-		<kotlin-logging.version>1.6.24</kotlin-logging.version>
+    <properties>
+        <java.version>11</java.version>
+        <kotlin.version>1.5.10</kotlin.version>
+        <testcontainers.version>1.15.3</testcontainers.version>
+        <!-- logging -->
+        <kotlin-logging.version>1.6.24</kotlin-logging.version>
+        <logback.version>1.2.3</logback.version>
 
-		<!-- testing -->
-		<assertj.version>3.6.1</assertj.version>
-		<mokito.version>2.1.0</mokito.version>
+        <!-- testing -->
+        <assertj.version>3.6.1</assertj.version>
+        <mokito.version>2.1.0</mokito.version>
 
-		<!-- spring -->
-		<spring-boot.version>2.5.0</spring-boot.version>
-		<!-- tomcat : downgraded from v9 to v8 to match with springboot v2.x
-		<tomcat.version>8.5.37</tomcat.version>
- 		-->
-		<!-- graphql -->
-		<graphql-java-kickstart.version>6.0.1</graphql-java-kickstart.version>
-		<graphql-java-tools.version>5.7.1</graphql-java-tools.version>
+        <!-- spring -->
+        <spring-boot.version>2.5.0</spring-boot.version>
 
-		<!-- neo4j -->
-		<neo4j.version>4.0.11</neo4j.version>
-		<neo4j-apoc.version>4.0.0.18</neo4j-apoc.version>
-		<neo4j-java-driver.version>4.0.3</neo4j-java-driver.version>
+        <!-- graphql -->
+        <graphql-java-kickstart.version>6.0.1</graphql-java-kickstart.version>
+        <graphql-java-tools.version>5.7.1</graphql-java-tools.version>
 
-	</properties>
+        <!-- neo4j -->
+        <neo4j.version>4.0.11</neo4j.version>
+        <neo4j-apoc.version>4.0.0.18</neo4j-apoc.version>
+        <neo4j-java-driver.version>4.0.3</neo4j-java-driver.version>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.module</groupId>
-			<artifactId>jackson-module-kotlin</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-reflect</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-stdlib-jdk8</artifactId>
-		</dependency>
+    </properties>
 
-		<!-- logging -->
-		<dependency>
-			<groupId>io.github.microutils</groupId>
-			<artifactId>kotlin-logging</artifactId>
-			<version>${kotlin-logging.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
-		</dependency>
+    <modules>
+        <module>research-kotlin-springboot-bom</module>
+        <module>research-kotlin-springboot-starter</module>
+        <module>research-kotlin-springboot-neo4j</module>
+        <module>research-kotlin-springboot-graphql</module>
+        <module>research-kotlin-springboot-demo</module>
+    </modules>
 
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<version>${assertj.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.nhaarman.mockitokotlin2</groupId>
-			<artifactId>mockito-kotlin</artifactId>
-			<version>${mokito.version}</version>
-		</dependency>
-
-		<!-- GraphQL -->
-		<dependency>
-			<groupId>com.graphql-java-kickstart</groupId>
-			<artifactId>graphql-spring-boot-starter</artifactId>
-			<version>${graphql-java-kickstart.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.graphql-java-kickstart</groupId>
-			<artifactId>graphql-java-tools</artifactId>
-			<version>${graphql-java-tools.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.graphql-java-kickstart</groupId>
-			<artifactId>graphiql-spring-boot-starter</artifactId>
-			<version>${graphql-java-kickstart.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.graphql-java-kickstart</groupId>
-			<artifactId>voyager-spring-boot-starter</artifactId>
-			<version>${graphql-java-kickstart.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.graphql-java-kickstart</groupId>
-			<artifactId>graphql-spring-boot-starter-test</artifactId>
-			<version>${graphql-java-kickstart.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- springboot -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-			<version>${spring-boot.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>${spring-boot.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testcontainers</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- neo4j -->
-		<dependency>
-			<groupId>org.neo4j</groupId>
-			<artifactId>neo4j</artifactId>
-			<version>${neo4j.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-nop</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.neo4j</groupId>
-			<artifactId>neo4j-kernel</artifactId>
-			<version>${neo4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.neo4j</groupId>
-			<artifactId>neo4j-graphdb-api</artifactId>
-			<version>${neo4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.neo4j.procedure</groupId>
-			<artifactId>apoc</artifactId>
-			<version>${neo4j-apoc.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.neo4j.driver</groupId>
-			<artifactId>neo4j-java-driver</artifactId>
-			<version>${neo4j-java-driver.version}</version>
-		</dependency>
-
-	</dependencies>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.testcontainers</groupId>
-				<artifactId>testcontainers-bom</artifactId>
-				<version>${testcontainers.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-	<build>
-		<sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-		<testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.jetbrains.kotlin</groupId>
-				<artifactId>kotlin-maven-plugin</artifactId>
-				<configuration>
-					<args>
-						<arg>-Xjsr305=strict</arg>
-					</args>
-					<compilerPlugins>
-						<plugin>spring</plugin>
-					</compilerPlugins>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.jetbrains.kotlin</groupId>
-						<artifactId>kotlin-maven-allopen</artifactId>
-						<version>${kotlin.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<!-- plugin to inlude the full apoc with dependencies jar, as this is not available from maven central -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<groupId>org.neo4j.procedure</groupId>
-					<artifactId>apoc</artifactId>
-					<version>${neo4j-apoc.version}</version>
-					<packaging>jar</packaging>
-					<file>${basedir}/lib/apoc-${neo4j-apoc.version}-all.jar</file>
-					<generatePom>true</generatePom>
-				</configuration>
-				<executions>
-					<execution>
-						<id>install-jar-lib</id>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<phase>validate</phase>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <args>
+                        <arg>-Xjsr305=strict</arg>
+                    </args>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
