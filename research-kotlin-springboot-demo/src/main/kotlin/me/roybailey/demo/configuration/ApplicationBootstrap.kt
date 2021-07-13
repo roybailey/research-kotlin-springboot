@@ -1,6 +1,5 @@
 package me.roybailey.demo.configuration
 
-import me.roybailey.demo.neo4j.Neo4jBootstrap
 import mu.KotlinLogging
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.ApplicationListener

@@ -19,6 +19,7 @@
     <!-- management of versions defined here for modules to include without versioning -->
     <dependencyManagement>
         <dependencies>
+
             <!-- Kotlin -->
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -48,7 +49,6 @@
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>${assertj.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>com.nhaarman.mockitokotlin2</groupId>
@@ -76,68 +76,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring-boot.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- GraphQL -->
-            <dependency>
-                <groupId>com.graphql-java-kickstart</groupId>
-                <artifactId>graphql-spring-boot-starter</artifactId>
-                <version>${graphql-java-kickstart.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.graphql-java-kickstart</groupId>
-                <artifactId>graphql-java-tools</artifactId>
-                <version>${graphql-java-tools.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.graphql-java-kickstart</groupId>
-                <artifactId>graphiql-spring-boot-starter</artifactId>
-                <version>${graphql-java-kickstart.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.graphql-java-kickstart</groupId>
-                <artifactId>voyager-spring-boot-starter</artifactId>
-                <version>${graphql-java-kickstart.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.graphql-java-kickstart</groupId>
-                <artifactId>graphql-spring-boot-starter-test</artifactId>
-                <version>${graphql-java-kickstart.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- neo4j -->
-            <dependency>
-                <groupId>org.neo4j</groupId>
-                <artifactId>neo4j</artifactId>
-                <version>${neo4j.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-nop</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.neo4j</groupId>
-                <artifactId>neo4j-kernel</artifactId>
-                <version>${neo4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.neo4j</groupId>
-                <artifactId>neo4j-graphdb-api</artifactId>
-                <version>${neo4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.neo4j.procedure</groupId>
-                <artifactId>apoc</artifactId>
-                <version>${neo4j-apoc.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.neo4j.driver</groupId>
-                <artifactId>neo4j-java-driver</artifactId>
-                <version>${neo4j-java-driver.version}</version>
             </dependency>
 
             <!-- TestContainers -->
@@ -152,7 +90,52 @@
                 <groupId>org.testcontainers</groupId>
                 <artifactId>junit-jupiter</artifactId>
                 <version>${testcontainers.version}</version>
-                <scope>test</scope>
+            </dependency>
+
+            <!-- Starter Packs -->
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>research-kotlin-springboot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>research-kotlin-springboot-starter</artifactId>
+                <type>test-jar</type>
+                <classifier>tests</classifier>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>research-kotlin-springboot-test</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>research-kotlin-springboot-graphql</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>research-kotlin-springboot-graphql</artifactId>
+                <type>test-jar</type>
+                <classifier>tests</classifier>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>research-kotlin-springboot-neo4j</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>research-kotlin-springboot-neo4j</artifactId>
+                <type>test-jar</type>
+                <classifier>tests</classifier>
+                <version>${project.version}</version>
             </dependency>
 
         </dependencies>

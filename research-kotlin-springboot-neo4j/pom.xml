@@ -12,8 +12,15 @@
     <groupId>me.roybailey</groupId>
     <artifactId>research-kotlin-springboot-neo4j</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <name>research-kotlin-springboot-neo4j</name>
+    <name>Kotlin SpringBoot Neo4j</name>
     <description>Kotlin SpringBoot Neo4j Library</description>
+
+    <properties>
+        <!-- neo4j -->
+        <neo4j.version>4.0.11</neo4j.version>
+        <neo4j-apoc.version>4.0.0.18</neo4j-apoc.version>
+        <neo4j-java-driver.version>4.0.3</neo4j-java-driver.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -35,10 +42,18 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>me.roybailey</groupId>
+            <artifactId>research-kotlin-springboot-test</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- neo4j -->
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j</artifactId>
+            <version>${neo4j.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -49,18 +64,22 @@
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-kernel</artifactId>
+            <version>${neo4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-graphdb-api</artifactId>
+            <version>${neo4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.neo4j.procedure</groupId>
             <artifactId>apoc</artifactId>
+            <version>${neo4j-apoc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.neo4j.driver</groupId>
             <artifactId>neo4j-java-driver</artifactId>
+            <version>${neo4j-java-driver.version}</version>
         </dependency>
 
     </dependencies>

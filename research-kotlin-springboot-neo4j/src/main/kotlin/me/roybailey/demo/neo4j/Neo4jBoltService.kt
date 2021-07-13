@@ -72,7 +72,7 @@ open class Neo4jBoltService(val options: Neo4jServiceOptions) : Neo4jService {
      */
     override fun registerProcedures(toRegister: List<Class<*>>): Neo4jService {
         val unregisteredProcedures = mutableSetOf<String>()
-        unregisteredProcedures.addAll(toRegister.map { it.name.toLowerCase() })
+        unregisteredProcedures.addAll(toRegister.map { it.name.lowercase() })
         query("CALL dbms.procedures()") {
             record -> record.asMap()
         }.map {

@@ -11,6 +11,7 @@ import org.neo4j.graphdb.GraphDatabaseService
 import org.neo4j.kernel.internal.GraphDatabaseAPI
 import java.io.File
 import java.net.InetAddress
+import java.nio.file.Files.createTempDirectory
 import java.time.Instant.now
 import kotlin.system.exitProcess
 
@@ -23,10 +24,10 @@ open class Neo4jEmbeddedService(val options: Neo4jServiceOptions) : Neo4jService
 
     private val neo4jConfiguration = Neo4jService::class.java.getResource("/neo4j.conf")
 
-    lateinit private var neo4jDatabaseFolder: File
-    lateinit var graphDbService: DatabaseManagementService
-    lateinit var graphDb: GraphDatabaseService
-    lateinit var neo4jBoltService: Neo4jBoltService
+    private var neo4jDatabaseFolder: File
+    var graphDbService: DatabaseManagementService
+    var graphDb: GraphDatabaseService
+    var neo4jBoltService: Neo4jBoltService
 
     init {
         val (neo4jUri, boltPort) = options

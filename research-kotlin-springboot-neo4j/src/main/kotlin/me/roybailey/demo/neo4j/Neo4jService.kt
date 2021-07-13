@@ -20,6 +20,7 @@ data class Neo4jServiceOptions(
     val mode: String = neo4jUri.lowercase().substring(0, 4)
 }
 
+
 typealias Neo4jServiceStatementResult = Result
 typealias Neo4jServiceRecord = Record
 
@@ -27,6 +28,7 @@ typealias Neo4jResultMapper = (result: Neo4jServiceStatementResult) -> Unit
 typealias Neo4jRecordMapper<T> = (record: Neo4jServiceRecord) -> T
 
 val nullNeo4jResultMapper = { _:Neo4jServiceStatementResult -> }
+
 
 interface Neo4jService {
 
@@ -143,13 +145,4 @@ interface Neo4jService {
             )
         }
     }
-}
-
-
-class Neo4jServiceProcedures {
-
-    @UserFunction("custom.data.encrypt")
-    fun format(@Name("value") value: String,
-               @Name(value = "key", defaultValue = "") key: String): String =
-            String(Base64.getEncoder().encode(value.toByteArray()))
 }

@@ -12,9 +12,10 @@
     <description>Kotlin SpringBoot Parent</description>
 
     <properties>
+        <!-- language -->
         <java.version>11</java.version>
         <kotlin.version>1.5.10</kotlin.version>
-        <testcontainers.version>1.15.3</testcontainers.version>
+
         <!-- logging -->
         <kotlin-logging.version>1.6.24</kotlin-logging.version>
         <logback.version>1.2.3</logback.version>
@@ -22,26 +23,20 @@
         <!-- testing -->
         <assertj.version>3.6.1</assertj.version>
         <mokito.version>2.1.0</mokito.version>
+        <testcontainers.version>1.15.3</testcontainers.version>
+        <junit-platform.version>5.7.2</junit-platform.version>
+        <surefire-plugin.version>2.22.2</surefire-plugin.version>
 
         <!-- spring -->
         <spring-boot.version>2.5.0</spring-boot.version>
-
-        <!-- graphql -->
-        <graphql-java-kickstart.version>6.0.1</graphql-java-kickstart.version>
-        <graphql-java-tools.version>5.7.1</graphql-java-tools.version>
-
-        <!-- neo4j -->
-        <neo4j.version>4.0.11</neo4j.version>
-        <neo4j-apoc.version>4.0.0.18</neo4j-apoc.version>
-        <neo4j-java-driver.version>4.0.3</neo4j-java-driver.version>
-
     </properties>
 
     <modules>
-        <module>research-kotlin-springboot-bom</module>
         <module>research-kotlin-springboot-starter</module>
+        <module>research-kotlin-springboot-test</module>
         <module>research-kotlin-springboot-neo4j</module>
         <module>research-kotlin-springboot-graphql</module>
+        <module>research-kotlin-springboot-bom</module>
         <module>research-kotlin-springboot-demo</module>
     </modules>
 
@@ -52,6 +47,35 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.junit.jupiter</groupId>
+                        <artifactId>junit-jupiter-engine</artifactId>
+                        <version>${junit-platform.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${surefire-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
