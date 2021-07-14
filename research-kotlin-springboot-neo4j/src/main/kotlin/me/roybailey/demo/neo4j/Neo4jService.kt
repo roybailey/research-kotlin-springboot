@@ -17,7 +17,7 @@ data class Neo4jServiceOptions(
         val ignoreErrorOnDrop: Boolean = true,
         val ignoreProcedureNotFound: Boolean = true
 ) {
-    val mode: String = neo4jUri.lowercase().substring(0, 4)
+    val mode: String = neo4jUri.toLowerCase().substring(0, 4)
 }
 
 
