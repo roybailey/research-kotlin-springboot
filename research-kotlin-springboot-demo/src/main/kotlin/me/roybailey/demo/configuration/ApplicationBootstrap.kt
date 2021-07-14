@@ -1,6 +1,7 @@
 package me.roybailey.demo.configuration
 
 import mu.KotlinLogging
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.ApplicationListener
 import org.springframework.stereotype.Component
@@ -15,6 +16,9 @@ open class ApplicationBootstrap(
 
     private val logger = KotlinLogging.logger {}
 
+    @Value("\${starwars.api.planets.uri}")
+    lateinit var starwarsApiPlanetUri: String
+
     private fun exitError(message: String, status: Int = 1): Unit =
         logger.run {
             error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -28,18 +32,21 @@ open class ApplicationBootstrap(
 
         val token = System.getenv("API_TOKEN")
         if (token == null || token.isEmpty()) {
-            logger.warn("API_TOKEN not found")
-        }
-
-        val apiTest = RestTemplate()
-        val response = apiTest.getForEntity(
-            "https://swapi.dev/api/planets/1/",
-            String::class.java
-        )
-        if (response.statusCode.is2xxSuccessful) {
+            logger.info { "API token not found, loading graph database..." }
             neo4jBootstrap.initializeGraph(token)
         } else {
-            exitError("Error response from API ${response.statusCode.value()} from API_TOKEN=${token}")
+            logger.info { "API token, validating token..." }
+            val apiTest = RestTemplate()
+            val response = apiTest.getForEntity(
+                starwarsApiPlanetUri,
+                String::class.java
+            )
+            if (response.statusCode.is2xxSuccessful) {
+                logger.info { "API token valid, loading graph database..." }
+                neo4jBootstrap.initializeGraph(token)
+            } else {
+                exitError("Error response from API ${response.statusCode.value()} from API_TOKEN=${token}")
+            }
         }
     }
 }
