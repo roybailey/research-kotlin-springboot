@@ -19,7 +19,11 @@ class Neo4jBootstrap(
 
         val initializeTime = Instant.now()
         try {
-            val params = mapOf("token" to System.getenv("API_TOKEN"))
+            val params = mapOf(
+                "token" to System.getenv("API_TOKEN"),
+                "peopleUrl" to Neo4jBootstrap::class.java.getResource("/import/people.json")!!.toURI().toString(),
+                "planetsUrl" to Neo4jBootstrap::class.java.getResource("/import/planets.json")!!.toURI().toString()
+            )
             val planets = Neo4jBootstrap::class.java.getResource("/cypher/planets.cypher")!!.readText()
             neo4jService.execute(planets, params) {
                 logger.info { "Loaded Star Wars Planets Graph Data" }

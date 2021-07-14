@@ -49,7 +49,7 @@ open class Neo4jEmbeddedService(val options: Neo4jServiceOptions) : Neo4jService
             logger.info("Creating Neo4j Database at $neo4jDatabaseFolder")
 
             val graphDbBuilder = DatabaseManagementServiceBuilder(neo4jDatabaseFolder)
-                .loadPropertiesFromFile(neo4jConfiguration.toURI().toString().replace("file:/",""))
+                .loadPropertiesFromFile(neo4jConfiguration!!.toURI().toString().replace("file:",""))
 
             if (boltPort > 0) {
                 // val bolt = BoltConnector()
@@ -68,7 +68,7 @@ open class Neo4jEmbeddedService(val options: Neo4jServiceOptions) : Neo4jService
             }
 
             graphDbService = graphDbBuilder.build()
-            graphDb = graphDbService.database(DEFAULT_DATABASE_NAME);
+            graphDb = graphDbService.database(DEFAULT_DATABASE_NAME)
         } catch (err: Exception) {
             logger.error("########### ########## ########## ########## ##########")
             logger.error("!!!!!!!!!! Error creating Neo4j Database !!!!!!!!!!")
