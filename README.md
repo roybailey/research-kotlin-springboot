@@ -11,7 +11,7 @@ Status        | Description
 
 To create a template Kotlin project for showing boilerplate code.
 
-* Use multi-modules to create 'starter' projects that encapsulate code and dependencies for common tech.
+* Use multi-modules to create common libraries and 'starter' projects that encapsulate code and dependencies
 * Create demo SpringBoot application to pull everything together and provide working template
 
 ## Getting started
@@ -26,13 +26,11 @@ To create a template Kotlin project for showing boilerplate code.
 
 See module `README` files for specifics
 
-Module        | Description
-------------- | ------------- 
-`research-kotlin-springboot-starter`    |  Common starter pack defining language, logging & testing dependencies
-`research-kotlin-springboot-graphql`    |  Starter pack containing GraphQL dependencies and utilities
-`research-kotlin-springboot-neo4j`      |  Starter pack containing Neo4j dependencies and utilities
-`research-kotlin-springboot-bom`        |  Bill of Materials for all libraries in this collection
-`research-kotlin-springboot-demo`       |  Demo SpringBoot Application
+Module          | Description
+--------------- | ------------- 
+`rksb-common`   |  Common libraries and starter packs defining language, logging, testing and 3rd party dependencies
+`rksb-api`      |  API definition and code generation
+`rksb-service`  |  Service examples
 
 
 ## Handover Suggestions
