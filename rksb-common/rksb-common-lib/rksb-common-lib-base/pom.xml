@@ -6,11 +6,13 @@
     <parent>
         <groupId>me.roybailey</groupId>
         <artifactId>rksb-common-lib</artifactId>
-        <version>${revision}</version>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>rksb-common-lib-base</artifactId>
-    <version>${revision}</version>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
     <name>Research Kotlin SpringBoot Common Base</name>
     <description>Research Kotlin SpringBoot Base</description>
 

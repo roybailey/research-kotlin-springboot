@@ -1,0 +1,10 @@
+{
+  "source": {
+    "table": {
+      "name": "ABC"
+    },
+    "fields": [
+      { "name": "ID", "type": "String" }
+    ]
+  }
+}

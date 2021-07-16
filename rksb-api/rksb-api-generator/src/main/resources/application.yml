@@ -1,0 +1,4 @@
+spring:
+  profiles: no-web-profile-name
+  main:
+    web-application-type: none

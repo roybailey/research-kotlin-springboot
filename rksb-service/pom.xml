@@ -6,7 +6,7 @@
     <parent>
         <groupId>me.roybailey</groupId>
         <artifactId>research-kotlin-springboot</artifactId>
-        <version>${revision}</version>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <groupId>me.roybailey</groupId>
@@ -18,7 +18,7 @@
     <description>Kotlin SpringBoot Services</description>
 
     <modules>
-        <module>rksb-demo</module>
+        <module>rksb-service-demo</module>
     </modules>
 
 </project>

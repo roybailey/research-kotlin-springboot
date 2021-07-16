@@ -6,12 +6,14 @@
 	<parent>
 		<groupId>me.roybailey</groupId>
 		<artifactId>rksb-common-lib</artifactId>
-		<version>${revision}</version>
+		<version>0.1.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>me.roybailey</groupId>
 	<artifactId>rksb-common-lib-graphql</artifactId>
-	<version>${revision}</version>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
 	<name>Research Kotlin SpringBoot Common GraphQL</name>
 	<description>Research Kotlin SpringBoot Common GraphQL Library</description>
 

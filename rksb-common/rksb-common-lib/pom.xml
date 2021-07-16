@@ -6,12 +6,12 @@
     <parent>
         <groupId>me.roybailey</groupId>
         <artifactId>rksb-common</artifactId>
-        <version>${revision}</version>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
 
     <groupId>me.roybailey</groupId>
     <artifactId>rksb-common-lib</artifactId>
-    <version>${revision}</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Research Kotlin SpringBoot Common Libraries</name>
