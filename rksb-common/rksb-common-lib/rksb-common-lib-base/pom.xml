@@ -5,14 +5,14 @@
 
     <parent>
         <groupId>me.roybailey</groupId>
-        <artifactId>research-kotlin-springboot-parent</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <artifactId>rksb-common-lib</artifactId>
+        <version>${revision}</version>
     </parent>
 
-    <artifactId>research-kotlin-springboot-starter</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-    <name>Kotlin SpringBoot Starter</name>
-    <description>Kotlin SpringBoot Starter</description>
+    <artifactId>rksb-common-lib-base</artifactId>
+    <version>${revision}</version>
+    <name>Research Kotlin SpringBoot Common Base</name>
+    <description>Research Kotlin SpringBoot Base</description>
 
     <properties>
         <!-- all version properties should be defined in parent as this is basic low level starter pack -->

@@ -5,15 +5,15 @@
 
     <parent>
         <groupId>me.roybailey</groupId>
-        <artifactId>research-kotlin-springboot-parent</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <artifactId>rksb-common-lib</artifactId>
+        <version>${revision}</version>
     </parent>
 
     <groupId>me.roybailey</groupId>
-    <artifactId>research-kotlin-springboot-neo4j</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-    <name>Kotlin SpringBoot Neo4j</name>
-    <description>Kotlin SpringBoot Neo4j Library</description>
+    <artifactId>rksb-common-lib-neo4j</artifactId>
+    <version>${revision}</version>
+    <name>Research Kotlin SpringBoot Common Neo4j</name>
+    <description>Research Kotlin SpringBoot Common Neo4j Library</description>
 
     <properties>
         <!-- neo4j -->
@@ -26,7 +26,7 @@
         <dependencies>
             <dependency>
                 <groupId>me.roybailey</groupId>
-                <artifactId>research-kotlin-springboot-bom</artifactId>
+                <artifactId>rksb-common-bom</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -38,13 +38,13 @@
 
         <dependency>
             <groupId>me.roybailey</groupId>
-            <artifactId>research-kotlin-springboot-starter</artifactId>
+            <artifactId>rksb-common-lib-base</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>me.roybailey</groupId>
-            <artifactId>research-kotlin-springboot-test</artifactId>
+            <artifactId>rksb-common-lib-test</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>

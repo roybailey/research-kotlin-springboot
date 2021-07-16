@@ -5,14 +5,14 @@
 
     <parent>
         <groupId>me.roybailey</groupId>
-        <artifactId>research-kotlin-springboot-parent</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <artifactId>rksb-common-lib</artifactId>
+        <version>${revision}</version>
     </parent>
 
-    <artifactId>research-kotlin-springboot-test</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-    <name>Kotlin SpringBoot Test Starter Pack</name>
-    <description>Kotlin SpringBoot Test Starter Pack</description>
+    <artifactId>rksb-common-lib-test</artifactId>
+    <version>${revision}</version>
+    <name>Research Kotlin SpringBoot Common Test Pack</name>
+    <description>Research Kotlin SpringBoot Test Pack</description>
 
     <properties>
         <!-- all version properties should be defined in parent as this is basic low level starter pack -->
@@ -35,7 +35,7 @@
 
         <dependency>
             <groupId>me.roybailey</groupId>
-            <artifactId>research-kotlin-springboot-starter</artifactId>
+            <artifactId>rksb-common-lib-base</artifactId>
             <version>${project.version}</version>
         </dependency>
 

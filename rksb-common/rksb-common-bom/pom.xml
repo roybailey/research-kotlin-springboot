@@ -5,16 +5,16 @@
 
     <parent>
         <groupId>me.roybailey</groupId>
-        <artifactId>research-kotlin-springboot-parent</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <artifactId>rksb-common</artifactId>
+        <version>${revision}</version>
     </parent>
 
     <groupId>me.roybailey</groupId>
-    <artifactId>research-kotlin-springboot-bom</artifactId>
+    <artifactId>rksb-common-bom</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Kotlin SpringBoot BOM</name>
-    <description>Kotlin SpringBoot Bill Of Materials</description>
+    <name>Research Kotlin SpringBoot Common BOM</name>
+    <description>Research Kotlin SpringBoot Common Bill Of Materials</description>
 
     <!-- management of versions defined here for modules to include without versioning -->
     <dependencyManagement>
@@ -92,15 +92,15 @@
                 <version>${testcontainers.version}</version>
             </dependency>
 
-            <!-- Starter Packs -->
+            <!-- Common Libraries & Starter Packs -->
             <dependency>
                 <groupId>me.roybailey</groupId>
-                <artifactId>research-kotlin-springboot-starter</artifactId>
+                <artifactId>rksb-common-lib-base</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>me.roybailey</groupId>
-                <artifactId>research-kotlin-springboot-starter</artifactId>
+                <artifactId>rksb-common-lib-base</artifactId>
                 <type>test-jar</type>
                 <classifier>tests</classifier>
                 <version>${project.version}</version>
@@ -108,18 +108,18 @@
 
             <dependency>
                 <groupId>me.roybailey</groupId>
-                <artifactId>research-kotlin-springboot-test</artifactId>
+                <artifactId>rksb-common-lib-test</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>me.roybailey</groupId>
-                <artifactId>research-kotlin-springboot-graphql</artifactId>
+                <artifactId>rksb-common-lib-graphql</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>me.roybailey</groupId>
-                <artifactId>research-kotlin-springboot-graphql</artifactId>
+                <artifactId>rksb-common-lib-graphql</artifactId>
                 <type>test-jar</type>
                 <classifier>tests</classifier>
                 <version>${project.version}</version>
@@ -127,12 +127,12 @@
 
             <dependency>
                 <groupId>me.roybailey</groupId>
-                <artifactId>research-kotlin-springboot-neo4j</artifactId>
+                <artifactId>rksb-common-lib-neo4j</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>me.roybailey</groupId>
-                <artifactId>research-kotlin-springboot-neo4j</artifactId>
+                <artifactId>rksb-common-lib-neo4j</artifactId>
                 <type>test-jar</type>
                 <classifier>tests</classifier>
                 <version>${project.version}</version>

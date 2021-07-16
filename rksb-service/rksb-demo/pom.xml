@@ -11,12 +11,14 @@
 	</parent>
 
 	<groupId>me.roybailey</groupId>
-	<artifactId>research-kotlin-springboot-demo</artifactId>
+	<artifactId>rksb-service-demo</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
-	<name>Kotlin SpringBoot Demo</name>
-	<description>Kotlin SpringBoot Demo Application</description>
+	<name>Research Kotlin SpringBoot Service Demo</name>
+	<description>Research Kotlin SpringBoot Service Demo Application</description>
 
 	<properties>
+                <revision>0.1.0-SNAPSHOT</revision>
+
 		<!-- language -->
 		<java.version>11</java.version>
 		<kotlin.version>1.5.10</kotlin.version>
@@ -38,7 +40,7 @@
 		<dependencies>
 			<dependency>
 				<groupId>me.roybailey</groupId>
-				<artifactId>research-kotlin-springboot-bom</artifactId>
+				<artifactId>rksb-common-bom</artifactId>
 				<version>${project.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
@@ -50,25 +52,25 @@
 
 		<dependency>
 			<groupId>me.roybailey</groupId>
-			<artifactId>research-kotlin-springboot-starter</artifactId>
+			<artifactId>rksb-common-lib-base</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>me.roybailey</groupId>
-			<artifactId>research-kotlin-springboot-graphql</artifactId>
+			<artifactId>rksb-common-lib-graphql</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>me.roybailey</groupId>
-			<artifactId>research-kotlin-springboot-neo4j</artifactId>
+			<artifactId>rksb-common-lib-neo4j</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>me.roybailey</groupId>
-			<artifactId>research-kotlin-springboot-test</artifactId>
+			<artifactId>rksb-common-lib-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>me.roybailey</groupId>
-			<artifactId>research-kotlin-springboot-starter</artifactId>
+			<artifactId>rksb-common-lib-base</artifactId>
 			<type>test-jar</type>
 			<classifier>tests</classifier>
 			<scope>test</scope>

@@ -4,14 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.roybailey</groupId>
-    <artifactId>research-kotlin-springboot-parent</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <artifactId>research-kotlin-springboot</artifactId>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
-    <name>research-kotlin-springboot-parent</name>
+    <name>Research Kotlin SpringBoot</name>
     <description>Kotlin SpringBoot Parent</description>
 
     <properties>
+        <revision>0.1.0-SNAPSHOT</revision>
+
         <!-- language -->
         <java.version>11</java.version>
         <kotlin.version>1.5.10</kotlin.version>
@@ -32,12 +34,9 @@
     </properties>
 
     <modules>
-        <module>research-kotlin-springboot-starter</module>
-        <module>research-kotlin-springboot-test</module>
-        <module>research-kotlin-springboot-neo4j</module>
-        <module>research-kotlin-springboot-graphql</module>
-        <module>research-kotlin-springboot-bom</module>
-        <module>research-kotlin-springboot-demo</module>
+        <module>rksb-common</module>
+        <module>rksb-api</module>
+        <module>rksb-service</module>
     </modules>
 
     <build>
