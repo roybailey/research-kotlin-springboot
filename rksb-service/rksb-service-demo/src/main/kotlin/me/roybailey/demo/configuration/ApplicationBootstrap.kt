@@ -32,7 +32,7 @@ open class ApplicationBootstrap(
 
         val token = System.getenv("API_TOKEN")
         if (token == null || token.isEmpty()) {
-            logger.info { "API token not found, loading graph database..." }
+            logger.info { "API token not found, attempting to load graph database anyway..." }
             neo4jBootstrap.initializeGraph(token)
         } else {
             logger.info { "API token, validating token..." }

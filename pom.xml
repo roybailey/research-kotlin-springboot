@@ -28,6 +28,7 @@
         <testcontainers.version>1.15.3</testcontainers.version>
         <junit-platform.version>5.7.2</junit-platform.version>
         <surefire-plugin.version>2.22.2</surefire-plugin.version>
+        <ktor.version>1.6.1</ktor.version>
 
         <!-- spring -->
         <spring-boot.version>2.5.0</spring-boot.version>

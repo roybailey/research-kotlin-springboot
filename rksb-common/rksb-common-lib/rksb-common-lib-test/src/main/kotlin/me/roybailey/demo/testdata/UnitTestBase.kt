@@ -60,19 +60,21 @@ abstract class UnitTestBase {
         }
 
         // Resolved build execution folder locations for accessing test data files from file-system.
-        // Required to test Neo4j cypher can load from the file-system correctly.
         // Statically created so that TestContainers can be created with file-system mappings.
 
         var projectFolder = gitRootFolder!!.absolutePath.also {
             logger.info { "Using projectFolder from $it" }
         }
-        var moduleFolder = cwd.substring(0, cwd.indexOf('/', projectFolder.length + 1)).also {
+        var moduleFolder = cwd.also { // .substring(0, cwd.indexOf('/', projectFolder.length + 1)).also {
             logger.info { "Using moduleFolder from $it" }
         }
         var projectTestDataFolder = "$projectFolder/testdata".replace('/',File.separatorChar).also {
             logger.info { "Using projectTestDataFolder from $it" }
         }
-        var moduleTestDataFolder = "$moduleFolder/src/test/resources/testdata".replace('/',File.separatorChar).also {
+        var moduleResourceFolder = "$moduleFolder/src/test/resources".replace('/',File.separatorChar).also {
+            logger.info { "Using moduleResourceFolder from $it" }
+        }
+        var moduleTestDataFolder = "$moduleResourceFolder/testdata".replace('/',File.separatorChar).also {
             logger.info { "Using moduleTestDataFolder from $it" }
         }
     }
