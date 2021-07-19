@@ -12,6 +12,18 @@ import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import org.testcontainers.utility.MountableFile
 
+object BoltNeo4jServiceFactory {
+
+    fun createNeo4jService(): Neo4jService = Neo4jService.getInstance(
+        Neo4jServiceOptions(
+            neo4jUri = "bolt://localhost",
+            boltPort = 7987,
+            username = "neo4j",
+            password = "localhost"
+        )
+    )
+
+}
 
 @Testcontainers
 abstract class Neo4jServiceBoltTestBase : UnitTestBase() {

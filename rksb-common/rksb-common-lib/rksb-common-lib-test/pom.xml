@@ -18,8 +18,8 @@
 
     <properties>
         <!-- all version properties should be defined in parent as this is basic low level starter pack -->
-        <javalin.version>3.13.9</javalin.version>
-        <rest-assured.version>4.4.0</rest-assured.version>
+        <javalin.version>3.13.3</javalin.version>
+        <rest-assured.version>4.3.0</rest-assured.version>
     </properties>
 
     <dependencyManagement>

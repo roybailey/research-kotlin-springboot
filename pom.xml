@@ -32,6 +32,7 @@
 
         <!-- spring -->
         <spring-boot.version>2.5.0</spring-boot.version>
+        <jackson.version>2.12.3</jackson.version>
     </properties>
 
     <modules>

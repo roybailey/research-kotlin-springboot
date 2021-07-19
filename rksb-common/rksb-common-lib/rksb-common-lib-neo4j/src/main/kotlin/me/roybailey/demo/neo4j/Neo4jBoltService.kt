@@ -14,18 +14,16 @@ open class Neo4jBoltService(val options: Neo4jServiceOptions) : Neo4jService {
     private val logger = KotlinLogging.logger {}
     private val instanceSignature = InetAddress.getLocalHost().canonicalHostName + "-" + hashCode()
 
-    private val neo4jConfiguration = Neo4jService::class.java.getResource("/neo4j.conf")
-
     private var driver: Driver
 
     init {
         logger.info("########### ########## ########## ########## ##########")
-        logger.info("Creating Neo4j Database options=$options instance=$instanceSignature")
+        logger.info("Connecting Neo4j Database options=$options instance=$instanceSignature")
         logger.info("########### ########## ########## ########## ##########")
 
-        logger.info("Created Neo4j Database from: $neo4jConfiguration")
-
         val neo4jUri = if (options.neo4jUri.substring(7).contains(":")) options.neo4jUri else options.neo4jUri + ":" + options.boltPort
+
+        logger.info("Connecting Neo4j Database: $neo4jUri")
 
         try {
             driver = GraphDatabase.driver(neo4jUri, AuthTokens.basic(options.username, options.password))
