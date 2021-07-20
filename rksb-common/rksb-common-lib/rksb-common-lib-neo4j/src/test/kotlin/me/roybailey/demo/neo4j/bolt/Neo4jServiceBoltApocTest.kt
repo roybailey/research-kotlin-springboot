@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class Neo4jServiceBoltApocTest : Neo4jServiceBoltTestBase() {
 
-    @Disabled
+
     @Test
     fun testApocJsonLoadAgainstBoltServer() {
         Neo4jDataLoader(neo4jService).loadData(

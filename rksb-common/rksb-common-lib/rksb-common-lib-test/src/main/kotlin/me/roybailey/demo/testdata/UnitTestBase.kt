@@ -71,7 +71,7 @@ abstract class UnitTestBase {
         var projectTestDataFolder = "$projectFolder/testdata".replace('/',File.separatorChar).also {
             logger.info { "Using projectTestDataFolder from $it" }
         }
-        var moduleResourceFolder = "$moduleFolder/src/test/resources".replace('/',File.separatorChar).also {
+        var moduleResourceFolder = "${moduleFolder}src/test/resources".replace('/',File.separatorChar).also {
             logger.info { "Using moduleResourceFolder from $it" }
         }
         var moduleTestDataFolder = "$moduleResourceFolder/testdata".replace('/',File.separatorChar).also {
