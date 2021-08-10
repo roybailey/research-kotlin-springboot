@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    # these get overwritten by the testcontainers dynamic values
+    # driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+    # url: jdbc:tc:postgresql://localhost/testappdb
+    # username: user
+    # password: password
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+
