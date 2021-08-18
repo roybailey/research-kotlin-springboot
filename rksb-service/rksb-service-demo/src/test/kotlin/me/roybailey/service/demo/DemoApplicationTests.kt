@@ -1,4 +1,4 @@
-package me.roybailey.common
+package me.roybailey.service.demo
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

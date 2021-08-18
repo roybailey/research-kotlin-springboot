@@ -33,6 +33,9 @@
         <!-- spring -->
         <spring-boot.version>2.5.0</spring-boot.version>
         <jackson.version>2.12.3</jackson.version>
+
+        <!-- database -->
+        <flyway.version>7.13.0</flyway.version>
     </properties>
 
     <modules>
@@ -45,6 +48,13 @@
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

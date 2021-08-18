@@ -1,7 +1,7 @@
 package me.roybailey.common.neo4j.springboot
 
 import me.roybailey.common.neo4j.Neo4jService
-import me.roybailey.common.testdata.UnitTestBase
+import me.roybailey.common.test.UnitTestBase
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

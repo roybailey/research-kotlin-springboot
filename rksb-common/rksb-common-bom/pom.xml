@@ -69,6 +69,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jooq</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
@@ -81,6 +86,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+
+            <!-- Database -->
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${flyway.version}</version>
             </dependency>
 
             <!-- TestContainers -->
@@ -106,6 +118,32 @@
             <dependency>
                 <groupId>me.roybailey</groupId>
                 <artifactId>rksb-common-lib-base</artifactId>
+                <type>test-jar</type>
+                <classifier>tests</classifier>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-common-lib-database</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-common-lib-database</artifactId>
+                <type>test-jar</type>
+                <classifier>tests</classifier>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-common-lib-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-common-lib-web</artifactId>
                 <type>test-jar</type>
                 <classifier>tests</classifier>
                 <version>${project.version}</version>
@@ -140,6 +178,12 @@
                 <artifactId>rksb-common-lib-neo4j</artifactId>
                 <type>test-jar</type>
                 <classifier>tests</classifier>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-api-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

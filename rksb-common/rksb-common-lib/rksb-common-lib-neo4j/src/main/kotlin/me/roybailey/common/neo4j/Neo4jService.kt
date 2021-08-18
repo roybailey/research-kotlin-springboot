@@ -6,13 +6,13 @@ import org.neo4j.driver.Result
 
 
 data class Neo4jServiceOptions(
-        val neo4jUri: String,
-        val boltPort: Int = -1,
-        val username: String = "neo4j",
-        val password: String = "",
-        val neo4jProcedures: List<Class<*>> = Neo4jService.getDefaultProcedures(),
-        val ignoreErrorOnDrop: Boolean = true,
-        val ignoreProcedureNotFound: Boolean = true
+    val neo4jUri: String,
+    val boltPort: Int = -1,
+    val username: String = "neo4j",
+    val password: String = "",
+    val neo4jProcedures: List<Class<*>> = Neo4jService.getDefaultProcedures(),
+    val ignoreErrorOnDrop: Boolean = true,
+    val ignoreProcedureNotFound: Boolean = true
 ) {
     val mode: String = neo4jUri.toLowerCase().substring(0, 4)
 }
@@ -24,7 +24,7 @@ typealias Neo4jServiceRecord = Record
 typealias Neo4jResultMapper = (result: Neo4jServiceStatementResult) -> Unit
 typealias Neo4jRecordMapper<T> = (record: Neo4jServiceRecord) -> T
 
-val nullNeo4jResultMapper = { _:Neo4jServiceStatementResult -> }
+val nullNeo4jResultMapper = { _: Neo4jServiceStatementResult -> }
 
 
 interface Neo4jService {

@@ -1,4 +1,4 @@
-package me.roybailey.common.testdata
+package me.roybailey.common.test
 
 import mu.KotlinLogging
 import org.junit.jupiter.api.AfterEach
@@ -85,10 +85,10 @@ abstract class UnitTestBase {
         started = now()
         logger.info("************************************************************")
         logger.info { "Running ${testInfo.testClass.get().name}.`${testInfo.testMethod.get().name}`" }
-        logger.info { "projectFolder           ${projectFolder}" }
-        logger.info { "moduleFolder            ${moduleFolder}" }
-        logger.info { "projectTestDataFolder   ${projectTestDataFolder}" }
-        logger.info { "moduleTestDataFolder    ${moduleTestDataFolder}" }
+        logger.info { "projectFolder           $projectFolder" }
+        logger.info { "moduleFolder            $moduleFolder" }
+        logger.info { "projectTestDataFolder   $projectTestDataFolder" }
+        logger.info { "moduleTestDataFolder    $moduleTestDataFolder" }
         logger.info("************************************************************")
     }
 

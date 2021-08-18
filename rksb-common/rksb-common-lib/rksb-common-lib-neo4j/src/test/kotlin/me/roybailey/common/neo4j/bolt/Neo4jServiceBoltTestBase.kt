@@ -2,7 +2,7 @@ package me.roybailey.common.neo4j.bolt
 
 import me.roybailey.common.neo4j.Neo4jService
 import me.roybailey.common.neo4j.Neo4jServiceOptions
-import me.roybailey.common.testdata.UnitTestBase
+import me.roybailey.common.test.UnitTestBase
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInfo

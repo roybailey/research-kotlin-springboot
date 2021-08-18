@@ -1,4 +1,4 @@
-package me.roybailey.common.configuration
+package me.roybailey.service.demo.configuration
 
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Value

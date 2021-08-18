@@ -1,9 +1,8 @@
-package me.roybailey.common.test.server
+package me.roybailey.common.test
 
 import io.restassured.RestAssured.*
 import io.restassured.filter.log.RequestLoggingFilter
 import io.restassured.filter.log.ResponseLoggingFilter
-import me.roybailey.common.testdata.UnitTestBase
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach

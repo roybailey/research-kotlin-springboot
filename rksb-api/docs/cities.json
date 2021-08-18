@@ -1,0 +1,9 @@
+{
+  "tableMapping": [
+    {
+      "table": "CITIES",
+      "record": "CitiesRecord",
+      "domain": "Cities"
+    }
+  ]
+}

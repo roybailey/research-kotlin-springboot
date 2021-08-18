@@ -1,0 +1,9 @@
+{
+  "tableMapping": [
+    {
+      "table": "BOOKS",
+      "record": "BooksRecord",
+      "domain": "Books"
+    }
+  ]
+}

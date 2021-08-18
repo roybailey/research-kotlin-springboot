@@ -1,29 +1,36 @@
-# Common
+# API Domain
 
-**Common Code Modules**
+**API Domain Modules**
 
 ## Design
 
-Keep common libraries in one place, built together in the same project version.
+Modules intended to generate boilerplate code through layering of code generation steps as follows
 
-* Use multi-modules to create common libraries projects that encapsulate code and dependencies
+1. Build the api domain configurations (e.g. definition of all requirements and configurations for code generation)
+1. Run domain process to update the database schema
+1. Generate typesafe Java database schema using jooq (requires database access and any schema changes e.g. views) 
+1. Generate 
+
 
 ## Getting started
 
 * `mvn clean install` 
 
+
 ### Prerequisites
 
 * Docker, used by test-containers for testing 3rd party databases
+
 
 ### Modules
 
 See module `README` files for specifics
 
-Module        | Description
-------------- | ------------- 
-`rksb-lib`    | Libraries and starter packs
-`rksb-bom`    | Bill of Materials for versioning all common libraries
+Module                    | Description
+------------------------- | ------------- 
+`rksb-api-database`       | Code generation from database schema using jooq
+`rksb-api-generator`      | Code generation of controller and jooq queries
+`rksb-api-service`        | Generated code building and testing
 
 
 ## Handover Suggestions

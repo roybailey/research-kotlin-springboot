@@ -1,4 +1,4 @@
-package me.roybailey.common.test.server
+package me.roybailey.common.test
 
 import io.javalin.Javalin
 import io.javalin.plugin.openapi.annotations.ContentType

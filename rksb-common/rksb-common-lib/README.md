@@ -28,6 +28,8 @@ See module `README` files for specifics
 Module           | Description
 ---------------- | ------------- 
 `rksb-base`      | Base library for Language & Logging dependencies/utilities
+`rksb-database`  | Database library for Postgres dependencies/utilities
+`rksb-restful`   | RESTful library for Web Service dependencies/utilities
 `rksb-test`      | Test library for Testing dependencies/utilities
 `rksb-neo4j`     | Neo4j graph database dependencies/utilities
 `rksb-graphql`   | GraphQL dependencies/utilities

@@ -1,4 +1,4 @@
-package me.roybailey.common.configuration
+package me.roybailey.service.demo.configuration
 
 import me.roybailey.common.neo4j.Neo4jService
 import mu.KotlinLogging

@@ -58,6 +58,15 @@
 		</dependency>
 		<dependency>
 			<groupId>me.roybailey</groupId>
+			<artifactId>rksb-common-lib-database</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>me.roybailey</groupId>
+			<artifactId>rksb-common-lib-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>me.roybailey</groupId>
 			<artifactId>rksb-common-lib-graphql</artifactId>
 		</dependency>
 		<dependency>
@@ -76,6 +85,11 @@
 			<type>test-jar</type>
 			<classifier>tests</classifier>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>me.roybailey</groupId>
+			<artifactId>rksb-api-domain</artifactId>
 		</dependency>
 
 	</dependencies>
@@ -119,6 +133,21 @@
 						<version>${kotlin.version}</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+					<mainClass>me.roybailey.service.demo.DemoApplicationKt</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,6 +1,14 @@
 spring:
   application:
     name: research-kotlin-springboot
+  datasource:
+    initialization-mode: never
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: localhost
+  jooq:
+    sql-dialect: POSTGRES
   servlet:
     multipart:
       enabled: true

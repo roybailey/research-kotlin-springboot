@@ -30,12 +30,13 @@ open class Neo4jConfiguration(val customVariables: Map<String, String> = emptyMa
     open fun neo4jService(): Neo4jService {
         // initialize embedded Neo4j database
         val neo4jService = Neo4jService.getInstance(
-                Neo4jServiceOptions(
-                        neo4jUri = neo4jUri,
-                        boltPort = neo4jBoltConnectorPort,
-                        username = neo4jUsername,
-                        password = neo4jPassword
-                ))
+            Neo4jServiceOptions(
+                neo4jUri = neo4jUri,
+                boltPort = neo4jBoltConnectorPort,
+                username = neo4jUsername,
+                password = neo4jPassword
+            )
+        )
         // set static global variables such as sensitive connection values...
         customVariables.forEach {
             neo4jService.setStatic(it.key, it.value)
