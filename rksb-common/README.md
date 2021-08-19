@@ -1,6 +1,6 @@
-# API Domain
+# Common
 
-**API Domain Modules**
+**Common Libraries Modules**
 
 ## Design
 
@@ -12,6 +12,14 @@ Modules intended to generate boilerplate code through layering of code generatio
 1. Generate 
 
 
+## Modules
+
+Module          | Description
+--------------- | ------------- 
+[**`rksb-common-lib`**](./rksb-common-lib/README.md)    |  Common library modules for language and 3rd party 
+[**`rksb-common-bom`**](./rksb-common-bom/README.md)    |  Book of Materials, versioning for all 3rd party / common libraries
+
+
 ## Getting started
 
 * `mvn clean install` 
@@ -20,17 +28,6 @@ Modules intended to generate boilerplate code through layering of code generatio
 ### Prerequisites
 
 * Docker, used by test-containers for testing 3rd party databases
-
-
-### Modules
-
-See module `README` files for specifics
-
-Module                    | Description
-------------------------- | ------------- 
-`rksb-api-database`       | Code generation from database schema using jooq
-`rksb-api-generator`      | Code generation of controller and jooq queries
-`rksb-api-service`        | Generated code building and testing
 
 
 ## Handover Suggestions

@@ -17,10 +17,6 @@
     <description>Research Kotlin SpringBoot Web Libraries</description>
 
     <properties>
-        <!-- neo4j -->
-        <neo4j.version>4.0.11</neo4j.version>
-        <neo4j-apoc.version>4.0.0.18</neo4j-apoc.version>
-        <neo4j-java-driver.version>4.0.3</neo4j-java-driver.version>
     </properties>
 
     <dependencyManagement>

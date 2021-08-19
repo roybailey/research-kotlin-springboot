@@ -2,10 +2,8 @@
 
 **Library for including Neo4j embedded within a service**
 
-Status        | Description
-------------- | ------------- 
-**STATUS**    | _Under Construction_
-**STRATEGY**  | _Spike working example_
+**STATUS** _Under Construction_
+
 
 ## Design
 

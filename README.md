@@ -1,18 +1,26 @@
 # research-kotlin-springboot
 
-**Template Multi-Module Kotlin Project**
+**Multi-Module Kotlin SpringBoot Project**
 
-Status        | Description
-------------- | ------------- 
-**STATUS**    | _Under Construction_
-**STRATEGY**  | _Spike working example_
+**STATUS** _Under Construction_
+
 
 ## Design
 
-To create a template Kotlin project for showing boilerplate code.
+To create a template Kotlin project for generating API boilerplate code.
 
 * Use multi-modules to create common libraries and 'starter' projects that encapsulate code and dependencies
 * Create demo SpringBoot application to pull everything together and provide working template
+
+
+## Modules
+
+Module          | Description
+--------------- | ------------- 
+[**`rksb-common`**](./rksb-common/README.md)    |  Common libraries and starter packs defining language, logging, testing and 3rd party dependencies
+[**`rksb-api`**](./rksb-api/README.md)          |  API definition and code generation
+[**`rksb-service`**](./rksb-service/README.md)  |  Service examples
+
 
 ## Getting started
 
@@ -21,16 +29,6 @@ To create a template Kotlin project for showing boilerplate code.
 ### Prerequisites
 
 * Docker, used by test-containers for testing 3rd party databases
-
-### Modules
-
-See module `README` files for specifics
-
-Module          | Description
---------------- | ------------- 
-`rksb-common`   |  Common libraries and starter packs defining language, logging, testing and 3rd party dependencies
-`rksb-api`      |  API definition and code generation
-`rksb-service`  |  Service examples
 
 
 ## Handover Suggestions

@@ -1,11 +1,11 @@
-# Test Starter
+# Database Starter
 
-**Test Library for Testing**
+**Library for Web/RESTful Tooling**
 
 ## Design
 
-* Encapsulate Testing code, dependencies and utilities
-* Uses Kotlin logging, assertj, JUnit 5, TestContainers
+* Encapsulate Web/RESTful related code, dependencies and utilities
+* SpringBoot Web, Actuator
 
 ## Getting started
 
@@ -16,4 +16,4 @@
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
-
+* Currently setup for Kotlin only, consider adding support for Java in same project
