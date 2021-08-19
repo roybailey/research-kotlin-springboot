@@ -3,7 +3,22 @@
     {
       "table": "CITIES",
       "record": "CitiesRecord",
-      "domain": "Cities"
+      "domain": "Cities",
+      "columnMapping": [
+        {
+          "column": "NAME",
+          "type": "STRING"
+        },
+        {
+          "column": "POPULATION",
+          "type": "NUMBER"
+        }
+      ],
+      "testData": [
+        {
+          "count": 10
+        }
+      ]
     }
   ]
 }

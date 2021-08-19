@@ -3,7 +3,22 @@
     {
       "table": "BOOKS",
       "record": "BooksRecord",
-      "domain": "Books"
+      "domain": "Books",
+      "columnMapping": [
+        {
+          "column": "TITLE",
+          "type": "STRING"
+        },
+        {
+          "column": "PUBLICATIONDATE",
+          "type": "NUMBER"
+        }
+      ],
+      "testData": [
+        {
+          "count": 10
+        }
+      ]
     }
   ]
 }
