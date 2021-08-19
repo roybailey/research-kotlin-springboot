@@ -6,6 +6,8 @@ import me.roybailey.common.test.UnitTestBase
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.TestInfo
+import org.junit.jupiter.api.condition.DisabledOnOs
+import org.junit.jupiter.api.condition.OS
 import org.testcontainers.containers.BindMode
 import org.testcontainers.containers.Neo4jContainer
 import org.testcontainers.junit.jupiter.Container
@@ -46,6 +48,7 @@ abstract class Neo4jServiceBoltTestBase : UnitTestBase() {
             )
         //.withNetwork(Network.newNetwork())
         //.withExtraHost("host.testcontainers.localhost", InetAddress.getLocalHost().hostAddress)
+
     }
 
     val neo4jImportFolder: String = "/var/lib/neo4j/import"

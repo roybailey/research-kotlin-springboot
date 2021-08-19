@@ -1,6 +1,9 @@
 package me.roybailey.common.database.postgres
 
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.condition.DisabledOnOs
+import org.junit.jupiter.api.condition.OS
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.DynamicPropertyRegistry
@@ -13,7 +16,7 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @Testcontainers
 @SpringBootTest
 @ActiveProfiles("postgres")
-class PostgresTestContainerTest {
+class TestContainerPostgresTest {
 
     companion object {
 
@@ -31,9 +34,11 @@ class PostgresTestContainerTest {
             registry.add("spring.datasource.password", container::getPassword);
             registry.add("spring.datasource.username", container::getUsername);
         }
+
     }
 
     @Test
+    @Disabled
     fun testPostgresTestContainerInitialised() {
 
     }

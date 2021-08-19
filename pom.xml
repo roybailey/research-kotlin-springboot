@@ -29,6 +29,7 @@
         <junit-platform.version>5.7.2</junit-platform.version>
         <surefire-plugin.version>2.22.2</surefire-plugin.version>
         <ktor.version>1.6.1</ktor.version>
+        <h2.version>1.4.200</h2.version>
 
         <!-- spring -->
         <spring-boot.version>2.5.0</spring-boot.version>
@@ -70,6 +71,11 @@
                         <version>${junit-platform.version}</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <excludes>
+                        <!--<exclude>**/*TestContainer*</exclude>-->
+                    </excludes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

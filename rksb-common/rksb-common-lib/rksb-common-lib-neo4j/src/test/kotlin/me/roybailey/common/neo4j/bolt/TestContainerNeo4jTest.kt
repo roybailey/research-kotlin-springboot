@@ -3,7 +3,11 @@ package me.roybailey.common.neo4j.bolt
 import me.roybailey.common.neo4j.Neo4jService
 import me.roybailey.common.neo4j.Neo4jServiceOptions
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.condition.DisabledOnOs
+import org.junit.jupiter.api.condition.EnabledOnOs
+import org.junit.jupiter.api.condition.OS
 import org.junit.jupiter.api.fail
 import org.neo4j.driver.AuthTokens
 import org.neo4j.driver.Driver
@@ -12,11 +16,19 @@ import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
 
-@Testcontainers
-class TestNeo4jContainerTest {
+//@Testcontainers
+class TestContainerNeo4jTest {
 
+    /*
+    companion object {
+
+        @JvmStatic
+        @Container
+        val neo4jContainer = Neo4jServiceBoltTestBase.Companion.KNeo4jContainer().withAdminPassword("localhost")
+    }
 
     @Test
+    @Disabled
     fun testSomethingUsingBolt() {
 
         // Retrieve the Bolt URL from the container
@@ -36,6 +48,7 @@ class TestNeo4jContainerTest {
 
 
     @Test
+    @Disabled
     fun testNeo4jServiceAccessToTestContainer() {
 
         Neo4jService.getInstance(
@@ -50,12 +63,5 @@ class TestNeo4jContainerTest {
             assertThat(total).isEqualTo(0)
         }
     }
-
-
-    companion object {
-
-        @JvmStatic
-        @Container
-        val neo4jContainer = Neo4jServiceBoltTestBase.Companion.KNeo4jContainer().withAdminPassword("localhost")
-    }
+    */
 }

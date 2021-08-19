@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 
-class Neo4jServiceBoltBasicTest : Neo4jServiceBoltTestBase() {
+class TestContainerNeo4jServiceBoltBasicTest : Neo4jServiceBoltTestBase() {
 
 
     @Test

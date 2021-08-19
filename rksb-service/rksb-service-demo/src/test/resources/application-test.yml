@@ -1,3 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+jooq:
+    sql-dialect: H2
+
 # ===========================================
 # NEO4J DATABASE (see classpath://neo4j.conf for neo4j database settings)
 # ===========================================
