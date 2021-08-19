@@ -24,14 +24,10 @@ class ControllerCodeGenerator {
     val controllerTemplate = """ 
 package {{PACKAGE_NAME}}
 
-import me.roybailey.codegen.jooq.database.Tables.{{TABLE_NAME}}
-import me.roybailey.codegen.jooq.database.tables.records.{{RECORD_NAME}}
-import me.roybailey.codegen.jooq.database.tables.pojos.{{DOMAIN_NAME}}
-import org.jooq.DSLContext
-import org.jooq.impl.DSL.select
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import me.roybailey.codegen.jooq.database.tables.pojos.{{DOMAIN_NAME}}
 
 
 @RestController

@@ -1,9 +1,9 @@
 {
   "tableMapping": [
     {
-      "table": "CITIES",
-      "record": "CitiesRecord",
-      "domain": "Cities",
+      "table": "TEMP_CITIES",
+      "record": "TempCitiesRecord",
+      "domain": "TempCities",
       "columnMapping": [
         {
           "column": "NAME",

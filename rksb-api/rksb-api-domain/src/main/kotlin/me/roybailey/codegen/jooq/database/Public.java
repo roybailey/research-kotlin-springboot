@@ -7,8 +7,8 @@ package me.roybailey.codegen.jooq.database;
 import java.util.Arrays;
 import java.util.List;
 
-import me.roybailey.codegen.jooq.database.tables.Books;
-import me.roybailey.codegen.jooq.database.tables.Cities;
+import me.roybailey.codegen.jooq.database.tables.TempBooks;
+import me.roybailey.codegen.jooq.database.tables.TempCities;
 
 import org.jooq.Catalog;
 import org.jooq.Table;
@@ -29,14 +29,14 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
-     * The table <code>public.books</code>.
+     * The table <code>public.temp_books</code>.
      */
-    public final Books BOOKS = Books.BOOKS;
+    public final TempBooks TEMP_BOOKS = TempBooks.TEMP_BOOKS;
 
     /**
-     * The table <code>public.cities</code>.
+     * The table <code>public.temp_cities</code>.
      */
-    public final Cities CITIES = Cities.CITIES;
+    public final TempCities TEMP_CITIES = TempCities.TEMP_CITIES;
 
     /**
      * No further instances allowed
@@ -54,8 +54,8 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            Books.BOOKS,
-            Cities.CITIES
+            TempBooks.TEMP_BOOKS,
+            TempCities.TEMP_CITIES
         );
     }
 }

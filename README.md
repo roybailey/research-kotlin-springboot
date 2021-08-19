@@ -28,8 +28,12 @@ Module          | Description
 
 ### Prerequisites
 
-* Docker, used by test-containers for testing 3rd party databases
+* Docker, used by test-containers for testing 3rd party databases (or uncomment `<excludes>**TestContainer**</exclude>` from `pom.xml` to avoid)
+* Postgres access for code generation
 
+```
+docker run --name postgres -e POSTGRES_PASSWORD=localhost postgres
+```
 
 ## Handover Suggestions
 

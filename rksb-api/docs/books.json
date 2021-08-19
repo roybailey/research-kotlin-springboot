@@ -1,9 +1,9 @@
 {
   "tableMapping": [
     {
-      "table": "BOOKS",
-      "record": "BooksRecord",
-      "domain": "Books",
+      "table": "TEMP_BOOKS",
+      "record": "TempBooksRecord",
+      "domain": "TempBooks",
       "columnMapping": [
         {
           "column": "TITLE",

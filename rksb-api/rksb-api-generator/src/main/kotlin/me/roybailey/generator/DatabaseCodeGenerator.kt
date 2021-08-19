@@ -61,6 +61,7 @@ class DatabaseCodeGenerator {
                     //
                     // Defaults to org.jooq.codegen.JavaGenerator
                     .withName("org.jooq.codegen.JavaGenerator")
+                    // A programmatic naming strategy implementation, referenced by class name
                     .withDatabase(
                         Database()
                             .withName("org.jooq.meta.postgres.PostgresDatabase")
@@ -73,10 +74,7 @@ class DatabaseCodeGenerator {
                             .withPackageName(packageName)
                             .withDirectory(directory)
                     )
-                    .withGenerate(
-                        Generate()
-                            .withPojos(true)
-                    )
+                    .withGenerate(Generate().withPojos(true))
             )
         GenerationTool.generate(configuration)
         logger.info("Database Code Generation - FINISHED")

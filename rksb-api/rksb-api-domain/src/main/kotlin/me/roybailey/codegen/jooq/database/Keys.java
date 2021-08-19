@@ -4,10 +4,10 @@
 package me.roybailey.codegen.jooq.database;
 
 
-import me.roybailey.codegen.jooq.database.tables.Books;
-import me.roybailey.codegen.jooq.database.tables.Cities;
-import me.roybailey.codegen.jooq.database.tables.records.BooksRecord;
-import me.roybailey.codegen.jooq.database.tables.records.CitiesRecord;
+import me.roybailey.codegen.jooq.database.tables.TempBooks;
+import me.roybailey.codegen.jooq.database.tables.TempCities;
+import me.roybailey.codegen.jooq.database.tables.records.TempBooksRecord;
+import me.roybailey.codegen.jooq.database.tables.records.TempCitiesRecord;
 
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -26,6 +26,6 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<BooksRecord> BOOKS_PKEY = Internal.createUniqueKey(Books.BOOKS, DSL.name("books_pkey"), new TableField[] { Books.BOOKS.ID }, true);
-    public static final UniqueKey<CitiesRecord> CITIES_PKEY = Internal.createUniqueKey(Cities.CITIES, DSL.name("cities_pkey"), new TableField[] { Cities.CITIES.ID }, true);
+    public static final UniqueKey<TempBooksRecord> TEMP_BOOKS_PKEY = Internal.createUniqueKey(TempBooks.TEMP_BOOKS, DSL.name("temp_books_pkey"), new TableField[] { TempBooks.TEMP_BOOKS.ID }, true);
+    public static final UniqueKey<TempCitiesRecord> TEMP_CITIES_PKEY = Internal.createUniqueKey(TempCities.TEMP_CITIES, DSL.name("temp_cities_pkey"), new TableField[] { TempCities.TEMP_CITIES.ID }, true);
 }

@@ -4,8 +4,8 @@
 package me.roybailey.codegen.jooq.database;
 
 
-import me.roybailey.codegen.jooq.database.tables.Books;
-import me.roybailey.codegen.jooq.database.tables.Cities;
+import me.roybailey.codegen.jooq.database.tables.TempBooks;
+import me.roybailey.codegen.jooq.database.tables.TempCities;
 
 
 /**
@@ -15,12 +15,12 @@ import me.roybailey.codegen.jooq.database.tables.Cities;
 public class Tables {
 
     /**
-     * The table <code>public.books</code>.
+     * The table <code>public.temp_books</code>.
      */
-    public static final Books BOOKS = Books.BOOKS;
+    public static final TempBooks TEMP_BOOKS = TempBooks.TEMP_BOOKS;
 
     /**
-     * The table <code>public.cities</code>.
+     * The table <code>public.temp_cities</code>.
      */
-    public static final Cities CITIES = Cities.CITIES;
+    public static final TempCities TEMP_CITIES = TempCities.TEMP_CITIES;
 }
