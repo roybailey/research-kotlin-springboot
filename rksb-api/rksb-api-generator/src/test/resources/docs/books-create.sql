@@ -1,3 +1,5 @@
+drop table if exists temp_books;
+
 create table temp_books
 (
     id              serial not null
@@ -8,3 +10,6 @@ create table temp_books
     publicationdate integer,
     price     double precision
 );
+
+drop view if exists v_temp_books;
+create view v_temp_books as select * from temp_books;

@@ -1,2 +1,0 @@
-DROP VIEW IF EXISTS v_temp_books;
-CREATE VIEW V_TEMP_BOOKS AS SELECT * FROM temp_books;

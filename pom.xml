@@ -17,7 +17,8 @@
         <!-- language -->
         <java.version>11</java.version>
         <kotlin.version>1.5.10</kotlin.version>
-
+        <kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
+        
         <!-- logging -->
         <kotlin-logging.version>1.6.24</kotlin-logging.version>
         <logback.version>1.2.3</logback.version>
