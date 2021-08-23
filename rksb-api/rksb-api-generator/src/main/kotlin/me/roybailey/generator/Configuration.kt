@@ -53,17 +53,25 @@ open class Configuration {
     }
 
     @Bean
-    open fun apiDefinition(): List<ApiDefinition> {
-        val apiDirMap = Files.list(Path.of("$basedir/../docs")).collect(Collectors.toList())
+    open fun apiSpecification(): List<ApiSpecification> {
+        val apiDirMap = Files
+            .walk(Path.of("$basedir/../docs"))
+            .filter { it.fileName.endsWith("-spec.json")}
+            .collect(Collectors.toList())
         val mapper = jacksonObjectMapper()
 
-        val apiDefinitions = apiDirMap.stream().map {
+        val apiSpecifications = apiDirMap.stream().map {
             logger.info { it }
-            val apiDefinition = mapper.readValue(it.toFile(), ApiDefinition::class.java)
-            logger.info { apiDefinition }
-            apiDefinition
+            val apiSpecification = mapper.readValue(it.toFile(), ApiSpecification::class.java)
+            logger.info { apiSpecification }
+
+            File(it.toAbsolutePath().fileName.toString().replace("-spec.json","-create.sql"))
+                .readText()
+            // todo parse create ddl to get list of columns and types
+
+            apiSpecification
         }.collect(Collectors.toList())
 
-        return apiDefinitions
+        return apiSpecifications
     }
 }

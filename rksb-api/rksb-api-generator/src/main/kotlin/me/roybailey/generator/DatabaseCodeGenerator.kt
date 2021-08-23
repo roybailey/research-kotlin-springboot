@@ -6,7 +6,6 @@ import org.jooq.codegen.GenerationTool
 import org.jooq.meta.jaxb.*
 import org.jooq.meta.jaxb.Target
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
 import javax.annotation.PostConstruct
 
 @Component
@@ -18,7 +17,7 @@ class DatabaseCodeGenerator {
     lateinit var properties: ConfigurationProperties
 
     @Autowired
-    lateinit var apiDefinitions: List<ApiDefinition>
+    lateinit var apiSpecifications: List<ApiSpecification>
 
     @PostConstruct
     fun generateDatabaseCode() {
@@ -30,7 +29,7 @@ class DatabaseCodeGenerator {
         val directory = "${basedir}/${target}"
         val packageName = "${properties.basePackageName}.jooq.database"
         val excludes = properties.excludes
-        val includes = apiDefinitions
+        val includes = apiSpecifications
             .map { apiDefinition -> apiDefinition.tableMapping.map { tableMapping -> tableMapping.table } }
             .toList()
             .flatten()

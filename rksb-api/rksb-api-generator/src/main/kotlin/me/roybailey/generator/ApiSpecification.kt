@@ -1,6 +1,6 @@
 package me.roybailey.generator
 
-data class ApiDefinition (
+data class ApiSpecification (
     val tableMapping: List<ApiTableMapping>
 )
 

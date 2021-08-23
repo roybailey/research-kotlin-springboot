@@ -1,15 +1,10 @@
 package me.roybailey.generator
 
 import mu.KotlinLogging
-import org.jooq.DSLContext
 import org.jooq.SQLDialect
-import org.jooq.impl.DSL
 import org.jooq.impl.DSL.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import java.io.File
-import java.nio.file.Files
-import java.nio.file.Path
 import java.util.stream.IntStream
 import javax.annotation.PostConstruct
 import javax.sql.DataSource
@@ -24,7 +19,7 @@ class DatabaseDataGenerator {
     lateinit var properties: ConfigurationProperties
 
     @Autowired
-    lateinit var apiDefinitions: List<ApiDefinition>
+    lateinit var apiSpecifications: List<ApiSpecification>
 
     @Autowired
     lateinit var dataSource: DataSource
@@ -43,7 +38,7 @@ class DatabaseDataGenerator {
         logger.info("Database Data Generation - STARTING")
         val jooq = using(dataSource, SQLDialect.POSTGRES)
 
-        val tableMappings = apiDefinitions
+        val tableMappings = apiSpecifications
             .map { apiDefinition -> apiDefinition.tableMapping }
             .toList()
             .flatten()

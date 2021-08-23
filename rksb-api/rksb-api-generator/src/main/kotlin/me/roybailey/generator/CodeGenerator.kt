@@ -3,10 +3,7 @@ package me.roybailey.generator
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import org.springframework.beans.factory.annotation.Value
 import java.io.File
-import java.nio.file.Files.createDirectories
-import java.nio.file.Path
 import javax.annotation.PostConstruct
 
 @Component
@@ -18,7 +15,7 @@ class CodeGenerator {
     lateinit var properties: ConfigurationProperties
 
     @Autowired
-    lateinit var apiDefinitions: List<ApiDefinition>
+    lateinit var apiSpecifications: List<ApiSpecification>
 
     @Autowired
     lateinit var serviceCodeGenerator: ServiceCodeGenerator
@@ -35,7 +32,7 @@ class CodeGenerator {
         val target = properties.target
         val basePackageName = "${properties.basePackageName}.api"
         val basePackageDirectory = "$basedir/$target/${basePackageName.replace(".", "/")}"
-        val tableMappings = apiDefinitions
+        val tableMappings = apiSpecifications
             .map { apiDefinition -> apiDefinition.tableMapping }
             .toList()
             .flatten()
