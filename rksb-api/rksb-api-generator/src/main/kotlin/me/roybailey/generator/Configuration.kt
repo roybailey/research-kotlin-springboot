@@ -1,5 +1,6 @@
 package me.roybailey.generator
 
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.zaxxer.hikari.HikariDataSource
 import mu.KotlinLogging
@@ -56,22 +57,68 @@ open class Configuration {
     open fun apiSpecification(): List<ApiSpecification> {
         val apiDirMap = Files
             .walk(Path.of("$basedir/../docs"))
-            .filter { it.fileName.endsWith("-spec.json")}
+            .filter { it.toFile().name.endsWith("-spec.json") }
             .collect(Collectors.toList())
         val mapper = jacksonObjectMapper()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
-        val apiSpecifications = apiDirMap.stream().map {
-            logger.info { it }
-            val apiSpecification = mapper.readValue(it.toFile(), ApiSpecification::class.java)
+        val apiSpecifications = apiDirMap.stream().map { apiSpecPath ->
+            logger.info { apiSpecPath }
+            val apiSpecification = mapper.readValue(apiSpecPath.toFile(), ApiSpecification::class.java)
             logger.info { apiSpecification }
 
-            File(it.toAbsolutePath().fileName.toString().replace("-spec.json","-create.sql"))
-                .readText()
-            // todo parse create ddl to get list of columns and types
+            apiSpecification.tableMapping
+                .filter { it.createSql != null }
+                .forEach { tableMapping ->
+                    val columnMap = tableMapping.columnMapping.associateByTo(mutableMapOf(), { it.column.toUpperCase() }, { it })
+
+                    val createSql = File(apiSpecPath.toFile().parentFile.absolutePath + "/" + tableMapping.createSql)
+                        .readText()
+                    logger.info("Parsing createSql\n$createSql")
+                    val databaseColumns = getDatabaseColumns(createSql)
+                    tableMapping.columnMapping = databaseColumns.map { databaseColumn ->
+                        val specColumn = columnMap[databaseColumn.column]
+                        logger.info("Column parsed as [$databaseColumn]")
+                        logger.info("Column spec'd as [$specColumn]")
+                        val apiColumnMapping = specColumn ?: databaseColumn
+                        apiColumnMapping.databaseType = databaseColumn.databaseType
+                        logger.info("Column merged as [$apiColumnMapping]")
+                        apiColumnMapping
+                    }
+                }
 
             apiSpecification
         }.collect(Collectors.toList())
 
         return apiSpecifications
+    }
+
+
+    private fun getDatabaseColumns(createSql: String): List<ApiColumnMapping> {
+        val parsedColumns = createSql
+            .substring(createSql.indexOf('(') + 1, createSql.lastIndexOf(')'))
+            .replace("\n", " ")
+            .split(",")
+            .map { column -> column.trim() }
+            .map { column ->
+                Pair(
+                    column.substring(0, column.indexOf(' ')).trim().toUpperCase(),
+                    column.substring(column.indexOf(' ')).trim().toUpperCase()
+                )
+            }
+            .map { pair ->
+                ApiColumnMapping(
+                    pair.first,
+                    pair.second,
+                    when {
+                        pair.second.contains("key") -> "ID"
+                        pair.second.contains(Regex("varchar|text")) -> "TEXT"
+                        pair.second.contains("double") -> "DOUBLE"
+                        else -> pair.second.toUpperCase()
+                    }
+                )
+            }
+            .toList()
+        return parsedColumns
     }
 }

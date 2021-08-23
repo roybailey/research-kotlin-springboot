@@ -1,23 +1,26 @@
 package me.roybailey.generator
 
 data class ApiSpecification (
-    val tableMapping: List<ApiTableMapping>
+    var name: String,
+    var tableMapping: List<ApiTableMapping>
 )
 
 data class ApiTableMapping (
-    val table: String,
-    val record: String,
-    val domain: String,
-    val columnMapping: List<ApiColumnMapping>,
-    val testData: List<ApiTestData>
+    var table: String,
+    var record: String,
+    var domain: String,
+    var createSql: String?,
+    var columnMapping: List<ApiColumnMapping>,
+    var testData: List<ApiTestData>
 )
 
 data class ApiColumnMapping (
-    val column: String,
-    val type: String,
-    val testDataStrategy: String = "sequence",
+    var column: String,
+    var databaseType: String? = null,
+    var type: String? = null,
+    var testDataStrategy: String = "sequence",
 )
 
 data class ApiTestData (
-    val count: Integer
+    var count: Integer
 )

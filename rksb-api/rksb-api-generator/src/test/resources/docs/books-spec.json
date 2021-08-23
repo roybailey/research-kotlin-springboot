@@ -5,14 +5,12 @@
       "table": "TEMP_BOOKS",
       "record": "TempBooksRecord",
       "domain": "TempBooks",
+      "createSql": "books-create.sql",
       "columnMapping": [
         {
-          "column": "TITLE",
-          "type": "STRING"
-        },
-        {
           "column": "PUBLICATIONDATE",
-          "type": "NUMBER"
+          "type": "DATE",
+          "testDataStrategy": "datesequence"
         }
       ],
       "testData": [
