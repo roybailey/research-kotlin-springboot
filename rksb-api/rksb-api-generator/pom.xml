@@ -19,6 +19,7 @@
 
     <properties>
         <jooq.version>3.15.1</jooq.version>
+        <handlebars.version>4.1.2</handlebars.version>
     </properties>
 
     <dependencyManagement>
@@ -76,6 +77,12 @@
             <groupId>org.jooq</groupId>
             <artifactId>jooq-codegen</artifactId>
             <version>${jooq.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.jknack</groupId>
+            <artifactId>handlebars</artifactId>
+            <version>${handlebars.version}</version>
         </dependency>
 
     </dependencies>

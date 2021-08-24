@@ -1,5 +1,7 @@
 package me.roybailey.generator
 
+import me.roybailey.generator.code.ControllerCodeGenerator
+import me.roybailey.generator.code.ServiceCodeGenerator
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
