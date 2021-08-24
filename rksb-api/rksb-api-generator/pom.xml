@@ -94,7 +94,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
-                    <mainClass>me.roybailey.generator.GeneratorKt</mainClass>
+                    <mainClass>me.roybailey.generator.GeneratorApplicationKt</mainClass>
                 </configuration>
                 <executions>
                     <execution>
