@@ -18,6 +18,17 @@
     <description>Kotlin SpringBoot API Service</description>
 
     <properties>
+        <codegen.srcdir>${project.basedir}/src/main/kotlin</codegen.srcdir>
+        <codegen.distdir>${codegen.srcdir}/me/roybailey/codegen</codegen.distdir>
+        <codegen.package>me.roybailey.codegen</codegen.package>
+
+        <codegen.jooq.distdir>${codegen.distdir}/jooq</codegen.jooq.distdir>
+        <codegen.jooq.package>${codegen.package}.jooq</codegen.jooq.package>
+        <codegen.jooq.minimum.count>4</codegen.jooq.minimum.count>
+
+        <codegen.api.distdir>${codegen.distdir}/api</codegen.api.distdir>
+        <codegen.api.package>${codegen.package}.api</codegen.api.package>
+        <codegen.api.minimum.count>2</codegen.api.minimum.count>
     </properties>
 
     <dependencyManagement>
@@ -40,8 +51,17 @@
         </dependency>
         <dependency>
             <groupId>me.roybailey</groupId>
+            <artifactId>rksb-common-lib-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>me.roybailey</groupId>
             <artifactId>rksb-common-lib-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>me.roybailey</groupId>
+            <artifactId>rksb-api-common</artifactId>
         </dependency>
 
         <dependency>
@@ -67,10 +87,47 @@
                         <configuration>
                             <target>
                                 <echo>Running Code Generator with Apache Ant!</echo>
+                                <!-- 1. delete the codegen folder contents to ensure all code is regenerated and deletes/renames are handled -->
+                                <echo>Deleting Previous Code Generated Source from ${codegen.jooq.distdir}</echo>
+                                <echo>Deleting Previous Code Generated Source from ${codegen.api.distdir}</echo>
+                                <delete includeEmptyDirs="true" failonerror="false">
+                                    <fileset dir="${codegen.jooq.distdir}" includes="**"/>
+                                    <fileset dir="${codegen.api.distdir}" includes="**"/>
+                                </delete>
+                                <!-- 2. execute code generation project, passing required parameters for output -->
+                                <echo>Running Code Generator using project.basedir=${project.basedir}</echo>
                                 <java fork="true" jar="../rksb-api-generator/target/rksb-api-generator-0.1.0-SNAPSHOT.jar">
                                     <arg value="--project.basedir=${project.basedir}"/>
                                     <arg value="--project.version=${project.version}"/>
                                 </java>
+                                <!-- 3. count the files generated and validate minimum expected counts as indication of failure -->
+                                <resourcecount property="codegen.jooq.count">
+                                    <fileset id="codegen" dir="${codegen.jooq.distdir}" includes="**"/>
+                                </resourcecount>
+                                <echo message="GENERATOR CREATED (${codegen.jooq.count}/${codegen.jooq.minimum.count}) in ${codegen.jooq.distdir}"/>
+                                <resourcecount property="codegen.api.count">
+                                    <fileset id="codegen" dir="${codegen.api.distdir}" includes="**"/>
+                                </resourcecount>
+                                <echo message="GENERATOR CREATED (${codegen.api.count}/${codegen.api.minimum.count}) in ${codegen.api.distdir}"/>
+                                <!-- 4. fail maven build when minimum file generation counts not acheived (these minimums should be reviewed periodically) -->
+                                <fail message="GENERATOR MISSING FILES (${codegen.jooq.count}/${codegen.jooq.minimum.count}) in ${codegen.jooq.distdir}">
+                                    <condition>
+                                        <not>
+                                            <resourcecount when="greater" count="${codegen.jooq.minimum.count}">
+                                                <fileset id="codegen" dir="${codegen.jooq.distdir}" includes="**"/>
+                                            </resourcecount>
+                                        </not>
+                                    </condition>
+                                </fail>
+                                <fail message="GENERATOR MISSING FILES (${codegen.api.count}/${codegen.api.minimum.count}) in ${codegen.api.distdir}">
+                                    <condition>
+                                        <not>
+                                            <resourcecount when="greater" count="${codegen.api.minimum.count}">
+                                                <fileset id="codegen" dir="${codegen.api.distdir}" includes="**"/>
+                                            </resourcecount>
+                                        </not>
+                                    </condition>
+                                </fail>
                             </target>
                         </configuration>
                         <goals>

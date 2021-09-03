@@ -88,6 +88,13 @@
                 <version>${spring-boot.version}</version>
             </dependency>
 
+            <!-- JSON -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-kotlin</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
             <!-- Database -->
             <dependency>
                 <groupId>org.flywaydb</groupId>
@@ -183,7 +190,22 @@
 
             <dependency>
                 <groupId>me.roybailey</groupId>
-                <artifactId>rksb-api-domain</artifactId>
+                <artifactId>rksb-api-blueprint</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-api-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-api-generator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-api-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

@@ -2,8 +2,6 @@
 
 **Module containing API related definitions, common and code generated libraries**
 
-**STATUS** _Under Construction_
-
 
 ## Design
 
@@ -17,9 +15,10 @@ Modules intended to generate boilerplate code through layering of code generatio
 
 Module          | Description
 --------------- | ------------- 
-[**`docs`**](./docs/README.md)                                |  API documentation and definition 
+[**`rksb-api-blueprint`**](./rksb-api-blueprint/README.md)    |  API blueprints, definitions and documentation
+[**`rksb-api-common`**](./rksb-api-common/README.md)          |  API common custom code library and blueprint loader
 [**`rksb-api-generator`**](./rksb-api-generator/README.md)    |  API database and code generation tooling
-[**`rksb-api-domain`**](./rksb-api-domain/README.md)          |  API domain of generated and common code library
+[**`rksb-api-service`**](./rksb-api-service/README.md)        |  API combined common and generated code library
 
 
 ## Getting started

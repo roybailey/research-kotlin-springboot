@@ -1,8 +1,8 @@
 package me.roybailey.generator.code
 
 import com.github.jknack.handlebars.Handlebars
-import me.roybailey.generator.ApiSpecification
-import me.roybailey.generator.ApiTableMapping
+import me.roybailey.api.blueprint.ApiBlueprint
+import me.roybailey.api.blueprint.ApiTableMapping
 import me.roybailey.generator.ConfigurationProperties
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,24 +21,26 @@ class ControllerCodeGenerator {
     lateinit var properties: ConfigurationProperties
 
     @Autowired
-    lateinit var apiSpecifications: List<ApiSpecification>
+    lateinit var apiBlueprints: List<ApiBlueprint>
 
     val controllerTemplate = """ 
 package {{PACKAGE_NAME}}
 
+import javax.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import me.roybailey.api.common.BaseController
 import me.roybailey.codegen.jooq.database.tables.pojos.{{DOMAIN_NAME}}
 
 
 @RestController
-class {{DOMAIN_NAME}}Controller(private val {{DOMAIN_VARIABLE}}Service: {{DOMAIN_NAME}}Service) {
+class {{DOMAIN_NAME}}Controller(private val {{DOMAIN_VARIABLE}}Service: {{DOMAIN_NAME}}Service) : BaseController() {
 
     @GetMapping
     @RequestMapping("/{{DOMAIN_BASEURL}}")
-    fun getAllData(): List<{{DOMAIN_NAME}}> {
-        return {{DOMAIN_VARIABLE}}Service.getAllData();
+    fun getAllData(request:HttpServletRequest): List<{{DOMAIN_NAME}}> {
+        return {{DOMAIN_VARIABLE}}Service.getAllData(request.parameterMap);
     }
 }
     """.trimIndent().trim()
@@ -51,7 +53,7 @@ class {{DOMAIN_NAME}}Controller(private val {{DOMAIN_VARIABLE}}Service: {{DOMAIN
         val target = properties.target
         val basePackageName = "${properties.basePackageName}.api"
         val basePackageDirectory = "$basedir/$target/${basePackageName.replace(".", "/")}"
-        val tableMappings = apiSpecifications
+        val tableMappings = apiBlueprints
             .map { apiDefinition -> apiDefinition.tableMapping }
             .toList()
             .flatten()

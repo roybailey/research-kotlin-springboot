@@ -2,8 +2,6 @@
 
 **Module containing API code generation utilities**
 
-**STATUS** _Under Construction_
-
 
 ## Design
 
@@ -15,6 +13,10 @@ or at least enough around the column names and stubs needed to reduce the amount
 
 * [jooq.org](https://jooq.org) is used to generate from database schema
 * [handlebars.java](https://github.com/jknack/handlebars.java) is used to generate source code
+
+Code generation should be kept as simplistic as possible, the minimum needed to drive common code.
+e.g. generating classes with String identifiers and let the common base code lookup the real objects
+(rather than generating more complex code to lookup real objects directly).
 
 
 ## Getting Started
@@ -84,4 +86,4 @@ create view v_temp_books as select * from temp_books;
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
-
+* Enrich ApiBlueprint object graph to reduce custom model entries for code generation

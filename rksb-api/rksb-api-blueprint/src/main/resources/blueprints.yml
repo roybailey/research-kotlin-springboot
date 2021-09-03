@@ -1,0 +1,3 @@
+api.blueprints:
+  - api/books-blueprint.json
+  - api/cities-blueprint.json

@@ -1,5 +1,6 @@
 package me.roybailey.generator
 
+import me.roybailey.api.blueprint.ApiBlueprintConfiguration
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
@@ -10,11 +11,16 @@ import org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.boot.runApplication
+import org.springframework.context.annotation.ComponentScan
 import java.lang.System.exit
 import javax.sql.DataSource
 import kotlin.system.exitProcess
 
-@SpringBootApplication(exclude = [R2dbcAutoConfiguration::class])
+@SpringBootApplication(
+    exclude = [R2dbcAutoConfiguration::class],
+    scanBasePackageClasses = [ApiBlueprintConfiguration::class],
+    scanBasePackages = ["me.roybailey.generator"]
+)
 open class GeneratorApplication : ApplicationRunner {
 
     private val logger = KotlinLogging.logger {}

@@ -18,8 +18,10 @@
     <description>Kotlin SpringBoot API</description>
 
     <modules>
+        <module>rksb-api-blueprint</module>
+        <module>rksb-api-common</module>
         <module>rksb-api-generator</module>
-        <module>rksb-api-domain</module>
+        <module>rksb-api-service</module>
     </modules>
 
 </project>

@@ -1,0 +1,28 @@
+{
+  "name": "books",
+  "tableMapping": [
+    {
+      "table": "TEMP_BOOKS",
+      "record": "TempBooksRecord",
+      "domain": "TempBooks",
+      "columnMapping": [
+        {
+          "column": "PUBLICATIONDATE",
+          "testDataStrategy": "datesequence"
+        }
+      ],
+      "filterMapping": [
+        {
+          "name": "title",
+          "column": "TITLE",
+          "type": "LIKE"
+        }
+      ],
+      "testData": [
+        {
+          "count": 10
+        }
+      ]
+    }
+  ]
+}

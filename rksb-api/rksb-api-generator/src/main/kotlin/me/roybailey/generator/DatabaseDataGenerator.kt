@@ -1,5 +1,6 @@
 package me.roybailey.generator
 
+import me.roybailey.api.blueprint.ApiBlueprint
 import mu.KotlinLogging
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL.*
@@ -19,7 +20,7 @@ class DatabaseDataGenerator {
     lateinit var properties: ConfigurationProperties
 
     @Autowired
-    lateinit var apiSpecifications: List<ApiSpecification>
+    lateinit var apiBlueprints: List<ApiBlueprint>
 
     @Autowired
     lateinit var dataSource: DataSource
@@ -38,7 +39,7 @@ class DatabaseDataGenerator {
         logger.info("Database Data Generation - STARTING")
         val jooq = using(dataSource, SQLDialect.POSTGRES)
 
-        val tableMappings = apiSpecifications
+        val tableMappings = apiBlueprints
             .map { apiDefinition -> apiDefinition.tableMapping }
             .toList()
             .flatten()

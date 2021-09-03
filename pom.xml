@@ -33,7 +33,7 @@
         <h2.version>1.4.200</h2.version>
 
         <!-- spring -->
-        <spring-boot.version>2.5.0</spring-boot.version>
+        <spring-boot.version>2.5.4</spring-boot.version>
         <jackson.version>2.12.3</jackson.version>
 
         <!-- database -->

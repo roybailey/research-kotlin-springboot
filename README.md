@@ -40,4 +40,5 @@ docker run --name postgres -e POSTGRES_PASSWORD=localhost postgres
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
+* TODO: tag TestContainer/integration tests and exclude from maven build
 

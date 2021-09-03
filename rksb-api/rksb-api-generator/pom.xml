@@ -53,11 +53,14 @@
             <artifactId>rksb-common-lib-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>me.roybailey</groupId>
+            <artifactId>rksb-api-common</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

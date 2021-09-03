@@ -1,5 +1,6 @@
 package me.roybailey.generator
 
+import me.roybailey.api.blueprint.ApiBlueprint
 import me.roybailey.generator.code.ControllerCodeGenerator
 import me.roybailey.generator.code.ServiceCodeGenerator
 import mu.KotlinLogging
@@ -17,7 +18,7 @@ class CodeGenerator {
     lateinit var properties: ConfigurationProperties
 
     @Autowired
-    lateinit var apiSpecifications: List<ApiSpecification>
+    lateinit var apiBlueprints: List<ApiBlueprint>
 
     @Autowired
     lateinit var serviceCodeGenerator: ServiceCodeGenerator
@@ -34,7 +35,7 @@ class CodeGenerator {
         val target = properties.target
         val basePackageName = "${properties.basePackageName}.api"
         val basePackageDirectory = "$basedir/$target/${basePackageName.replace(".", "/")}"
-        val tableMappings = apiSpecifications
+        val tableMappings = apiBlueprints
             .map { apiDefinition -> apiDefinition.tableMapping }
             .toList()
             .flatten()

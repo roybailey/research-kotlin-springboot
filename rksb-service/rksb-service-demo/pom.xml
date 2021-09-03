@@ -89,7 +89,7 @@
 
 		<dependency>
 			<groupId>me.roybailey</groupId>
-			<artifactId>rksb-api-domain</artifactId>
+			<artifactId>rksb-api-service</artifactId>
 		</dependency>
 
 	</dependencies>

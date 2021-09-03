@@ -5,7 +5,7 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication
-@ComponentScan(basePackages = ["me.roybailey.codegen.api"])
+@ComponentScan(basePackages = ["me.roybailey.api", "me.roybailey.codegen"])
 open class DemoApplication
 
 fun main(args: Array<String>) {

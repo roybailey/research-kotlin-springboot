@@ -1,5 +1,6 @@
 package me.roybailey.generator
 
+import me.roybailey.api.blueprint.ApiBlueprint
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
 import org.jooq.codegen.GenerationTool
@@ -17,7 +18,7 @@ class DatabaseCodeGenerator {
     lateinit var properties: ConfigurationProperties
 
     @Autowired
-    lateinit var apiSpecifications: List<ApiSpecification>
+    lateinit var apiBlueprints: List<ApiBlueprint>
 
     @PostConstruct
     fun generateDatabaseCode() {
@@ -29,7 +30,7 @@ class DatabaseCodeGenerator {
         val directory = "${basedir}/${target}"
         val packageName = "${properties.basePackageName}.jooq.database"
         val excludes = properties.excludes
-        val includes = apiSpecifications
+        val includes = apiBlueprints
             .map { apiDefinition -> apiDefinition.tableMapping.map { tableMapping -> tableMapping.table } }
             .toList()
             .flatten()
