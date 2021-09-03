@@ -5,6 +5,7 @@ import me.roybailey.common.neo4j.Neo4jServiceOptions
 import me.roybailey.common.test.UnitTestBase
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.TestInfo
 import org.junit.jupiter.api.condition.DisabledOnOs
 import org.junit.jupiter.api.condition.OS
@@ -27,6 +28,7 @@ object BoltNeo4jServiceFactory {
 
 }
 
+@Tag("test-containers")
 @Testcontainers
 abstract class Neo4jServiceBoltTestBase : UnitTestBase() {
 

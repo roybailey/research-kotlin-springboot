@@ -1,6 +1,7 @@
 package me.roybailey.common.database.postgres
 
 import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.condition.DisabledOnOs
 import org.junit.jupiter.api.condition.OS
@@ -12,7 +13,7 @@ import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
-
+@Tag("test-containers")
 @Testcontainers
 @SpringBootTest
 @ActiveProfiles("postgres")
@@ -38,7 +39,6 @@ class TestContainerPostgresTest {
     }
 
     @Test
-    @Disabled
     fun testPostgresTestContainerInitialised() {
 
     }

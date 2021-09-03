@@ -18,4 +18,16 @@ open class ConfigurationProperties {
     @Value("\${project.database.excludes:.*schema.*|pg_.*}")
     lateinit var excludes: String
 
+    @Value("\${project.database.url:jdbc:postgresql://localhost:5432/postgres}")
+    lateinit var databaseUrl: String
+
+    @Value("\${project.database.driver:org.postgresql.Driver}")
+    lateinit var databaseDriver: String
+
+    @Value("\${project.database.username:postgres}")
+    lateinit var databaseUsername: String
+
+    @Value("\${project.database.password:localhost}")
+    lateinit var databasePassword: String
+
 }

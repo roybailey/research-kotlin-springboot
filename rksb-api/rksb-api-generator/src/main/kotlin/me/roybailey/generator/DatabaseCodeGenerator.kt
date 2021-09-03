@@ -46,10 +46,10 @@ class DatabaseCodeGenerator {
         var configuration = org.jooq.meta.jaxb.Configuration()
             .withJdbc(
                 Jdbc()
-                    .withDriver("org.postgresql.Driver")
-                    .withUrl("jdbc:postgresql://localhost:5432/postgres")
-                    .withUser("postgres")
-                    .withPassword("localhost")
+                    .withDriver(properties.databaseDriver)
+                    .withUrl(properties.databaseUrl)
+                    .withUser(properties.databaseUsername)
+                    .withPassword(properties.databasePassword)
             )
             .withGenerator(
                 Generator()

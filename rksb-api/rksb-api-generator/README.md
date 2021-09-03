@@ -86,4 +86,5 @@ create view v_temp_books as select * from temp_books;
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
-* Enrich ApiBlueprint object graph to reduce custom model entries for code generation
+* TODO: Enrich ApiBlueprint object graph to reduce custom model entries for code generation
+* TODO: Pass more parameters into generator

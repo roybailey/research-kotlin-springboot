@@ -29,6 +29,7 @@
         <testcontainers.version>1.15.3</testcontainers.version>
         <junit-platform.version>5.7.2</junit-platform.version>
         <surefire-plugin.version>2.22.2</surefire-plugin.version>
+        <surefire-exclude-test-tags>test-containers</surefire-exclude-test-tags>
         <ktor.version>1.6.1</ktor.version>
         <h2.version>1.4.200</h2.version>
 
@@ -73,9 +74,7 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <excludes>
-                        <!--<exclude>**/*TestContainer*</exclude>-->
-                    </excludes>
+                    <excludedGroups>${surefire-exclude-test-tags}</excludedGroups>
                 </configuration>
             </plugin>
             <plugin>
