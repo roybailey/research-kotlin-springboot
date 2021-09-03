@@ -23,6 +23,7 @@ might use the database column lists to handle common column logic.
 * Add new API Blueprint to `src/main/resources/api` folder (or subfolder)
 * Add `<api-name>-blueprint.json`
 * Add `<api-name>-create.sql` for creation of source table
+* Finally, add the new blueprint file location into `blueprints.yml` to be included in code generation
 
 
 ## Developers Guide
@@ -35,4 +36,6 @@ might use the database column lists to handle common column logic.
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
+* TODO: update ApiBlueprintTest to optionally check for books
+* TODO: update ApiBlueprintTest to read the `blueprint.yml` and check count
 

@@ -24,11 +24,11 @@
 
         <codegen.jooq.distdir>${codegen.distdir}/jooq</codegen.jooq.distdir>
         <codegen.jooq.package>${codegen.package}.jooq</codegen.jooq.package>
-        <codegen.jooq.minimum.count>4</codegen.jooq.minimum.count>
+        <codegen.jooq.minimum.count>1</codegen.jooq.minimum.count>
 
         <codegen.api.distdir>${codegen.distdir}/api</codegen.api.distdir>
         <codegen.api.package>${codegen.package}.api</codegen.api.package>
-        <codegen.api.minimum.count>2</codegen.api.minimum.count>
+        <codegen.api.minimum.count>1</codegen.api.minimum.count>
     </properties>
 
     <dependencyManagement>
@@ -106,6 +106,7 @@
                                     <arg value="--app.datasource.jooq.url=${codegen.jooq.url}"/>
                                     <arg value="--app.datasource.jooq.username=${codegen.jooq.username}"/>
                                     <arg value="--app.datasource.jooq.password=${codegen.jooq.password}"/>
+                                    <arg value="--app.datasource.jooq.schema=${codegen.jooq.schema}"/>
                                 </java>
                                 <!-- 3. count the files generated and validate minimum expected counts as indication of failure -->
                                 <resourcecount property="codegen.jooq.count">

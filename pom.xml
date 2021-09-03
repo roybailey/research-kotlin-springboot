@@ -45,6 +45,7 @@
         <codegen.jooq.url>jdbc:postgresql://localhost:5432/postgres</codegen.jooq.url>
         <codegen.jooq.username>postgres</codegen.jooq.username>
         <codegen.jooq.password>localhost</codegen.jooq.password>
+        <codegen.jooq.schema>public</codegen.jooq.schema>
 
     </properties>
 

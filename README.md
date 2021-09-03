@@ -36,9 +36,13 @@ Module          | Description
 docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=localhost postgres
 ```
 
+### Modifying Database
+
+* Update `pom.xml` for code generation database properties
+* Update `service-demo/src/main/resources/application.yml` for demo database properties
+
 ## Handover Suggestions
 
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
-
 

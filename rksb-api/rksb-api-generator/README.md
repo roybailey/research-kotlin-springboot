@@ -88,3 +88,4 @@ _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
 * TODO: Enrich ApiBlueprint object graph to reduce custom model entries for code generation
 * TODO: Pass more parameters into generator
+* TODO: Configurable database schema (not hardcoded to public)

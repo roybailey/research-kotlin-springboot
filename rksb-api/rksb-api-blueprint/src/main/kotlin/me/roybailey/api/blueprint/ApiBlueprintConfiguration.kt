@@ -15,18 +15,23 @@ open class ApiBlueprintConfiguration {
     private val logger = KotlinLogging.logger {}
 
     @Bean
-    open fun apiBlueprints(): List<ApiBlueprint> {
-
+    open fun apiBlueprintFiles(): List<String> {
         // this was easier than getting Spring to load YAML arrays properly
-        val propertiesFile= "blueprints.yml"
+        val propertiesFile = "blueprints.yml"
         val yaml = Yaml()
         val inputStream = this.javaClass.classLoader.getResourceAsStream(propertiesFile)
         val properties: Map<String, Any> = yaml.load(inputStream)
-        val apiBlueprintFiles:List<String> = properties["api.blueprints"] as List<String>
         logger.info("Loaded $propertiesFile")
+        return properties["api.blueprints"] as List<String>
+    }
+
+    @Bean
+    open fun apiBlueprints(): List<ApiBlueprint> {
+
+        val apiBlueprintFiles = apiBlueprintFiles()
         logger.info("Loaded api.blueprints as $apiBlueprintFiles")
 
-        if(apiBlueprintFiles.isEmpty()) {
+        if (apiBlueprintFiles.isEmpty()) {
             logger.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             logger.error("!!!!! NO API BLUEPRINTS FOUND !!!!!")
             logger.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -37,16 +42,21 @@ open class ApiBlueprintConfiguration {
 
         val apiBlueprints = apiBlueprintFiles.stream().map { apiBlueprintFile ->
             logger.info { apiBlueprintFile }
-            val apiBlueprint = mapper.readValue(this.javaClass.classLoader.getResourceAsStream(apiBlueprintFile), ApiBlueprint::class.java)
+            val apiBlueprint = mapper.readValue(
+                this.javaClass.classLoader.getResourceAsStream(apiBlueprintFile),
+                ApiBlueprint::class.java
+            )
             logger.info { apiBlueprint }
 
             apiBlueprint.tableMapping
 //                .filter { it.createSql != null }
                 .forEach { tableMapping ->
-                    val columnMap = tableMapping.columnMapping.associateByTo(mutableMapOf(), { it.column.toUpperCase() }, { it })
+                    val columnMap =
+                        tableMapping.columnMapping.associateByTo(mutableMapOf(), { it.column.toUpperCase() }, { it })
 
-                    val apiCreateSqlFile = apiBlueprintFile.replace("-blueprint.json","-create.sql")
-                    val createSql = String(this.javaClass.classLoader.getResourceAsStream(apiCreateSqlFile)!!.readAllBytes())
+                    val apiCreateSqlFile = apiBlueprintFile.replace("-blueprint.json", "-create.sql")
+                    val createSql =
+                        String(this.javaClass.classLoader.getResourceAsStream(apiCreateSqlFile)!!.readAllBytes())
                     //val createSql = File(apiBlueprintFile.toFile().parentFile.absolutePath + "/" + tableMapping.createSql).readText()
 
                     logger.info("Parsing createSql\n$createSql")

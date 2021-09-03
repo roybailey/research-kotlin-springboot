@@ -24,7 +24,7 @@ app.datasource.jooq:
 #  url: jdbc:postgresql://localhost:5432/postgres
 #  username: postgres
 #  password: localhost
+#  schema: public
 
-app:
   codegen:
 #    base.package: <package to generate code into is defined in root pom.xml and passed as parameter>

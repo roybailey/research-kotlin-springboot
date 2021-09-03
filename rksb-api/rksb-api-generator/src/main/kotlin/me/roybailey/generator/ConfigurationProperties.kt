@@ -42,4 +42,7 @@ open class ConfigurationProperties {
     @Value("\${app.datasource.jooq.password}")
     lateinit var jooqDatabasePassword: String
 
+    @Value("\${app.datasource.jooq.schema}")
+    lateinit var jooqDatabaseSchema: String
+
 }

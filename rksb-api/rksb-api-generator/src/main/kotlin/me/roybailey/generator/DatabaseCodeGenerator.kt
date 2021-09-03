@@ -67,7 +67,7 @@ class DatabaseCodeGenerator {
                             .withName("org.jooq.meta.postgres.PostgresDatabase")
                             .withIncludes(includes)
                             .withExcludes(excludes)
-                            .withInputSchema("public")
+                            .withInputSchema(properties.jooqDatabaseSchema)
                     )
                     .withTarget(
                         Target()
