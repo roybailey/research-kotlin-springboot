@@ -46,10 +46,10 @@ class DatabaseCodeGenerator {
         var configuration = org.jooq.meta.jaxb.Configuration()
             .withJdbc(
                 Jdbc()
-                    .withDriver(properties.databaseDriver)
-                    .withUrl(properties.databaseUrl)
-                    .withUser(properties.databaseUsername)
-                    .withPassword(properties.databasePassword)
+                    .withDriver(properties.jooqDatabaseDriver)
+                    .withUrl(properties.jooqDatabaseUrl)
+                    .withUser(properties.jooqDatabaseUsername)
+                    .withPassword(properties.jooqDatabasePassword)
             )
             .withGenerator(
                 Generator()

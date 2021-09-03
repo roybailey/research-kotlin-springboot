@@ -99,6 +99,13 @@
                                 <java fork="true" jar="../rksb-api-generator/target/rksb-api-generator-0.1.0-SNAPSHOT.jar">
                                     <arg value="--project.basedir=${project.basedir}"/>
                                     <arg value="--project.version=${project.version}"/>
+                                    <arg value="--app.codegen.base.package=${codegen.base.package}"/>
+                                    <arg value="--app.datasource.main.url=${codegen.jooq.url}"/>
+                                    <arg value="--app.datasource.main.username=${codegen.jooq.username}"/>
+                                    <arg value="--app.datasource.main.password=${codegen.jooq.password}"/>
+                                    <arg value="--app.datasource.jooq.url=${codegen.jooq.url}"/>
+                                    <arg value="--app.datasource.jooq.username=${codegen.jooq.username}"/>
+                                    <arg value="--app.datasource.jooq.password=${codegen.jooq.password}"/>
                                 </java>
                                 <!-- 3. count the files generated and validate minimum expected counts as indication of failure -->
                                 <resourcecount property="codegen.jooq.count">

@@ -22,17 +22,18 @@ Module          | Description
 [**`rksb-service`**](./rksb-service/README.md)  |  Service examples
 
 
-## Getting started
+## Getting Started
 
-* `mvn clean install` 
+* `mvn clean install`
+* `./demo.sh` to run the demo application
 
 ### Prerequisites
 
-* Docker, used by test-containers for testing 3rd party databases (or uncomment `<excludes>**TestContainer**</exclude>` from `pom.xml` to avoid)
-* Postgres access for code generation
+* Postgres access for code generation, see `pom.xml` for properties to assign
+* Docker, used by test-containers for testing 3rd party databases (excluded by default using JUnit5 tag `test-containers`) 
 
 ```
-docker run --name postgres -e POSTGRES_PASSWORD=localhost postgres
+docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=localhost postgres
 ```
 
 ## Handover Suggestions
@@ -40,5 +41,4 @@ docker run --name postgres -e POSTGRES_PASSWORD=localhost postgres
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
-* TODO: tag TestContainer/integration tests and exclude from maven build
 
