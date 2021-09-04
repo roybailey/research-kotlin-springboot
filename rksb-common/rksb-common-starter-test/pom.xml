@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- do not inherit from multi-module parent pom as this is expected to be setup like an independent project -->
+	<parent>
+		<groupId>me.roybailey</groupId>
+		<artifactId>rksb-common</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>rksb-common-starter-test</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Research Kotlin SpringBoot Common Starter Test</name>
+	<description>Research Kotlin SpringBoot Common Starter Test</description>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>me.roybailey</groupId>
+				<artifactId>rksb-common-bom</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>me.roybailey</groupId>
+			<artifactId>rksb-common-lib-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>me.roybailey</groupId>
+			<artifactId>rksb-common-lib-base</artifactId>
+			<type>test-jar</type>
+			<classifier>tests</classifier>
+		</dependency>
+
+	</dependencies>
+
+</project>

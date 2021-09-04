@@ -37,5 +37,4 @@ _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
 * TODO: update ApiBlueprintTest to optionally check for books
-* TODO: update ApiBlueprintTest to read the `blueprint.yml` and check count
 

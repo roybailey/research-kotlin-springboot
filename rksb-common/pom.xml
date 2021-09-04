@@ -20,6 +20,8 @@
     <modules>
         <module>rksb-common-lib</module>
         <module>rksb-common-bom</module>
+        <module>rksb-common-starter</module>
+        <module>rksb-common-starter-test</module>
     </modules>
 
 </project>

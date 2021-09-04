@@ -3,19 +3,19 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<!-- do not inherit from multi-module parent pom as this is expected to be setup like an independent project -->
 	<parent>
 		<groupId>me.roybailey</groupId>
-		<artifactId>rksb-service</artifactId>
+		<artifactId>rksb-common</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>me.roybailey</groupId>
-	<artifactId>rksb-service-demo</artifactId>
+	<artifactId>rksb-common-starter</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Research Kotlin SpringBoot Service Demo</name>
-	<description>Research Kotlin SpringBoot Service Demo Application</description>
+	<name>Research Kotlin SpringBoot Common Starter</name>
+	<description>Research Kotlin SpringBoot Common Starter</description>
 
 	<dependencyManagement>
 		<dependencies>
@@ -31,21 +31,39 @@
 
 	<dependencies>
 
+		<!-- SpringBoot -->
 		<dependency>
-			<groupId>me.roybailey</groupId>
-			<artifactId>rksb-common-starter</artifactId>
-			<version>${project.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>me.roybailey</groupId>
-			<artifactId>rksb-common-starter-test</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jooq</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>me.roybailey</groupId>
-			<artifactId>rksb-api-service</artifactId>
+			<artifactId>rksb-common-lib-base</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>me.roybailey</groupId>
+			<artifactId>rksb-common-lib-database</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>me.roybailey</groupId>
+			<artifactId>rksb-common-lib-web</artifactId>
 		</dependency>
 
 		<dependency>
@@ -58,26 +76,5 @@
 		</dependency>
 
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring-boot.version}</version>
-				<configuration>
-					<fork>true</fork>
-					<mainClass>me.roybailey.service.demo.DemoApplicationKt</mainClass>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>

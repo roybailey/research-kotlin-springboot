@@ -18,6 +18,7 @@
     <description>Kotlin SpringBoot API Service</description>
 
     <properties>
+
         <codegen.srcdir>${project.basedir}/src/main/kotlin</codegen.srcdir>
         <codegen.distdir>${codegen.srcdir}/me/roybailey/codegen</codegen.distdir>
         <codegen.package>me.roybailey.codegen</codegen.package>
@@ -29,6 +30,7 @@
         <codegen.api.distdir>${codegen.distdir}/api</codegen.api.distdir>
         <codegen.api.package>${codegen.package}.api</codegen.api.package>
         <codegen.api.minimum.count>1</codegen.api.minimum.count>
+
     </properties>
 
     <dependencyManagement>
