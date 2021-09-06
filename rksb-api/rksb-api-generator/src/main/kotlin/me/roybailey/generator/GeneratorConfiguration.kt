@@ -13,7 +13,7 @@ import javax.sql.DataSource
 
 
 @Configuration
-open class Configuration {
+open class GeneratorConfiguration {
 
     private val logger = KotlinLogging.logger {}
 
