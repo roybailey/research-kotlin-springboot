@@ -1,6 +1,6 @@
-# Library
+# Research Kotlin SpringBoot - Common Libraries
 
-**Library Code Modules**
+**Common Library Code Modules**
 
 
 ## Design
@@ -19,6 +19,7 @@ Libraries built together in the same project version.
 
 Module          | Description
 --------------- | ------------- 
+[**`..`**](../README.md) | *parent*
 [**`rksb-common-lib-base`**](./rksb-common-lib-base/README.md)          |  Base library for Language & Logging dependencies/utilities
 [**`rksb-common-lib-database`**](./rksb-common-lib-database/README.md)  |  Database library for Postgres dependencies/utilities
 [**`rksb-common-lib-web`**](./rksb-common-lib-web/README.md)            |  Web/RESTful library for Web Service dependencies/utilities

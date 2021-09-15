@@ -62,10 +62,12 @@
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jooq</artifactId>
         </dependency>
+        <!-- JOOQ Database Code Generator and DSL -->
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq</artifactId>

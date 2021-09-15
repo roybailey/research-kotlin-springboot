@@ -13,7 +13,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row3;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -56,9 +56,19 @@ public class TempBooks extends TableImpl<TempBooksRecord> {
     public final TableField<TempBooksRecord, String> TITLE = createField(DSL.name("title"), SQLDataType.VARCHAR(255), this, "");
 
     /**
+     * The column <code>public.temp_books.description</code>.
+     */
+    public final TableField<TempBooksRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.CLOB, this, "");
+
+    /**
      * The column <code>public.temp_books.publicationdate</code>.
      */
     public final TableField<TempBooksRecord, Integer> PUBLICATIONDATE = createField(DSL.name("publicationdate"), SQLDataType.INTEGER, this, "");
+
+    /**
+     * The column <code>public.temp_books.price</code>.
+     */
+    public final TableField<TempBooksRecord, Double> PRICE = createField(DSL.name("price"), SQLDataType.DOUBLE, this, "");
 
     private TempBooks(Name alias, Table<TempBooksRecord> aliased) {
         this(alias, aliased, null);
@@ -135,11 +145,11 @@ public class TempBooks extends TableImpl<TempBooksRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Integer, String, Integer> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row5<Integer, String, String, Integer, Double> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }

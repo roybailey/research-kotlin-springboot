@@ -155,6 +155,19 @@
 
             <dependency>
                 <groupId>me.roybailey</groupId>
+                <artifactId>rksb-common-lib-jooq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-common-lib-jooq</artifactId>
+                <type>test-jar</type>
+                <classifier>tests</classifier>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>me.roybailey</groupId>
                 <artifactId>rksb-common-lib-web</artifactId>
                 <version>${project.version}</version>
             </dependency>

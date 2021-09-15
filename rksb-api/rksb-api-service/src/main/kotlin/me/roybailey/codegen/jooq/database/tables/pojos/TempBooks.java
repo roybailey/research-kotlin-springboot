@@ -17,24 +17,32 @@ public class TempBooks implements Serializable {
 
     private Integer id;
     private String  title;
+    private String  description;
     private Integer publicationdate;
+    private Double  price;
 
     public TempBooks() {}
 
     public TempBooks(TempBooks value) {
         this.id = value.id;
         this.title = value.title;
+        this.description = value.description;
         this.publicationdate = value.publicationdate;
+        this.price = value.price;
     }
 
     public TempBooks(
         Integer id,
         String  title,
-        Integer publicationdate
+        String  description,
+        Integer publicationdate,
+        Double  price
     ) {
         this.id = id;
         this.title = title;
+        this.description = description;
         this.publicationdate = publicationdate;
+        this.price = price;
     }
 
     /**
@@ -66,6 +74,20 @@ public class TempBooks implements Serializable {
     }
 
     /**
+     * Getter for <code>public.temp_books.description</code>.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Setter for <code>public.temp_books.description</code>.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
      * Getter for <code>public.temp_books.publicationdate</code>.
      */
     public Integer getPublicationdate() {
@@ -79,13 +101,29 @@ public class TempBooks implements Serializable {
         this.publicationdate = publicationdate;
     }
 
+    /**
+     * Getter for <code>public.temp_books.price</code>.
+     */
+    public Double getPrice() {
+        return this.price;
+    }
+
+    /**
+     * Setter for <code>public.temp_books.price</code>.
+     */
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("TempBooks (");
 
         sb.append(id);
         sb.append(", ").append(title);
+        sb.append(", ").append(description);
         sb.append(", ").append(publicationdate);
+        sb.append(", ").append(price);
 
         sb.append(")");
         return sb.toString();

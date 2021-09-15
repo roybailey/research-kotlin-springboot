@@ -1,33 +1,30 @@
-# Common
+# Research Kotlin SpringBoot - Common
 
 **Common Libraries Modules**
 
 ## Design
 
-Modules intended to generate boilerplate code through layering of code generation steps as follows
+Modules of common code built together and versioned within a bom (bill-of-materials) 
 
-1. Build the api domain configurations (e.g. definition of all requirements and configurations for code generation)
-1. Run domain process to update the database schema
-1. Generate typesafe Java database schema using jooq (requires database access and any schema changes e.g. views) 
-1. Generate 
+1. Module to contain all common libraries
+1. A bill-of-materials module to version all 3rd party and common libraries
+1. Various 'starter' projects for common dependencies 
 
 
 ## Modules
 
 Module          | Description
 --------------- | ------------- 
-[**`rksb-common-lib`**](./rksb-common-lib/README.md)    |  Common library modules for language and 3rd party 
-[**`rksb-common-bom`**](./rksb-common-bom/README.md)    |  Book of Materials, versioning for all 3rd party / common libraries
+[**`..`**](../README.md) | *parent*
+[**`rksb-common-lib`**](./rksb-common-lib/README.md)            |  Common library modules for language and 3rd party 
+[**`rksb-common-bom`**](./rksb-common-bom/README.md)            |  Book of Materials, versioning for all 3rd party / common libraries
+[**`rksb-common-starter`**](./rksb-common-starter/README.md)              |  Starter project containing standard REST/database dependencies
+[**`rksb-common-starter-test`**](./rksb-common-starter-test/README.md)    |  Starter project containing standard Test dependencies
 
 
 ## Getting started
 
 * `mvn clean install` 
-
-
-### Prerequisites
-
-* Docker, used by test-containers for testing 3rd party databases
 
 
 ## Handover Suggestions

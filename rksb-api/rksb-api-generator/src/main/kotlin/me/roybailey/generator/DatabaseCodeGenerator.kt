@@ -77,6 +77,7 @@ class DatabaseCodeGenerator {
                     .withGenerate(Generate().withPojos(true))
             )
         GenerationTool.generate(configuration)
+
         logger.info("Database Code Generation - FINISHED")
     }
 }

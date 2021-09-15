@@ -30,6 +30,22 @@ might use the database column lists to handle common column logic.
 
 * `mvn clean install` 
 
+### Running the Generator from IDEA
+
+GeneratorApplicationKt
+
+```
+--project.basedir=<repo-root-folder>/rksb-api/rksb-api-service
+--project.version=0.1.0-SNAPSHOT
+--app.codegen.base.package=me.roybailey.codegen
+--app.datasource.main.url=jdbc:postgresql://localhost:5432/postgres
+--app.datasource.main.username=postgres
+--app.datasource.main.password=localhost
+--app.datasource.jooq.url=jdbc:postgresql://localhost:5432/postgres
+--app.datasource.jooq.username=postgres
+--app.datasource.jooq.password=localhost
+--app.datasource.jooq.schema=public
+```
 
 ## Handover Suggestions
 

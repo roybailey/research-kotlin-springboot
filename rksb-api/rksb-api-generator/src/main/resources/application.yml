@@ -11,6 +11,13 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         jdbc.lob.non_contextual_creation: true
 
+  flyway:
+    enabled: true
+    locations: classpath:ddl
+    url: jdbc:postgresql://localhost:5432/postgres
+    user: postgres
+    password: localhost
+
 app.datasource.main:
   initialization-mode: never
   platform: postgres

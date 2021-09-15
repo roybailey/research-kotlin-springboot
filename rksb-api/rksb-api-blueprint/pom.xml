@@ -38,6 +38,10 @@
             <groupId>me.roybailey</groupId>
             <artifactId>rksb-common-lib-base</artifactId>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>me.roybailey</groupId>-->
+<!--            <artifactId>rksb-common-lib-jooq</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>me.roybailey</groupId>
             <artifactId>rksb-common-lib-test</artifactId>

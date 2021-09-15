@@ -1,10 +1,12 @@
-# Common BOM
+# Research Kotlin SpringBoot - Common Bill of Materials
 
-**Common Book of Materials for defining all versioning of 3rd party and common libraries**
+**Common Bill of Materials for defining all versioning of 3rd party and common libraries**
 
 ## Design
 
-`pom.xml` to define all versioning for common 3rd party and custom libraries.
+* `pom.xml` to define all versioning for common 3rd party and custom libraries.
+* Versions should mostly be defined in the root `pom.xml` unless very specialist
+
 
 ### Usage
 
@@ -23,6 +25,16 @@ Add to your `pom.xml` the following using the appropriate version.
 		</dependencies>
 	</dependencyManagement>
 ```
+
+Then add any dependecies you require without need for version as this will come from the `bom`
+
+```
+    <dependency>
+        <groupId>me.roybailey</groupId>
+        <artifactId>rksb-common-lib-base</artifactId>
+    </dependency>
+```
+
 
 ## Getting started
 

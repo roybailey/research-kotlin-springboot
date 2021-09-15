@@ -67,6 +67,8 @@ open class ApiBlueprintConfiguration {
                         logger.info("Column spec'd as [$specColumn]")
                         val apiColumnMapping = specColumn ?: databaseColumn
                         apiColumnMapping.databaseType = databaseColumn.databaseType
+                        if(apiColumnMapping.type == null)
+                            apiColumnMapping.type = databaseColumn.databaseType
                         logger.info("Column merged as [$apiColumnMapping]")
                         apiColumnMapping
                     }
@@ -95,9 +97,10 @@ open class ApiBlueprintConfiguration {
                     pair.first,
                     pair.second,
                     when {
-                        pair.second.contains("key") -> "ID"
-                        pair.second.contains(Regex("varchar|text")) -> "TEXT"
-                        pair.second.contains("double") -> "DOUBLE"
+                        pair.second.contains(Regex("key", RegexOption.IGNORE_CASE)) -> "ID"
+                        pair.second.contains(Regex("varchar|text", RegexOption.IGNORE_CASE)) -> "TEXT"
+                        pair.second.contains(Regex("double", RegexOption.IGNORE_CASE)) -> "DOUBLE"
+                        pair.second.contains(Regex("integer", RegexOption.IGNORE_CASE)) -> "INTEGER"
                         else -> pair.second.toUpperCase()
                     }
                 )
