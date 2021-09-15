@@ -49,34 +49,42 @@ open class ApiBlueprintConfiguration {
             logger.info { apiBlueprint }
 
             apiBlueprint.tableMapping
-//                .filter { it.createSql != null }
                 .forEach { tableMapping ->
                     val columnMap =
                         tableMapping.columnMapping.associateByTo(mutableMapOf(), { it.column.toUpperCase() }, { it })
 
-                    val apiCreateSqlFile = apiBlueprintFile.replace("-blueprint.json", "-create.sql")
-                    val createSql =
-                        String(this.javaClass.classLoader.getResourceAsStream(apiCreateSqlFile)!!.readAllBytes())
-                    //val createSql = File(apiBlueprintFile.toFile().parentFile.absolutePath + "/" + tableMapping.createSql).readText()
+                    if(tableMapping.createSql == null)
+                        tableMapping.createSql = apiBlueprintFile.replace("-blueprint.json", "-create.sql")
 
-                    logger.info("Parsing createSql\n$createSql")
-                    val databaseColumns = getDatabaseColumns(createSql)
-                    tableMapping.columnMapping = databaseColumns.map { databaseColumn ->
-                        val specColumn = columnMap[databaseColumn.column]
-                        logger.info("Column parsed as [$databaseColumn]")
-                        logger.info("Column spec'd as [$specColumn]")
-                        val apiColumnMapping = specColumn ?: databaseColumn
-                        apiColumnMapping.databaseType = databaseColumn.databaseType
-                        if(apiColumnMapping.type == null)
-                            apiColumnMapping.type = databaseColumn.databaseType
-                        logger.info("Column merged as [$apiColumnMapping]")
-                        apiColumnMapping
-                    }
+                    loadColumnsBySQL(tableMapping, columnMap)
                 }
 
             apiBlueprint
         }.collect(Collectors.toList())
         return apiBlueprints
+    }
+
+
+    private fun loadColumnsBySQL(
+        tableMapping: ApiTableMapping,
+        columnMap: MutableMap<String, ApiColumnMapping>
+    ) {
+        val createSql =
+            String(this.javaClass.classLoader.getResourceAsStream(tableMapping.createSql)!!.readAllBytes())
+
+        logger.info("Parsing createSql\n$createSql")
+        val databaseColumns = getDatabaseColumns(createSql)
+        tableMapping.columnMapping = databaseColumns.map { databaseColumn ->
+            val specColumn = columnMap[databaseColumn.column]
+            logger.info("Column parsed as [$databaseColumn]")
+            logger.info("Column spec'd as [$specColumn]")
+            val apiColumnMapping = specColumn ?: databaseColumn
+            apiColumnMapping.databaseType = databaseColumn.databaseType
+            if (apiColumnMapping.type == null)
+                apiColumnMapping.type = databaseColumn.databaseType
+            logger.info("Column merged as [$apiColumnMapping]")
+            apiColumnMapping
+        }
     }
 
 

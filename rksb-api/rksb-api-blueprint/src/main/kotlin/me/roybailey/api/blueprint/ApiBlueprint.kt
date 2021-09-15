@@ -9,6 +9,7 @@ data class ApiTableMapping (
     var table: String,
     var record: String,
     var domain: String,
+    var createSql: String? = null,
     var columnMapping: List<ApiColumnMapping>,
     var filterMapping: List<ApiFilterMapping> = emptyList(),
     var testData: List<ApiTestData>
