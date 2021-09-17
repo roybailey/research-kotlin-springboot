@@ -1,7 +1,5 @@
 package me.roybailey.api.blueprint
 
-import me.roybailey.api.blueprint.ApiBlueprint
-import me.roybailey.api.blueprint.ApiBlueprintConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -19,9 +17,6 @@ open class TestSpringApplication
 open class ApiBlueprintTest {
 
     @Autowired
-    lateinit var apiBlueprintFiles: List<String>
-
-    @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>
 
     @Autowired
@@ -29,10 +24,19 @@ open class ApiBlueprintTest {
 
 
     @Test
-    fun testApiBlueprintFiles() {
+    fun testApiBlueprintConfiguration() {
 
-        assertThat(apiBlueprintFiles).isNotNull
-        assertThat(apiBlueprintFiles.size).isGreaterThan(0)
+        assertThat(apiBlueprintConfiguration.properties.blueprints).isNotNull
+        assertThat(apiBlueprintConfiguration.properties.blueprints.size).isGreaterThan(0)
+
+        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseUrl).isNotNull
+        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseUrl.length).isGreaterThan(0)
+
+        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseUsername).isNotNull
+        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseUsername.length).isGreaterThan(0)
+
+        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseSchema).isNotNull
+        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseSchema.length).isGreaterThan(0)
     }
 
 
@@ -40,20 +44,19 @@ open class ApiBlueprintTest {
     fun testApiBlueprints() {
 
         assertThat(apiBlueprints).isNotNull
-        assertThat(apiBlueprints.size).isEqualTo(apiBlueprintFiles.size)
+        assertThat(apiBlueprints.size).isEqualTo(apiBlueprintConfiguration.properties.blueprints.size)
     }
 
 
     @Test
-    @Disabled // TODO remove external database requirement for this to work, use H2
     fun testBlueprintParsing() {
         apiBlueprints.stream().filter { it.name == "books" }.toList()[0].let { apiBlueprint ->
             assertThat(apiBlueprint.tableMapping.size).isEqualTo(1)
             apiBlueprint.tableMapping[0].let { tableMapping ->
                 assertThat(tableMapping.columnMapping.size).isEqualTo(5)
                 val columnMap = tableMapping.columnMapping.associateBy({ it.column }, { it })
-                assertThat(columnMap.containsKey("PUBLICATIONDATE")).isTrue
-                assertThat(columnMap["PUBLICATIONDATE"]!!.testDataStrategy).isEqualTo("datesequence")
+                assertThat(columnMap.containsKey("publicationdate")).isTrue
+                assertThat(columnMap["publicationdate"]!!.testDataStrategy).isEqualTo("datesequence")
             }
         }
     }

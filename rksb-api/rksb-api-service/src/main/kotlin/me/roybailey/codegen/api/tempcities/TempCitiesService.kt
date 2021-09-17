@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
 
 
 @Component
-class TempCitiesService(protected open val dsl: DSLContext) : BaseService("cities","TEMP_CITIES") {
+class TempCitiesService(protected open val dsl: DSLContext) : BaseService("cities","temp_cities") {
 
     fun getAllData(params: Map<String,Any>): List<TempCities> {
         val results = dsl

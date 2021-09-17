@@ -1,3 +1,15 @@
 api.blueprints:
   - api/books-blueprint.json
   - api/cities-blueprint.json
+
+api:
+  datasource:
+    blueprints:
+      initialization-mode: never
+      platform: postgres
+      url: jdbc:postgresql://localhost:5432/postgres
+      username: postgres
+      # todo move this to maven environment variable
+      password: localhost
+      schema: public
+
