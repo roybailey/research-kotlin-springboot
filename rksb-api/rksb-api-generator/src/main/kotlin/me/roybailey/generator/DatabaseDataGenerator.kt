@@ -1,10 +1,9 @@
 package me.roybailey.generator
 
 import me.roybailey.api.blueprint.ApiBlueprint
+import me.roybailey.api.blueprint.ApiBlueprintConfiguration
 import mu.KotlinLogging
-import org.jooq.OrderField
 import org.jooq.SQLDialect
-import org.jooq.SelectField
 import org.jooq.impl.DSL.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -19,7 +18,10 @@ class DatabaseDataGenerator {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var properties: ConfigurationProperties
+    lateinit var apiBlueprintConfiguration: ApiBlueprintConfiguration
+
+    @Autowired
+    lateinit var properties: GeneratorConfigurationProperties
 
     @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>
@@ -53,7 +55,7 @@ class DatabaseDataGenerator {
             field("is_nullable")
         )
             .from("information_schema.columns")
-            .where("table_schema='${properties.jooqDatabaseSchema}'")
+            .where("table_schema='${apiBlueprintConfiguration.properties.blueprintsDatabaseSchema}'")
             .fetch()
 
         fetch.forEach {

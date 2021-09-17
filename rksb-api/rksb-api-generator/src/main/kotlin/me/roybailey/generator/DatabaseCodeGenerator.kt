@@ -1,6 +1,7 @@
 package me.roybailey.generator
 
 import me.roybailey.api.blueprint.ApiBlueprint
+import me.roybailey.api.blueprint.ApiBlueprintConfiguration
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
 import org.jooq.codegen.GenerationTool
@@ -15,7 +16,10 @@ class DatabaseCodeGenerator {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var properties: ConfigurationProperties
+    lateinit var apiBlueprintConfiguration: ApiBlueprintConfiguration
+
+    @Autowired
+    lateinit var properties: GeneratorConfigurationProperties
 
     @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>
@@ -46,10 +50,10 @@ class DatabaseCodeGenerator {
         var configuration = org.jooq.meta.jaxb.Configuration()
             .withJdbc(
                 Jdbc()
-                    .withDriver(properties.jooqDatabaseDriver)
-                    .withUrl(properties.jooqDatabaseUrl)
-                    .withUser(properties.jooqDatabaseUsername)
-                    .withPassword(properties.jooqDatabasePassword)
+                    .withDriver(apiBlueprintConfiguration.properties.blueprintsDatabaseDriver)
+                    .withUrl(apiBlueprintConfiguration.properties.blueprintsDatabaseUrl)
+                    .withUser(apiBlueprintConfiguration.properties.blueprintsDatabaseUsername)
+                    .withPassword(apiBlueprintConfiguration.properties.blueprintsDatabasePassword)
             )
             .withGenerator(
                 Generator()
@@ -67,7 +71,7 @@ class DatabaseCodeGenerator {
                             .withName("org.jooq.meta.postgres.PostgresDatabase")
                             .withIncludes(includes)
                             .withExcludes(excludes)
-                            .withInputSchema(properties.jooqDatabaseSchema)
+                            .withInputSchema(apiBlueprintConfiguration.properties.blueprintsDatabaseSchema)
                     )
                     .withTarget(
                         Target()

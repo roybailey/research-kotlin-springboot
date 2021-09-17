@@ -15,7 +15,7 @@ class CodeGenerator {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var properties: ConfigurationProperties
+    lateinit var properties: GeneratorConfigurationProperties
 
     @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>

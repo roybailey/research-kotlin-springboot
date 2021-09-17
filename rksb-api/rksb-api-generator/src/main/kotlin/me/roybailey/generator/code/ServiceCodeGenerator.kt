@@ -3,7 +3,7 @@ package me.roybailey.generator.code
 import com.github.jknack.handlebars.Handlebars
 import me.roybailey.api.blueprint.ApiBlueprint
 import me.roybailey.api.blueprint.ApiTableMapping
-import me.roybailey.generator.ConfigurationProperties
+import me.roybailey.generator.GeneratorConfigurationProperties
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -18,7 +18,7 @@ class ServiceCodeGenerator {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var properties: ConfigurationProperties
+    lateinit var properties: GeneratorConfigurationProperties
 
     @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>
