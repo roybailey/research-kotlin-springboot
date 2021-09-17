@@ -40,12 +40,7 @@
         <!-- database -->
         <flyway.version>7.13.0</flyway.version>
 
-        <!-- code generation -->
-        <codegen.base.package>me.roybailey.codegen</codegen.base.package>
-        <codegen.jooq.url>jdbc:postgresql://localhost:5432/postgres</codegen.jooq.url>
-        <codegen.jooq.username>postgres</codegen.jooq.username>
-        <codegen.jooq.password>localhost</codegen.jooq.password>
-        <codegen.jooq.schema>public</codegen.jooq.schema>
+        <!-- code generation database properties can be found in api-blueprint module blueprints.yml -->
 
     </properties>
 

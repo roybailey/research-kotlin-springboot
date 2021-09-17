@@ -16,7 +16,7 @@ import javax.sql.DataSource
 open class GeneratorConfiguration {
 
     private val logger = KotlinLogging.logger {}
-
+/*
     @Bean
     @Primary
     @ConfigurationProperties("app.datasource.main")
@@ -44,5 +44,5 @@ open class GeneratorConfiguration {
         return jooqDataSourceProperties().initializeDataSourceBuilder()
             .type(HikariDataSource::class.java).build()
     }
-
+*/
 }

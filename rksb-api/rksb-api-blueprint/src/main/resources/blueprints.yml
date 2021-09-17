@@ -9,7 +9,9 @@ api:
       platform: postgres
       url: jdbc:postgresql://localhost:5432/postgres
       username: postgres
-      # todo move this to maven environment variable
       password: localhost
       schema: public
+      excludes: .*schema.*|pg_.*
+  codegen:
+    base-package: me.roybailey.codegen
 

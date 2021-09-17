@@ -1,6 +1,7 @@
 package me.roybailey.generator
 
 import me.roybailey.api.blueprint.ApiBlueprint
+import me.roybailey.api.blueprint.ApiBlueprintProperties
 import me.roybailey.generator.code.ControllerCodeGenerator
 import me.roybailey.generator.code.ServiceCodeGenerator
 import mu.KotlinLogging
@@ -15,7 +16,10 @@ class CodeGenerator {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var properties: GeneratorConfigurationProperties
+    lateinit var apiBlueprintProperties: ApiBlueprintProperties
+
+    @Autowired
+    lateinit var generatorProperties: GeneratorProperties
 
     @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>
@@ -31,9 +35,9 @@ class CodeGenerator {
     fun generateControllerCode() {
 
         logger.info("Code Generation - STARTING")
-        val basedir = properties.basedir
-        val target = properties.target
-        val basePackageName = "${properties.basePackageName}.api"
+        val basedir = generatorProperties.basedir
+        val target = generatorProperties.target
+        val basePackageName = "${apiBlueprintProperties.codegenBasePackage}.api"
         val basePackageDirectory = "$basedir/$target/${basePackageName.replace(".", "/")}"
         val tableMappings = apiBlueprints
             .map { apiDefinition -> apiDefinition.tableMapping }

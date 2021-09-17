@@ -2,8 +2,9 @@ package me.roybailey.generator.code
 
 import com.github.jknack.handlebars.Handlebars
 import me.roybailey.api.blueprint.ApiBlueprint
+import me.roybailey.api.blueprint.ApiBlueprintProperties
 import me.roybailey.api.blueprint.ApiTableMapping
-import me.roybailey.generator.GeneratorConfigurationProperties
+import me.roybailey.generator.GeneratorProperties
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -18,7 +19,10 @@ class ControllerCodeGenerator {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var properties: GeneratorConfigurationProperties
+    lateinit var apiBlueprintProperties: ApiBlueprintProperties
+
+    @Autowired
+    lateinit var generatorProperties: GeneratorProperties
 
     @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>
@@ -49,9 +53,9 @@ class {{DOMAIN_NAME}}Controller(private val {{DOMAIN_VARIABLE}}Service: {{DOMAIN
     fun generate(writeToFile: Boolean = true) {
 
         logger.info("Controller Code Generation - STARTING")
-        val basedir = properties.basedir
-        val target = properties.target
-        val basePackageName = "${properties.basePackageName}.api"
+        val basedir = generatorProperties.basedir
+        val target = generatorProperties.target
+        val basePackageName = "${apiBlueprintProperties.codegenBasePackage}.api"
         val basePackageDirectory = "$basedir/$target/${basePackageName.replace(".", "/")}"
         val tableMappings = apiBlueprints
             .map { apiDefinition -> apiDefinition.tableMapping }

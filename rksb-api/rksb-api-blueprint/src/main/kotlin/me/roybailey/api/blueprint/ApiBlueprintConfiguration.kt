@@ -16,12 +16,12 @@ open class ApiBlueprintConfiguration {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var properties: ApiBlueprintProperties
+    lateinit var apiBlueprintProperties: ApiBlueprintProperties
 
     @Bean
     open fun apiBlueprints(): List<ApiBlueprint> {
 
-        val apiBlueprintFiles = properties.blueprints
+        val apiBlueprintFiles = apiBlueprintProperties.blueprints
         logger.info("Loaded api.blueprints as $apiBlueprintFiles")
 
         if (apiBlueprintFiles.isEmpty()) {
@@ -77,8 +77,12 @@ open class ApiBlueprintConfiguration {
      * Loads column type information into ApiColumnMapping objects directly from database schema
      */
     private fun loadTableColumns(): Map<String, List<ApiColumnMapping>> {
-        logger.info("loading columns from ${properties.blueprintsDatabaseUrl} for schema=${properties.blueprintsDatabaseSchema}")
-        val jooq = using(properties.blueprintsDatabaseUrl, properties.blueprintsDatabaseUsername, properties.blueprintsDatabasePassword)
+        logger.info("loading columns from ${apiBlueprintProperties.blueprintsDatabaseUrl} for schema=${apiBlueprintProperties.blueprintsDatabaseSchema}")
+        val jooq = using(
+            apiBlueprintProperties.blueprintsDatabaseUrl,
+            apiBlueprintProperties.blueprintsDatabaseUsername,
+            apiBlueprintProperties.blueprintsDatabasePassword
+        )
         val mapApiColumnMapping = mutableMapOf<String, List<ApiColumnMapping>>()
 
         // SELECT * FROM information_schema.columns WHERE table_schema = 'public' ORDER BY table_name;
@@ -94,7 +98,7 @@ open class ApiBlueprintConfiguration {
         // generation_expression, is_updatable
         val fetch = jooq.select()
             .from("information_schema.columns")
-            .where("table_schema='${properties.blueprintsDatabaseSchema}'")
+            .where("table_schema='${apiBlueprintProperties.blueprintsDatabaseSchema}'")
             .fetch()
 
         logger.info(fetch.formatCSV())

@@ -1,13 +1,16 @@
 package me.roybailey.generator
 
 import me.roybailey.api.blueprint.ApiBlueprintConfiguration
+import me.roybailey.api.blueprint.ApiBlueprintProperties
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
 import org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.boot.runApplication
@@ -17,7 +20,13 @@ import javax.sql.DataSource
 import kotlin.system.exitProcess
 
 @SpringBootApplication(
-    exclude = [R2dbcAutoConfiguration::class],
+    // we dont want any of the spring auto datasource as we use the properties directly with jooq only
+    exclude = [
+        DataSourceAutoConfiguration::class,
+        DataSourceTransactionManagerAutoConfiguration::class,
+        HibernateJpaAutoConfiguration::class,
+        R2dbcAutoConfiguration::class
+    ],
     scanBasePackageClasses = [ApiBlueprintConfiguration::class],
     scanBasePackages = ["me.roybailey.generator"]
 )
@@ -26,14 +35,17 @@ open class GeneratorApplication : ApplicationRunner {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var dataSource: DataSource
+    lateinit var apiBlueprintProperties: ApiBlueprintProperties
 
     override fun run(args: ApplicationArguments?) {
         logger.info("Application started with command-line arguments: {}", args!!.sourceArgs)
-        logger.info("NonOptionArgs: {}", args.nonOptionArgs);
-        logger.info("OptionNames: {}", args.optionNames);
+        logger.info("NonOptionArgs: {}", args.nonOptionArgs)
+        logger.info("OptionNames: {}", args.optionNames)
 
-        logger.info("dataSource: {} {}", dataSource.connection.getClientInfo(), dataSource.connection.metaData);
+        logger.info("apiBlueprintProperties: {} {}",
+            apiBlueprintProperties.blueprintsDatabaseUrl,
+            apiBlueprintProperties.blueprintsDatabaseUsername
+        )
 
         logger.info("############################################################")
         args.optionNames.forEach { option ->

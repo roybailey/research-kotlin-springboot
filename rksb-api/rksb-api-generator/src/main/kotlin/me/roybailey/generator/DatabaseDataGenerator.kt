@@ -1,15 +1,13 @@
 package me.roybailey.generator
 
 import me.roybailey.api.blueprint.ApiBlueprint
-import me.roybailey.api.blueprint.ApiBlueprintConfiguration
+import me.roybailey.api.blueprint.ApiBlueprintProperties
 import mu.KotlinLogging
-import org.jooq.SQLDialect
 import org.jooq.impl.DSL.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.util.stream.IntStream
 import javax.annotation.PostConstruct
-import javax.sql.DataSource
 
 
 @Component
@@ -18,16 +16,13 @@ class DatabaseDataGenerator {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var apiBlueprintConfiguration: ApiBlueprintConfiguration
+    lateinit var apiBlueprintProperties: ApiBlueprintProperties
 
     @Autowired
-    lateinit var properties: GeneratorConfigurationProperties
+    lateinit var generatorProperties: GeneratorProperties
 
     @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>
-
-    @Autowired
-    lateinit var dataSource: DataSource
 
     fun generateSequenceString(column: String, index: Int): Any {
         return "$column${1000000 + index}"
@@ -37,40 +32,17 @@ class DatabaseDataGenerator {
         return 1000000 + index
     }
 
-    @PostConstruct
-    fun generateColumn() {
-
-        logger.info("Database Data Generation - STARTING")
-        val jooq = using(dataSource, SQLDialect.POSTGRES)
-
-        // SELECT * FROM  WHERE table_schema = 'information_schema' ORDER BY table_name;
-        val fetch = jooq.select(
-            field("table_schema"),
-            field("table_name"),
-            field("ordinal_position"),
-            field("column_name"),
-            field("data_type"),
-            field("character_maximum_length"),
-            field("numeric_precision"),
-            field("is_nullable")
-        )
-            .from("information_schema.columns")
-            .where("table_schema='${apiBlueprintConfiguration.properties.blueprintsDatabaseSchema}'")
-            .fetch()
-
-        fetch.forEach {
-            logger.info(it.formatCSV())
-        }
-
-        logger.info("Database Data Generation - FINISHED")
-    }
 
     @PostConstruct
     fun generateDatabaseData() {
 
         logger.info("Database Data Generation - STARTING")
 
-        val jooq = using(dataSource, SQLDialect.POSTGRES)
+        val jooq = using(
+            apiBlueprintProperties.blueprintsDatabaseUrl,
+            apiBlueprintProperties.blueprintsDatabaseUsername,
+            apiBlueprintProperties.blueprintsDatabasePassword
+        )
 
         val tableMappings = apiBlueprints
             .map { apiDefinition -> apiDefinition.tableMapping }

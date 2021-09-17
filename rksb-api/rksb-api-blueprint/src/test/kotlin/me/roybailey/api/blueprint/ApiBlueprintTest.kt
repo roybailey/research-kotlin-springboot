@@ -1,7 +1,6 @@
 package me.roybailey.api.blueprint
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -26,17 +25,17 @@ open class ApiBlueprintTest {
     @Test
     fun testApiBlueprintConfiguration() {
 
-        assertThat(apiBlueprintConfiguration.properties.blueprints).isNotNull
-        assertThat(apiBlueprintConfiguration.properties.blueprints.size).isGreaterThan(0)
+        assertThat(apiBlueprintConfiguration.apiBlueprintProperties.blueprints).isNotNull
+        assertThat(apiBlueprintConfiguration.apiBlueprintProperties.blueprints.size).isGreaterThan(0)
 
-        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseUrl).isNotNull
-        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseUrl.length).isGreaterThan(0)
+        assertThat(apiBlueprintConfiguration.apiBlueprintProperties.blueprintsDatabaseUrl).isNotNull
+        assertThat(apiBlueprintConfiguration.apiBlueprintProperties.blueprintsDatabaseUrl.length).isGreaterThan(0)
 
-        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseUsername).isNotNull
-        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseUsername.length).isGreaterThan(0)
+        assertThat(apiBlueprintConfiguration.apiBlueprintProperties.blueprintsDatabaseUsername).isNotNull
+        assertThat(apiBlueprintConfiguration.apiBlueprintProperties.blueprintsDatabaseUsername.length).isGreaterThan(0)
 
-        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseSchema).isNotNull
-        assertThat(apiBlueprintConfiguration.properties.blueprintsDatabaseSchema.length).isGreaterThan(0)
+        assertThat(apiBlueprintConfiguration.apiBlueprintProperties.blueprintsDatabaseSchema).isNotNull
+        assertThat(apiBlueprintConfiguration.apiBlueprintProperties.blueprintsDatabaseSchema.length).isGreaterThan(0)
     }
 
 
@@ -44,7 +43,7 @@ open class ApiBlueprintTest {
     fun testApiBlueprints() {
 
         assertThat(apiBlueprints).isNotNull
-        assertThat(apiBlueprints.size).isEqualTo(apiBlueprintConfiguration.properties.blueprints.size)
+        assertThat(apiBlueprints.size).isEqualTo(apiBlueprintConfiguration.apiBlueprintProperties.blueprints.size)
     }
 
 

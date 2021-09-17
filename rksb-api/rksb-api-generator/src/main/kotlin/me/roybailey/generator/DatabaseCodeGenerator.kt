@@ -1,13 +1,13 @@
 package me.roybailey.generator
 
 import me.roybailey.api.blueprint.ApiBlueprint
-import me.roybailey.api.blueprint.ApiBlueprintConfiguration
+import me.roybailey.api.blueprint.ApiBlueprintProperties
 import mu.KotlinLogging
-import org.springframework.stereotype.Component
 import org.jooq.codegen.GenerationTool
 import org.jooq.meta.jaxb.*
 import org.jooq.meta.jaxb.Target
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 import javax.annotation.PostConstruct
 
 @Component
@@ -16,10 +16,10 @@ class DatabaseCodeGenerator {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var apiBlueprintConfiguration: ApiBlueprintConfiguration
+    lateinit var apiBlueprintProperties: ApiBlueprintProperties
 
     @Autowired
-    lateinit var properties: GeneratorConfigurationProperties
+    lateinit var generatorProperties: GeneratorProperties
 
     @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>
@@ -29,11 +29,11 @@ class DatabaseCodeGenerator {
 
         logger.info("Database Code Generation - STARTING")
 
-        val basedir = properties.basedir
-        val target = properties.target
+        val basedir = generatorProperties.basedir
+        val target = generatorProperties.target
         val directory = "${basedir}/${target}"
-        val packageName = "${properties.basePackageName}.jooq.database"
-        val excludes = properties.excludes
+        val packageName = "${apiBlueprintProperties.codegenBasePackage}.jooq.database"
+        val excludes = apiBlueprintProperties.blueprintsDatabaseExcludes
         val includes = apiBlueprints
             .map { apiDefinition -> apiDefinition.tableMapping.map { tableMapping -> tableMapping.table } }
             .toList()
@@ -50,10 +50,10 @@ class DatabaseCodeGenerator {
         var configuration = org.jooq.meta.jaxb.Configuration()
             .withJdbc(
                 Jdbc()
-                    .withDriver(apiBlueprintConfiguration.properties.blueprintsDatabaseDriver)
-                    .withUrl(apiBlueprintConfiguration.properties.blueprintsDatabaseUrl)
-                    .withUser(apiBlueprintConfiguration.properties.blueprintsDatabaseUsername)
-                    .withPassword(apiBlueprintConfiguration.properties.blueprintsDatabasePassword)
+                    .withDriver(apiBlueprintProperties.blueprintsDatabaseDriver)
+                    .withUrl(apiBlueprintProperties.blueprintsDatabaseUrl)
+                    .withUser(apiBlueprintProperties.blueprintsDatabaseUsername)
+                    .withPassword(apiBlueprintProperties.blueprintsDatabasePassword)
             )
             .withGenerator(
                 Generator()
@@ -71,7 +71,7 @@ class DatabaseCodeGenerator {
                             .withName("org.jooq.meta.postgres.PostgresDatabase")
                             .withIncludes(includes)
                             .withExcludes(excludes)
-                            .withInputSchema(apiBlueprintConfiguration.properties.blueprintsDatabaseSchema)
+                            .withInputSchema(apiBlueprintProperties.blueprintsDatabaseSchema)
                     )
                     .withTarget(
                         Target()

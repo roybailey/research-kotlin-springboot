@@ -29,4 +29,10 @@ open class ApiBlueprintProperties {
     @Value("\${api.datasource.blueprints.schema}")
     lateinit var blueprintsDatabaseSchema: String
 
+    @Value("\${api.datasource.blueprints.excludes}")
+    lateinit var blueprintsDatabaseExcludes: String
+
+    @Value("\${api.codegen.base-package}")
+    lateinit var codegenBasePackage: String
+
 }
