@@ -2,10 +2,14 @@
 
 **Module containing API service library code, both generated and custom library code**
 
+Module of [**`..`**](../README.md) *parent*
+
 
 ## Design
 
-Modules to generate all API code from Blueprints.
+Modules to generate all API code from Blueprints using the Generator and package into jar.
+
+There is no code, the module runs the generator application as part of the build which populates the src
 
 
 ## Getting Started

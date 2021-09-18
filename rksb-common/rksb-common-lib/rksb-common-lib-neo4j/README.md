@@ -2,7 +2,7 @@
 
 **Library for including Neo4j embedded within a service**
 
-**STATUS** _Under Construction_
+Module of [**`..`**](../README.md) *parent*
 
 
 ## Design

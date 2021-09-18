@@ -2,10 +2,14 @@
 
 **Test Library for Testing**
 
+Module of [**`..`**](../README.md) *parent*
+
+
 ## Design
 
 * Encapsulate Testing code, dependencies and utilities
 * Uses Kotlin logging, assertj, JUnit 5, TestContainers
+
 
 ## Getting started
 

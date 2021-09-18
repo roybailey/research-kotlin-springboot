@@ -2,14 +2,16 @@
 
 **Module containing API Blueprint Definitions**
 
+Module of [**`..`**](../README.md) *parent*
+
 
 ## Design
 
 Modules to encapsulate all api blueprint definitions.
 These blueprints provide the following...
 
-* Source Table details
-* SQL Create DDL definitions
+* Database Table details
+* API details
 
 These are stored in the `resources` folder so they can be used both by the build system
 for code generation and loaded at runtime for common code logic.

@@ -2,14 +2,19 @@
 
 **GraphQL Library for Testing**
 
+Module of [**`..`**](../README.md) *parent*
+
+
 ## Design
 
 * Encapsulate GraphQL code, dependencies and utilities
 * Uses `graphql-java-kickstart` and `graphql-java-tools`
 
+
 ## Getting started
 
 * `mvn clean install` 
+
 
 ## Handover Suggestions
 

@@ -2,6 +2,8 @@
 
 **Base Library for Language & Logging**
 
+Module of [**`..`**](../README.md) *parent*
+
 ## Design
 
 * Encapsulate Language & Logging code, dependencies and utilities

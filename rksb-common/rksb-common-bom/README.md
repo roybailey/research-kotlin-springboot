@@ -2,6 +2,9 @@
 
 **Common Bill of Materials for defining all versioning of 3rd party and common libraries**
 
+Module of [**`..`**](../README.md) *parent*
+
+
 ## Design
 
 * `pom.xml` to define all versioning for common 3rd party and custom libraries.

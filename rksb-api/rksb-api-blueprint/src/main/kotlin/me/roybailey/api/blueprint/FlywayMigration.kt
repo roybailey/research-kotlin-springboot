@@ -36,6 +36,8 @@ class FlywayMigration(
         logger.info("############################################################")
         val flyway = Flyway
             .configure()
+            .baselineOnMigrate(true)
+            .baselineVersion("0001")
             .locations("classpath:ddl")
             .dataSource(url, username, password)
             .load()

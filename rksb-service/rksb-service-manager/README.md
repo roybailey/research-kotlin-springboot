@@ -2,7 +2,7 @@
 
 **Manager API Application using code-generation libraries**
 
-**STATUS** _Under Construction_
+Module of [**`..`**](../README.md) *parent*
 
 
 ## Design

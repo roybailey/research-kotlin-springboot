@@ -2,6 +2,8 @@
 
 **Database Library for Postgres and Database Tooling**
 
+Module of [**`..`**](../README.md) *parent*
+
 
 ## Design
 

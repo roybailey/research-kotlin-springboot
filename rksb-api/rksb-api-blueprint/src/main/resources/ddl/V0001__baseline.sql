@@ -1,0 +1,1 @@
+-- this is only here to represent the snapshot of schema that already exists when flyway first runs
