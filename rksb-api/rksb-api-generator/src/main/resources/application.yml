@@ -1,7 +1,9 @@
 spring:
   main:
     web-application-type: none
-
+  profiles:
+    include:
+      - blueprints
   jpa:
     hibernate:
       ddl-auto: none
@@ -10,7 +12,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         jdbc.lob.non_contextual_creation: true
-
   flyway:
     enabled: true
     locations: classpath:ddl
@@ -18,20 +19,3 @@ spring:
     user: postgres
     password: localhost
 
-app.datasource.main:
-  initialization-mode: never
-  platform: postgres
-#  url: jdbc:postgresql://localhost:5432/postgres
-#  username: postgres
-#  password: localhost
-
-app.datasource.jooq:
-  initialization-mode: never
-  platform: postgres
-#  url: jdbc:postgresql://localhost:5432/postgres
-#  username: postgres
-#  password: localhost
-#  schema: public
-
-  codegen:
-#    base.package: <package to generate code into is defined in root pom.xml and passed as parameter>

@@ -8,10 +8,11 @@ import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.io.File
+import java.util.concurrent.Callable
 import javax.annotation.PostConstruct
 
 @Component
-class CodeGenerator {
+class CodeGenerator : Callable<Boolean> {
 
     private val logger = KotlinLogging.logger {}
 
@@ -31,9 +32,7 @@ class CodeGenerator {
     lateinit var controllerCodeGenerator: ControllerCodeGenerator
 
 
-    @PostConstruct
-    fun generateControllerCode() {
-
+    override fun call(): Boolean {
         logger.info("Code Generation - STARTING")
         val basedir = generatorProperties.basedir
         val target = generatorProperties.target
@@ -51,9 +50,11 @@ class CodeGenerator {
         logger.info("tableMappings=$tableMappings")
 
         File(basePackageDirectory).deleteRecursively()
-        serviceCodeGenerator.generate()
-        controllerCodeGenerator.generate()
+        val resultServiceCodeGenerator = serviceCodeGenerator.call()
+        val resultControllerCodeGenerator = controllerCodeGenerator.call()
 
         logger.info("Code Generation - FINISHED")
+        return resultServiceCodeGenerator && resultControllerCodeGenerator
     }
+
 }

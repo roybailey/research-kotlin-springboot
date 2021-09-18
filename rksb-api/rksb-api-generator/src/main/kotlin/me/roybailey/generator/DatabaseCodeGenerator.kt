@@ -8,10 +8,11 @@ import org.jooq.meta.jaxb.*
 import org.jooq.meta.jaxb.Target
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.util.concurrent.Callable
 import javax.annotation.PostConstruct
 
 @Component
-class DatabaseCodeGenerator {
+class DatabaseCodeGenerator : Callable<Boolean> {
 
     private val logger = KotlinLogging.logger {}
 
@@ -24,8 +25,8 @@ class DatabaseCodeGenerator {
     @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>
 
-    @PostConstruct
-    fun generateDatabaseCode() {
+
+    override fun call(): Boolean {
 
         logger.info("Database Code Generation - STARTING")
 
@@ -83,5 +84,7 @@ class DatabaseCodeGenerator {
         GenerationTool.generate(configuration)
 
         logger.info("Database Code Generation - FINISHED")
+        return true
     }
+
 }

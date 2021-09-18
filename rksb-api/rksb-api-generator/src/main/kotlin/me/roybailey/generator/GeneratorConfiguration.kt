@@ -1,11 +1,10 @@
 package me.roybailey.generator
 
 import com.zaxxer.hikari.HikariDataSource
-import me.roybailey.api.blueprint.ApiBlueprint
 import mu.KotlinLogging
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties
 import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.boot.jdbc.DataSourceBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
@@ -16,6 +15,21 @@ import javax.sql.DataSource
 open class GeneratorConfiguration {
 
     private val logger = KotlinLogging.logger {}
+
+    @Bean
+    @Primary
+    @ConfigurationProperties("api.datasource.blueprints")
+    open fun blueprintsDataSourceProperties(): DataSourceProperties {
+        return DataSourceProperties()
+    }
+
+    @Bean
+    @Primary // this will override the datasource autoconfiguration and use your own everywhere
+    open fun dataSource(): DataSource {
+        return blueprintsDataSourceProperties().initializeDataSourceBuilder()
+            .type(HikariDataSource::class.java).build()
+    }
+
 /*
     @Bean
     @Primary

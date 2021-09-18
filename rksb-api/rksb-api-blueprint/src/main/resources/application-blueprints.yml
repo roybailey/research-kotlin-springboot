@@ -1,9 +1,13 @@
+# api.blueprints contains the list of blueprint APIs to code-generate against
 api.blueprints:
   - api/books-blueprint.json
   - api/cities-blueprint.json
 
 api:
   datasource:
+    # when enabled=true the primary dataSource is created from the below properties (only activated by services)
+    enabled: false
+    # these properties are used by the code generator and by derived services to access the main database
     blueprints:
       initialization-mode: never
       platform: postgres
@@ -12,6 +16,6 @@ api:
       password: localhost
       schema: public
       excludes: .*schema.*|pg_.*
+  # these properties are used by the code generator
   codegen:
     base-package: me.roybailey.codegen
-

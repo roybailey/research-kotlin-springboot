@@ -48,6 +48,15 @@
             <artifactId>rksb-common-lib-database</artifactId>
         </dependency>
 
+        <!-- we don't want every project that uses the blueprint library to include flyway -->
+        <!-- only the generator and the support manager service will apply the database migrations -->
+        <!-- hence 'provided' scope to make it 'opt-in' for the manager database migration service -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>

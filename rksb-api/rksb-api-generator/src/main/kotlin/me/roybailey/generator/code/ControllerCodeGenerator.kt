@@ -11,10 +11,11 @@ import org.springframework.stereotype.Component
 import java.io.File
 import java.nio.file.Files.createDirectories
 import java.nio.file.Path
+import java.util.concurrent.Callable
 
 
 @Component
-class ControllerCodeGenerator {
+class ControllerCodeGenerator : Callable<Boolean> {
 
     private val logger = KotlinLogging.logger {}
 
@@ -50,7 +51,9 @@ class {{DOMAIN_NAME}}Controller(private val {{DOMAIN_VARIABLE}}Service: {{DOMAIN
     """.trimIndent().trim()
 
 
-    fun generate(writeToFile: Boolean = true) {
+    override fun call(): Boolean = generate()
+
+    fun generate(writeToFile: Boolean = true) : Boolean {
 
         logger.info("Controller Code Generation - STARTING")
         val basedir = generatorProperties.basedir
@@ -84,6 +87,7 @@ class {{DOMAIN_NAME}}Controller(private val {{DOMAIN_VARIABLE}}Service: {{DOMAIN
             }
         }
         logger.info("Controller  Code Generation - FINISHED")
+        return true
     }
 
 

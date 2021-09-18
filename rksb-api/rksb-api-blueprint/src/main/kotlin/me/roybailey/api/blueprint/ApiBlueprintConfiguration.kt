@@ -5,12 +5,14 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import mu.KotlinLogging
 import org.jooq.impl.DSL.using
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.util.stream.Collectors
 
 
 @Configuration
+@ConditionalOnProperty(value=["api.blueprints.enabled"], havingValue = "true", matchIfMissing = true)
 open class ApiBlueprintConfiguration {
 
     private val logger = KotlinLogging.logger {}
@@ -54,12 +56,6 @@ open class ApiBlueprintConfiguration {
 
                     // map the columns by name
                     val columnMap = tableMapping.columnMapping.associateByTo(mutableMapOf(), { it.column }, { it })
-
-                    // load column information from static create sql script (deprecated)
-                    if (tableMapping.createSql != null) {
-                        val databaseColumns = parseDatabaseColumns(tableMapping, columnMap, tableMapping.createSql!!)
-                        tableMapping.columnMapping = mergeColumnMappings(databaseColumns, columnMap)
-                    }
 
                     // load column information from database schema
                     if (mapApiColumnMapping.containsKey(tableMapping.table)) {
@@ -113,52 +109,20 @@ open class ApiBlueprintConfiguration {
             mapApiColumnMapping[tableName] = mapApiColumnMapping[tableName]!!.plus(
                 ApiColumnMapping(
                     column = columnName,
-                    databaseType = dataType
+                    databaseType = dataType,
+                    type = when {
+                        dataType.contains(Regex("key", RegexOption.IGNORE_CASE)) -> "ID"
+                        dataType.contains(Regex("varchar|text|character", RegexOption.IGNORE_CASE)) -> "TEXT"
+                        dataType.contains(Regex("double", RegexOption.IGNORE_CASE)) -> "DOUBLE"
+                        dataType.contains(Regex("integer", RegexOption.IGNORE_CASE)) -> "INTEGER"
+                        else -> dataType.toUpperCase()
+                    }
                 )
             )
         }
 
         logger.info(mapApiColumnMapping.toString())
         return mapApiColumnMapping
-    }
-
-
-    @Deprecated("replaced with database column loading directly from database")
-    private fun parseDatabaseColumns(
-        tableMapping: ApiTableMapping,
-        columnMap: MutableMap<String, ApiColumnMapping>,
-        createSql: String
-    ): List<ApiColumnMapping> {
-        val createSql =
-            String(this.javaClass.classLoader.getResourceAsStream(tableMapping.createSql)!!.readAllBytes())
-
-        logger.info("Parsing createSql\n$createSql")
-        val parsedColumns = createSql
-            .substring(createSql.indexOf('(') + 1, createSql.lastIndexOf(')'))
-            .replace("\n", " ")
-            .split(",")
-            .map { column -> column.trim() }
-            .map { column ->
-                Pair(
-                    column.substring(0, column.indexOf(' ')).trim().toUpperCase(),
-                    column.substring(column.indexOf(' ')).trim().toUpperCase()
-                )
-            }
-            .map { pair ->
-                ApiColumnMapping(
-                    pair.first,
-                    pair.second,
-                    when {
-                        pair.second.contains(Regex("key", RegexOption.IGNORE_CASE)) -> "ID"
-                        pair.second.contains(Regex("varchar|text", RegexOption.IGNORE_CASE)) -> "TEXT"
-                        pair.second.contains(Regex("double", RegexOption.IGNORE_CASE)) -> "DOUBLE"
-                        pair.second.contains(Regex("integer", RegexOption.IGNORE_CASE)) -> "INTEGER"
-                        else -> pair.second.toUpperCase()
-                    }
-                )
-            }
-            .toList()
-        return parsedColumns
     }
 
 

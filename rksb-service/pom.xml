@@ -19,6 +19,7 @@
 
     <modules>
         <module>rksb-service-demo</module>
+        <module>rksb-service-manager</module>
     </modules>
 
 </project>

@@ -11,10 +11,11 @@ import org.springframework.stereotype.Component
 import java.io.File
 import java.nio.file.Files.createDirectories
 import java.nio.file.Path
+import java.util.concurrent.Callable
 
 
 @Component
-class ServiceCodeGenerator {
+class ServiceCodeGenerator : Callable<Boolean> {
 
     private val logger = KotlinLogging.logger {}
 
@@ -54,8 +55,9 @@ class {{DOMAIN_NAME}}Service(protected open val dsl: DSLContext) : BaseService("
 }
     """.trimIndent().trim()
 
+    override fun call(): Boolean = generate()
 
-    fun generate(writeToFile: Boolean = true) {
+    fun generate(writeToFile: Boolean = true) : Boolean {
 
         logger.info("Service Code Generation - STARTING")
         val basedir = generatorProperties.basedir
@@ -90,6 +92,7 @@ class {{DOMAIN_NAME}}Service(protected open val dsl: DSLContext) : BaseService("
         }
 
         logger.info("Service  Code Generation - FINISHED")
+        return true
     }
 
 

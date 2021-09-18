@@ -70,3 +70,9 @@ Any specialist software should be confined to a common library module within
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
+* TODO: Generate clean PoJos for API use
+* TODO: Generate AsciiDoc Blueprint report
+* TODO: Create Manager service for database migration and support tooling
+* TODO: Update Demo to test Flyway not required
+* TODO: Add date between two columns complex filter use-case
+

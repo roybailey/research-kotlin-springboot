@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource
 
 @Configuration
 @ConfigurationProperties(prefix = "api")
-@PropertySource(value = ["classpath:blueprints.yml"], factory = YamlPropertySourceFactory::class)
+@PropertySource(value = ["classpath:application-blueprints.yml"], factory = YamlPropertySourceFactory::class)
 open class ApiBlueprintProperties {
 
     lateinit var blueprints: List<String>

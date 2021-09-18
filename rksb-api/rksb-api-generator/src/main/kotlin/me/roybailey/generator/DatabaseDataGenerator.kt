@@ -5,13 +5,16 @@ import me.roybailey.api.blueprint.ApiBlueprintProperties
 import mu.KotlinLogging
 import org.jooq.impl.DSL.*
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.DependsOn
 import org.springframework.stereotype.Component
+import java.lang.IllegalArgumentException
+import java.util.concurrent.Callable
 import java.util.stream.IntStream
 import javax.annotation.PostConstruct
 
 
 @Component
-class DatabaseDataGenerator {
+class DatabaseDataGenerator : Callable<Boolean> {
 
     private val logger = KotlinLogging.logger {}
 
@@ -33,8 +36,7 @@ class DatabaseDataGenerator {
     }
 
 
-    @PostConstruct
-    fun generateDatabaseData() {
+    override fun call(): Boolean {
 
         logger.info("Database Data Generation - STARTING")
 
@@ -54,16 +56,18 @@ class DatabaseDataGenerator {
         tableMappings.forEach { tableMapping ->
 
             val columns = tableMapping.columnMapping.map { columnMapping ->
+                val testDataType = "${columnMapping.type}:${columnMapping.testDataStrategy}".toUpperCase()
                 Pair(
                     columnMapping.column,
-                    when ("${columnMapping.type}:${columnMapping.testDataStrategy}".toUpperCase()) {
+                    when (testDataType) {
                         "ID:SEQUENCE" -> ::generateSequenceNumber
                         "DOUBLE:SEQUENCE" -> ::generateSequenceNumber
+                        "TEXT:SEQUENCE" -> ::generateSequenceString
                         "STRING:SEQUENCE" -> ::generateSequenceString
                         "NUMBER:SEQUENCE" -> ::generateSequenceNumber
                         "INTEGER:SEQUENCE" -> ::generateSequenceNumber
                         "INTEGER:DATESEQUENCE" -> ::generateSequenceNumber // todo generate date
-                        else -> ::generateSequenceString
+                        else -> throw IllegalArgumentException("$testDataType Not Recognised")
                     }
                 )
             }.toTypedArray()
@@ -83,5 +87,6 @@ class DatabaseDataGenerator {
         }
 
         logger.info("Database Data Generation - FINISHED")
+        return true
     }
 }

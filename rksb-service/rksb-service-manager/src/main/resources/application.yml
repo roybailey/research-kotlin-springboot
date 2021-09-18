@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: research-kotlin-springboot
+#  datasource:
+#    initialization-mode: never
+#    platform: postgres
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    username: postgres
+#    password: localhost
+  jooq:
+    sql-dialect: POSTGRES
+  servlet:
+    multipart:
+      enabled: true
+      location: /tmp
+
+server:
+  port: 5000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+api:
+  datasource:
+    # when enabled=true the primary dataSource is created from the below properties (used by runtime services)
+    enabled: true

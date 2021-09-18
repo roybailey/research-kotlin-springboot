@@ -4,11 +4,15 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import kotlin.streams.toList
 
-@SpringBootApplication(scanBasePackageClasses = [ApiBlueprintConfiguration::class])
+@SpringBootApplication(
+    scanBasePackageClasses = [ApiBlueprintConfiguration::class],
+    exclude = [FlywayAutoConfiguration::class]
+)
 open class TestSpringApplication
 
 @SpringBootTest(classes = [TestSpringApplication::class])
@@ -46,17 +50,4 @@ open class ApiBlueprintTest {
         assertThat(apiBlueprints.size).isEqualTo(apiBlueprintConfiguration.apiBlueprintProperties.blueprints.size)
     }
 
-
-    @Test
-    fun testBlueprintParsing() {
-        apiBlueprints.stream().filter { it.name == "books" }.toList()[0].let { apiBlueprint ->
-            assertThat(apiBlueprint.tableMapping.size).isEqualTo(1)
-            apiBlueprint.tableMapping[0].let { tableMapping ->
-                assertThat(tableMapping.columnMapping.size).isEqualTo(5)
-                val columnMap = tableMapping.columnMapping.associateBy({ it.column }, { it })
-                assertThat(columnMap.containsKey("publicationdate")).isTrue
-                assertThat(columnMap["publicationdate"]!!.testDataStrategy).isEqualTo("datesequence")
-            }
-        }
-    }
 }
