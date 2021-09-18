@@ -32,7 +32,13 @@ open class ApiBlueprintProperties {
     @Value("\${api.datasource.blueprints.excludes}")
     lateinit var blueprintsDatabaseExcludes: String
 
-    @Value("\${api.codegen.base-package}")
+
     lateinit var codegenBasePackage: String
 
+    lateinit var columnTypeMappings: List<String>
+
+    fun getColumnTypeMappings(): Map<String, String> = columnTypeMappings.map {
+        val pair = it.split(",")
+        pair[0] to pair[1]
+    }.toMap()
 }

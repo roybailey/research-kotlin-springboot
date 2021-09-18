@@ -19,7 +19,7 @@ Module          | Description
 --------------- | ------------- 
 [**`rksb-common`**](./rksb-common/README.md)    |  Common libraries and starter packs defining language, logging, testing and 3rd party dependencies
 [**`rksb-api`**](./rksb-api/README.md)          |  API definition and code generation
-[**`rksb-service`**](./rksb-service/README.md)  |  Service examples
+[**`rksb-service`**](./rksb-service/README.md)  |  Deployable Services (inc. Manager for database schema migration)
 
 
 ## Getting Started
@@ -36,6 +36,12 @@ Module          | Description
 ```
 docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=localhost postgres
 ```
+
+
+### Adding an API Table Blueprint Mapping
+
+See [**`rksb-api/rksb-api-blueprint/README.md`**](rksb-api/rksb-api-blueprint/README.md) for instructions on adding a new API
+
 
 ### Adding 3rd Party Dependency
 
@@ -71,8 +77,18 @@ _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
 * TODO: Generate clean PoJos for API use
+* TODO: Create Manager catalogue of APIs
 * TODO: Generate AsciiDoc Blueprint report
-* TODO: Create Manager service for database migration and support tooling
 * TODO: Update Demo to test Flyway not required
 * TODO: Add date between two columns complex filter use-case
+
+* DONE: Create Flyway Database Migration Manager
+* DONE: Create Database Column Schema as part of Code Generation
+* DONE: Create API Basic Filtering Config/Hooks
+* DONE: Create API Controller Code Generator
+* DONE: Create API Service Code Generator
+* DONE: Create API Jooq Database Code Generator
+* DONE: Create Demo application able to showcase code generated service
+* DONE: Create API Code Generation module wired into Maven build
+* DONE: Create Common Library module with BOM and Starter
 

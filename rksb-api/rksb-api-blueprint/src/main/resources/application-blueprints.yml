@@ -17,5 +17,13 @@ api:
       schema: public
       excludes: .*schema.*|pg_.*
   # these properties are used by the code generator
-  codegen:
-    base-package: me.roybailey.codegen
+  codegen-base-package: me.roybailey.codegen
+  # the first type is the internal type, the second are Regex matches from the database type
+  column-type-mappings:
+    - ID,key
+    - TEXT,varchar|text|character
+    - DOUBLE,double|real|decimal|numeric
+    - INTEGER,integer|bigint|smallint|serial
+    - TIMESTAMP,timestamp|date|time|interval
+    - BOOLEAN,boolean
+

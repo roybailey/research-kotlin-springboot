@@ -8,11 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import java.lang.IllegalArgumentException
 import java.util.stream.Collectors
 
 
 @Configuration
-@ConditionalOnProperty(value=["api.blueprints.enabled"], havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = ["api.blueprints.enabled"], havingValue = "true", matchIfMissing = true)
 open class ApiBlueprintConfiguration {
 
     private val logger = KotlinLogging.logger {}
@@ -59,7 +60,8 @@ open class ApiBlueprintConfiguration {
 
                     // load column information from database schema
                     if (mapApiColumnMapping.containsKey(tableMapping.table)) {
-                        tableMapping.columnMapping = mergeColumnMappings(mapApiColumnMapping[tableMapping.table]!!, columnMap)
+                        tableMapping.columnMapping =
+                            mergeColumnMappings(mapApiColumnMapping[tableMapping.table]!!, columnMap)
                     }
                 }
 
@@ -80,6 +82,7 @@ open class ApiBlueprintConfiguration {
             apiBlueprintProperties.blueprintsDatabasePassword
         )
         val mapApiColumnMapping = mutableMapOf<String, List<ApiColumnMapping>>()
+        val mapColumnTypeMappings = apiBlueprintProperties.getColumnTypeMappings()
 
         // SELECT * FROM information_schema.columns WHERE table_schema = 'public' ORDER BY table_name;
         //
@@ -106,17 +109,19 @@ open class ApiBlueprintConfiguration {
             val dataType: String = record["data_type"] as String
             if (!mapApiColumnMapping.containsKey(tableName))
                 mapApiColumnMapping[tableName] = listOf()
+            val typeMapping =
+                mapColumnTypeMappings.filter { dataType.contains(Regex(it.value, RegexOption.IGNORE_CASE)) }.keys
+            if (typeMapping.isEmpty()) {
+                throw IllegalArgumentException("Unknown database type [$dataType] found.  Add the matching Regex entry to the properties file")
+            }
+            if (typeMapping.size > 1) {
+                logger.warn("Ambiguous database type $dataType found ($typeMapping).  Consider more restrictive matching Regex in the properties file")
+            }
             mapApiColumnMapping[tableName] = mapApiColumnMapping[tableName]!!.plus(
                 ApiColumnMapping(
                     column = columnName,
                     databaseType = dataType,
-                    type = when {
-                        dataType.contains(Regex("key", RegexOption.IGNORE_CASE)) -> "ID"
-                        dataType.contains(Regex("varchar|text|character", RegexOption.IGNORE_CASE)) -> "TEXT"
-                        dataType.contains(Regex("double", RegexOption.IGNORE_CASE)) -> "DOUBLE"
-                        dataType.contains(Regex("integer", RegexOption.IGNORE_CASE)) -> "INTEGER"
-                        else -> dataType.toUpperCase()
-                    }
+                    type = typeMapping.first()
                 )
             )
         }

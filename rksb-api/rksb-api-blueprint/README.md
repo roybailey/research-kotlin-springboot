@@ -19,14 +19,20 @@ for code generation and loaded at runtime for common code logic.
 For example:  The build system can code generate a `RestController` while the runtime
 might use the database column lists to handle common column logic.
 
+`ApiBlueprintConfiguration` contains the SpringBoot beans that load the blueprints and merge with database schema
+
 
 ## User Guide
 
 * Add new API Blueprint to `src/main/resources/api` folder (or subfolder)
 * Add `<api-name>-blueprint.json`
-* Add `<api-name>-create.sql` for creation of source table
-* Finally, add the new blueprint file location into `blueprints.yml` to be included in code generation
+* Finally, add the new blueprint file location into `application-blueprints.yml` to be included in code generation
 
+```
+api.blueprints:
+  - api/books-blueprint.json
+  - api/cities-blueprint.json
+```
 
 ## Developers Guide
 
@@ -39,14 +45,6 @@ GeneratorApplicationKt
 ```
 --project.basedir=<repo-root-folder>/rksb-api/rksb-api-service
 --project.version=0.1.0-SNAPSHOT
---app.codegen.base.package=me.roybailey.codegen
---app.datasource.main.url=jdbc:postgresql://localhost:5432/postgres
---app.datasource.main.username=postgres
---app.datasource.main.password=localhost
---app.datasource.jooq.url=jdbc:postgresql://localhost:5432/postgres
---app.datasource.jooq.username=postgres
---app.datasource.jooq.password=localhost
---app.datasource.jooq.schema=public
 ```
 
 ## Handover Suggestions
@@ -54,5 +52,5 @@ GeneratorApplicationKt
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
-* TODO: update ApiBlueprintTest to optionally check for books
-
+* Care must be taken with dependencies in this module as it is used by the generator in a build process
+  and by the manager for database migration and for services to load and support an API
