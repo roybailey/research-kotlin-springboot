@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import javax.annotation.PostConstruct
 
 
-open class BaseService(val apiBlueprintName: String, val tableMappingName: String) {
+open class BaseService(val apiBlueprintId: String, val tableMappingName: String) {
 
     protected val logger = KotlinLogging.logger {}
 
@@ -23,7 +23,7 @@ open class BaseService(val apiBlueprintName: String, val tableMappingName: Strin
 
     @PostConstruct
     fun init() {
-        this.apiBlueprint = this.apiBlueprintList.find { it.name == apiBlueprintName }!!
+        this.apiBlueprint = this.apiBlueprintList.find { it.id == apiBlueprintId }!!
         this.apiTableMapping = apiBlueprint.tableMapping.find { it.table == tableMappingName }!!
     }
 

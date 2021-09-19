@@ -18,6 +18,7 @@ class TempBooksService(protected open val dsl: DSLContext) : BaseService("books"
             .select()
             .from(TEMP_BOOKS)
             .where(getFilterCondition(params, TEMP_BOOKS))
+            .limit(100)
             .fetch()
             .into(TempBooks::class.java)
         return results;

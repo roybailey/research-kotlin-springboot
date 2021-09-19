@@ -1,7 +1,25 @@
 {
-  "name": "books",
+  "id": "books",
+  "apiMapping": [
+    {
+      "id": "books",
+      "namespace": "Books",
+      "tableMappingId": "books",
+      "apiPath": "/books"
+    },
+    {
+      "id": "books-lite",
+      "namespace": "BooksLite",
+      "tableMappingId": "books",
+      "apiPath": "/books-lite",
+      "apiRequestParameters": {
+        "title": "5"
+      }
+    }
+  ],
   "tableMapping": [
     {
+      "id": "books",
       "table": "TEMP_BOOKS",
       "record": "TempBooksRecord",
       "domain": "TempBooks",

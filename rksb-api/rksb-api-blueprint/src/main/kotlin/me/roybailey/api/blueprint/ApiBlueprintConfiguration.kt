@@ -100,7 +100,7 @@ open class ApiBlueprintConfiguration {
             .where("table_schema='${apiBlueprintProperties.blueprintsDatabaseSchema}'")
             .fetch()
 
-        logger.info(fetch.formatCSV())
+        logger.debug(fetch.formatCSV())
 
         fetch.forEach { record ->
             val tableName: String = record["table_name"] as String

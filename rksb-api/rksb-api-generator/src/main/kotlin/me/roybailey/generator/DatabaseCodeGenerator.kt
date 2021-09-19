@@ -12,7 +12,7 @@ import java.util.concurrent.Callable
 import javax.annotation.PostConstruct
 
 @Component
-class DatabaseCodeGenerator : Callable<Boolean> {
+class DatabaseCodeGenerator : Callable<GeneratorResult> {
 
     private val logger = KotlinLogging.logger {}
 
@@ -26,7 +26,7 @@ class DatabaseCodeGenerator : Callable<Boolean> {
     lateinit var apiBlueprints: List<ApiBlueprint>
 
 
-    override fun call(): Boolean {
+    override fun call(): GeneratorResult {
 
         logger.info("Database Code Generation - STARTING")
 

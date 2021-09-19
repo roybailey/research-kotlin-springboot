@@ -1,5 +1,6 @@
 package me.roybailey.generator.code
 
+import me.roybailey.api.blueprint.ApiMapping
 import me.roybailey.api.blueprint.ApiTableMapping
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -33,14 +34,23 @@ class BooksController(private val booksService: BooksService) : BaseController()
     @Test
     fun testControllerCodeGenerator() {
        val generatedCode = ControllerCodeGenerator().generateTableController(
+           ApiMapping(
+               id="books",
+               namespace = "Books",
+               tableMappingId="books",
+               apiPath = "/books"
+           ),
            ApiTableMapping(
+               id="books",
                table="BOOKS",
                record = "BooksRecord",
                domain="Books",
                columnMapping = listOf(),
                filterMapping = listOf(),
                testData = listOf()
-           ), "me.roybailey.domain.api")
+           ),
+           "me.roybailey.domain.api"
+       )
 
         assertThat(generatedCode).isEqualTo(expectedCode)
     }

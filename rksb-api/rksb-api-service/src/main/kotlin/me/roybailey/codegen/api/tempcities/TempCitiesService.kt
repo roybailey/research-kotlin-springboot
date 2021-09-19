@@ -18,6 +18,7 @@ class TempCitiesService(protected open val dsl: DSLContext) : BaseService("citie
             .select()
             .from(TEMP_CITIES)
             .where(getFilterCondition(params, TEMP_CITIES))
+            .limit(100)
             .fetch()
             .into(TempCities::class.java)
         return results;

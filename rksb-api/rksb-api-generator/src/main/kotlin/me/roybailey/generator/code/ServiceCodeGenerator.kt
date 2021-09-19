@@ -41,13 +41,14 @@ import org.springframework.stereotype.Component
 
 
 @Component
-class {{DOMAIN_NAME}}Service(protected open val dsl: DSLContext) : BaseService("{{apiBlueprint.name}}","{{tableMapping.table}}") {
+class {{DOMAIN_NAME}}Service(protected open val dsl: DSLContext) : BaseService("{{apiBlueprint.id}}","{{tableMapping.table}}") {
 
     fun getAllData(params: Map<String,Any>): List<{{DOMAIN_NAME}}> {
         val results = dsl
             .select()
             .from({{TABLE_NAME}})
             .where(getFilterCondition(params, {{TABLE_NAME}}))
+            .limit(100)
             .fetch()
             .into({{DOMAIN_NAME}}::class.java)
         return results;

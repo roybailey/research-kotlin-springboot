@@ -1,0 +1,40 @@
+= Blueprints v0.1.0-SNAPSHOT =
+
+> Auto-generated from code.  DO NOT EDIT
+
+:toc:
+:toc-placement!:
+:toc-title: TABLE OF CONTENTS
+:toclevels: 2
+
+toc::[]
+
+
+
+=== API books
+
+[cols=2*]
+|===
+|`apiPath` | `/books`
+|`tableMappingId` | `tableMappingId`
+|===
+
+=== API books-lite
+
+[cols=2*]
+|===
+|`apiPath` | `/books-lite`
+|`tableMappingId` | `tableMappingId`
+|===
+
+
+
+=== API cities
+
+[cols=2*]
+|===
+|`apiPath` | `/cities`
+|`tableMappingId` | `tableMappingId`
+|===
+
+

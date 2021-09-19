@@ -15,8 +15,11 @@ import org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 import org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration
 import org.springframework.boot.runApplication
+import java.util.concurrent.Callable
 import javax.annotation.PostConstruct
 import kotlin.system.exitProcess
+
+typealias GeneratorResult = Boolean
 
 @SpringBootApplication(
     // we dont want any of the spring auto datasource as we use the properties directly with jooq only
@@ -47,6 +50,9 @@ open class GeneratorApplication : ApplicationRunner {
     @Autowired
     lateinit var codeGenerator: CodeGenerator
 
+    @Autowired
+    lateinit var asciiDocGenerator: AsciiDocGenerator
+
     override fun run(args: ApplicationArguments?) {
         logger.info("Application started with command-line arguments: {}", args!!.sourceArgs)
         logger.info("NonOptionArgs: {}", args.nonOptionArgs)
@@ -67,21 +73,20 @@ open class GeneratorApplication : ApplicationRunner {
             logger.error("!!!!!!!!!! project.basedir not provided - exiting generator")
             exitProcess(-1)
         }
-    }
 
-    @PostConstruct
-    fun run() {
+        val generators = listOf(databaseCodeGenerator, databaseDataGenerator, codeGenerator, asciiDocGenerator)
+        val mapGeneratorResult = mutableMapOf<String,GeneratorResult>()
+        generators.forEach { generator ->
+            val generatorName = generator::class.java.simpleName
+            logger.info("############################################################")
+            logger.info("Running $generatorName...")
+            mapGeneratorResult[generatorName] = generator.call()
+        }
         logger.info("############################################################")
-        val resultDatabaseCodeGenerator = databaseCodeGenerator.call()
-        logger.info("############################################################")
-        val resultDatabaseDataGenerator = databaseDataGenerator.call()
-        logger.info("############################################################")
-        val resultCodeGenerator = codeGenerator.call()
-        logger.info("############################################################")
-
-        logger.info("DatabaseCodeGenerator $resultDatabaseCodeGenerator")
-        logger.info("DatabaseDataGenerator $resultDatabaseDataGenerator")
-        logger.info("CodeGenerator $resultCodeGenerator")
+        logger.info("Results...")
+        mapGeneratorResult.forEach { generatorResult ->
+            logger.info("$generatorResult}")
+        }
     }
 
 }

@@ -47,6 +47,7 @@ class BooksService(protected open val dsl: DSLContext) : BaseService("TEST","BOO
             .select()
             .from(BOOKS)
             .where(getFilterCondition(params, BOOKS))
+            .limit(100)
             .fetch()
             .into(Books::class.java)
         return results;
@@ -60,6 +61,7 @@ class BooksService(protected open val dsl: DSLContext) : BaseService("TEST","BOO
 
         val tableMappings = listOf(
             ApiTableMapping(
+                id="books",
                 table = "BOOKS",
                 record = "BooksRecord",
                 domain = "Books",
@@ -76,7 +78,7 @@ class BooksService(protected open val dsl: DSLContext) : BaseService("TEST","BOO
         )
 
         val generatedCode = ServiceCodeGenerator().generateTableService(
-            apiBlueprint = ApiBlueprint(name = "TEST", tableMapping = tableMappings),
+            apiBlueprint = ApiBlueprint(id = "TEST", tableMapping = tableMappings),
             tableMapping = tableMappings[0],
             basePackageName = "me.roybailey.domain.api"
         )

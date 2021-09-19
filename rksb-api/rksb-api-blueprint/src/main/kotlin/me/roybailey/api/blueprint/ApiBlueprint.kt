@@ -1,11 +1,21 @@
 package me.roybailey.api.blueprint
 
 data class ApiBlueprint (
-    var name: String,
-    var tableMapping: List<ApiTableMapping>
+    var id: String,
+    var tableMapping: List<ApiTableMapping>,
+    var apiMapping: List<ApiMapping>? = emptyList()
+)
+
+data class ApiMapping (
+    var id: String,
+    var namespace: String,
+    var tableMappingId: String,
+    var apiPath: String,
+    var apiRequestParameters: Map<String,String> = emptyMap()
 )
 
 data class ApiTableMapping (
+    var id: String,
     var table: String,
     var record: String,
     var domain: String,

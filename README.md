@@ -77,6 +77,8 @@ _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
 * TODO: Generate clean PoJos for API use
+* TODO: Map cleaner API path
+* TODO: Add default limit
 * TODO: Create Manager catalogue of APIs
 * TODO: Generate AsciiDoc Blueprint report
 * TODO: Update Demo to test Flyway not required

@@ -1,7 +1,16 @@
 {
-  "name": "cities",
+  "id": "cities",
+  "apiMapping": [
+    {
+      "id": "cities",
+      "namespace": "Cities",
+      "tableMappingId": "cities",
+      "apiPath": "/cities"
+    }
+  ],
   "tableMapping": [
     {
+      "id": "cities",
       "table": "TEMP_CITIES",
       "record": "TempCitiesRecord",
       "domain": "TempCities",

@@ -12,7 +12,7 @@ import java.util.concurrent.Callable
 import javax.annotation.PostConstruct
 
 @Component
-class CodeGenerator : Callable<Boolean> {
+class CodeGenerator : Callable<GeneratorResult> {
 
     private val logger = KotlinLogging.logger {}
 
@@ -32,7 +32,7 @@ class CodeGenerator : Callable<Boolean> {
     lateinit var controllerCodeGenerator: ControllerCodeGenerator
 
 
-    override fun call(): Boolean {
+    override fun call(): GeneratorResult {
         logger.info("Code Generation - STARTING")
         val basedir = generatorProperties.basedir
         val target = generatorProperties.target

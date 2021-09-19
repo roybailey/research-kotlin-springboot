@@ -16,7 +16,7 @@ import javax.annotation.PostConstruct
 
 
 @Component
-class DatabaseDataGenerator : Callable<Boolean> {
+class DatabaseDataGenerator : Callable<GeneratorResult> {
 
     private val logger = KotlinLogging.logger {}
 
@@ -42,7 +42,7 @@ class DatabaseDataGenerator : Callable<Boolean> {
     }
 
 
-    override fun call(): Boolean {
+    override fun call(): GeneratorResult {
 
         logger.info("Database Data Generation - STARTING")
 
