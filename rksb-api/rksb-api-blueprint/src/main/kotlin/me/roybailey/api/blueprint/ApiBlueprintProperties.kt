@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.PropertySource
+import java.lang.IllegalArgumentException
 
 
 @Configuration
@@ -41,4 +42,41 @@ open class ApiBlueprintProperties {
         val pair = it.split(",")
         pair[0] to pair[1]
     }.toMap()
+
+    fun getColumnType(dataType: String?): String {
+        if (dataType == null) {
+            throw IllegalArgumentException("NULL database type found when mapping to column-type-mapping properties")
+        }
+        val columnTypeMapping =
+            getColumnTypeMappings().filter { dataType.contains(Regex(it.value, RegexOption.IGNORE_CASE)) }.keys
+        if (columnTypeMapping.isEmpty()) {
+            throw IllegalArgumentException("Unknown database type [$dataType] found.  Add the matching Regex entry to the column-type-mapping properties")
+        }
+        if (columnTypeMapping.size > 1) {
+            throw IllegalArgumentException("Ambiguous database type $dataType found ($columnTypeMapping).  Consider more restrictive matching Regex in the column-type-mapping properties")
+        }
+        return columnTypeMapping.first()
+    }
+
+    lateinit var fieldTypeMappings: List<String>
+
+    fun getFieldTypeMappings(): Map<String, String> = fieldTypeMappings.map {
+        val pair = it.split(",")
+        pair[0] to pair[1]
+    }.toMap()
+
+    fun getFieldType(columnType: String?): String {
+        if (columnType == null) {
+            throw IllegalArgumentException("NULL column type found when mapping to field-type-mapping properties")
+        }
+        val fieldTypeMapping =
+            getFieldTypeMappings().filter { columnType.contains(Regex(it.value, RegexOption.IGNORE_CASE)) }.keys
+        if (fieldTypeMapping.isEmpty()) {
+            throw IllegalArgumentException("Unknown column type [$columnType] found.  Add the matching Regex entry to the field-type-mapping properties")
+        }
+        if (fieldTypeMapping.size > 1) {
+            throw IllegalArgumentException("Ambiguous column type $columnType found ($fieldTypeMapping).  Consider more restrictive matching Regex in the field-type-mapping properties")
+        }
+        return fieldTypeMapping.first()
+    }
 }

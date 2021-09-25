@@ -17,9 +17,9 @@ Module          | Description
 --------------- | ------------- 
 [**`..`**](../README.md) | *parent*
 [**`rksb-api-blueprint`**](./rksb-api-blueprint/README.md)    |  API blueprints, definitions and documentation
-[**`rksb-api-common`**](./rksb-api-common/README.md)          |  API common custom code library and blueprint loader
+[**`rksb-api-common`**](./rksb-api-common/README.md)          |  API common custom code library (base classes, utilities)
 [**`rksb-api-generator`**](./rksb-api-generator/README.md)    |  API database and code generation tooling
-[**`rksb-api-service`**](./rksb-api-service/README.md)        |  API combined common and generated code library
+[**`rksb-api-service`**](./rksb-api-service/README.md)        |  API generated code output
 
 
 ## Getting started

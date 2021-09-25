@@ -3,6 +3,7 @@ package me.roybailey.generator
 import me.roybailey.api.blueprint.ApiBlueprint
 import me.roybailey.api.blueprint.ApiBlueprintProperties
 import me.roybailey.generator.code.ControllerCodeGenerator
+import me.roybailey.generator.code.PojoCodeGenerator
 import me.roybailey.generator.code.ServiceCodeGenerator
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,6 +25,9 @@ class CodeGenerator : Callable<GeneratorResult> {
 
     @Autowired
     lateinit var apiBlueprints: List<ApiBlueprint>
+
+    @Autowired
+    lateinit var pojoCodeGenerator: PojoCodeGenerator
 
     @Autowired
     lateinit var serviceCodeGenerator: ServiceCodeGenerator
@@ -50,11 +54,18 @@ class CodeGenerator : Callable<GeneratorResult> {
         logger.info("tableMappings=$tableMappings")
 
         File(basePackageDirectory).deleteRecursively()
-        val resultServiceCodeGenerator = serviceCodeGenerator.call()
-        val resultControllerCodeGenerator = controllerCodeGenerator.call()
+        val generators = listOf(pojoCodeGenerator, serviceCodeGenerator, controllerCodeGenerator)
+        val mapGeneratorResult = mutableMapOf<String,GeneratorResult>()
+        generators.forEach { generator ->
+            val generatorName = generator::class.java.simpleName
+            logger.info("############################################################")
+            logger.info("Running $generatorName...")
+            mapGeneratorResult[generatorName] = generator.call()
+        }
+        logger.info("############################################################")
 
         logger.info("Code Generation - FINISHED")
-        return resultServiceCodeGenerator && resultControllerCodeGenerator
+        return mapGeneratorResult.filter { !it.value }.isEmpty()
     }
 
 }

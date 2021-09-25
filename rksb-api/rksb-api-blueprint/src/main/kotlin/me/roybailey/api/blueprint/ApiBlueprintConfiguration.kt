@@ -109,19 +109,11 @@ open class ApiBlueprintConfiguration {
             val dataType: String = record["data_type"] as String
             if (!mapApiColumnMapping.containsKey(tableName))
                 mapApiColumnMapping[tableName] = listOf()
-            val typeMapping =
-                mapColumnTypeMappings.filter { dataType.contains(Regex(it.value, RegexOption.IGNORE_CASE)) }.keys
-            if (typeMapping.isEmpty()) {
-                throw IllegalArgumentException("Unknown database type [$dataType] found.  Add the matching Regex entry to the properties file")
-            }
-            if (typeMapping.size > 1) {
-                logger.warn("Ambiguous database type $dataType found ($typeMapping).  Consider more restrictive matching Regex in the properties file")
-            }
             mapApiColumnMapping[tableName] = mapApiColumnMapping[tableName]!!.plus(
                 ApiColumnMapping(
                     column = columnName,
                     databaseType = dataType,
-                    type = typeMapping.first()
+                    type = apiBlueprintProperties.getColumnType(dataType)
                 )
             )
         }

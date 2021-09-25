@@ -26,4 +26,10 @@ api:
     - INTEGER,integer|bigint|smallint|serial
     - TIMESTAMP,timestamp|date|time|interval
     - BOOLEAN,boolean
-
+  # the first type is the internal type, the second are Regex matches from the database type
+  field-type-mappings:
+    - String,ID|TEXT|STRING
+    - Double,DOUBLE
+    - Integer,INTEGER|NUMBER
+    - Timestamp,TIMESTAMP
+    - Boolean,BOOLEAN

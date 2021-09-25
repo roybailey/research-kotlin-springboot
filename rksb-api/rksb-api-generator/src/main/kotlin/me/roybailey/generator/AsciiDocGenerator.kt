@@ -38,7 +38,7 @@ class AsciiDocGenerator : Callable<GeneratorResult> {
 
             {{#each blueprints}}
             {{#each apiMapping}}
-            === API {{id}}
+            == {{id}}
             
             [cols=2*]
             |===

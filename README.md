@@ -77,13 +77,15 @@ _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
 * TODO: Generate clean PoJos for API use
-* TODO: Map cleaner API path
-* TODO: Add default limit
+* TODO: Extend blueprint data classes to include all derived data needed for generators
+* TODO: Make sure everything is overridable
 * TODO: Create Manager catalogue of APIs
 * TODO: Generate AsciiDoc Blueprint report
-* TODO: Update Demo to test Flyway not required
 * TODO: Add date between two columns complex filter use-case
 
+* DONE: Update Demo to test Flyway not required
+* DONE: Map cleaner API path
+* DONE: Add default limit
 * DONE: Create Flyway Database Migration Manager
 * DONE: Create Database Column Schema as part of Code Generation
 * DONE: Create API Basic Filtering Config/Hooks

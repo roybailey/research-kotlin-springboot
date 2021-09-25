@@ -11,7 +11,7 @@ toc::[]
 
 
 
-=== API books
+== books
 
 [cols=2*]
 |===
@@ -19,7 +19,7 @@ toc::[]
 |`tableMappingId` | `tableMappingId`
 |===
 
-=== API books-lite
+== books-lite
 
 [cols=2*]
 |===
@@ -29,7 +29,7 @@ toc::[]
 
 
 
-=== API cities
+== cities
 
 [cols=2*]
 |===

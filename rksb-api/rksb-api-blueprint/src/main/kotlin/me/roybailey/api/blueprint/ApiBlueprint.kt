@@ -46,3 +46,21 @@ data class ApiFilterMapping (
 data class ApiTestData (
     var count: Integer
 )
+
+//
+// Pojo Mapping defines a POJO data class for use in API JSON request/response
+//
+
+data class ApiPojoMapping (
+    var id: String,
+    var packageName: String,
+    var name: String,  // name of the POJO
+    var domain: String,
+    var fieldMapping: List<ApiFieldMapping>,
+)
+
+data class ApiFieldMapping (
+    var fieldName: String,
+    var fieldType: String,
+    var jsonName: String? = null
+)
