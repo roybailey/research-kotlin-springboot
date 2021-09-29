@@ -4,8 +4,7 @@
 package me.roybailey.codegen.jooq.database;
 
 
-import me.roybailey.codegen.jooq.database.tables.TempBooks;
-import me.roybailey.codegen.jooq.database.tables.TempCities;
+import me.roybailey.codegen.jooq.database.tables.VTempCodegenSample;
 
 
 /**
@@ -15,12 +14,7 @@ import me.roybailey.codegen.jooq.database.tables.TempCities;
 public class Tables {
 
     /**
-     * The table <code>public.temp_books</code>.
+     * The table <code>public.v_temp_codegen_sample</code>.
      */
-    public static final TempBooks TEMP_BOOKS = TempBooks.TEMP_BOOKS;
-
-    /**
-     * The table <code>public.temp_cities</code>.
-     */
-    public static final TempCities TEMP_CITIES = TempCities.TEMP_CITIES;
+    public static final VTempCodegenSample V_TEMP_CODEGEN_SAMPLE = VTempCodegenSample.V_TEMP_CODEGEN_SAMPLE;
 }

@@ -1,0 +1,4 @@
+# these are used in unit tests that run the springboot config but are usually passed into generator as program arguments
+project:
+  basedir: ./target/temp
+  version: 0.0.0-SNAPSHOT

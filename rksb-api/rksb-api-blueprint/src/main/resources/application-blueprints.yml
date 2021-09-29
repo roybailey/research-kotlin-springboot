@@ -1,3 +1,27 @@
+# blueprints contains the list of blueprints for code generation
+blueprints:
+  - api/codegen-sample-blueprint.json
+# these properties are used by the code generator
+codegen-base-package: me.roybailey.codegen
+# the first type is the internal type, the second are Regex matches from the database type
+column-type-mappings:
+  - ID,key
+  - TEXT,varchar|text|character
+  - DOUBLE,double|real|decimal|numeric
+  - INTEGER,integer|bigint|smallint|serial
+  - TIMESTAMP,timestamp|date|time|interval
+  - BOOLEAN,boolean
+# the first type is the internal type, the second are Regex matches from the database type
+field-type-mappings:
+  - String,ID|TEXT|STRING
+  - Double,DOUBLE
+  - Integer,INTEGER|NUMBER
+  - Timestamp,TIMESTAMP
+  - Boolean,BOOLEAN
+
+
+
+
 # api.blueprints contains the list of blueprint APIs to code-generate against
 api.blueprints:
   - api/books-blueprint.json

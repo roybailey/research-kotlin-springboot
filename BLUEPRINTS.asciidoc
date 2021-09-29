@@ -11,30 +11,4 @@ toc::[]
 
 
 
-== books
-
-[cols=2*]
-|===
-|`apiPath` | `/books`
-|`tableMappingId` | `tableMappingId`
-|===
-
-== books-lite
-
-[cols=2*]
-|===
-|`apiPath` | `/books-lite`
-|`tableMappingId` | `tableMappingId`
-|===
-
-
-
-== cities
-
-[cols=2*]
-|===
-|`apiPath` | `/cities`
-|`tableMappingId` | `tableMappingId`
-|===
-
 

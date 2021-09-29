@@ -18,6 +18,7 @@
     <description>Kotlin SpringBoot API Blueprint</description>
 
     <properties>
+        <handlebars.version>4.1.2</handlebars.version>
     </properties>
 
     <dependencyManagement>
@@ -65,6 +66,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jooq</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.jknack</groupId>
+            <artifactId>handlebars</artifactId>
+            <version>${handlebars.version}</version>
         </dependency>
 
     </dependencies>

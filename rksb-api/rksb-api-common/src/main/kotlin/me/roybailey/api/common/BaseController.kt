@@ -1,10 +1,14 @@
 package me.roybailey.api.common
 
-import mu.KotlinLogging
 
-
-open class BaseController {
-
-    protected val logger = KotlinLogging.logger {}
-
-}
+open class BaseController(
+    override val blueprintId: String,
+    override val serviceMappingId: String,
+    override val tableMappingId: String,
+    override val modelMappingId: String
+) : AbstractBlueprintComponent(
+    blueprintId,
+    serviceMappingId,
+    tableMappingId,
+    modelMappingId
+)

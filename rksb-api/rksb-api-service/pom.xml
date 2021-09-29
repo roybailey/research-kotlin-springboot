@@ -25,11 +25,11 @@
 
         <codegen.jooq.distdir>${codegen.distdir}/jooq</codegen.jooq.distdir>
         <codegen.jooq.package>${codegen.package}.jooq</codegen.jooq.package>
-        <codegen.jooq.minimum.count>1</codegen.jooq.minimum.count>
+        <codegen.jooq.minimum.count>0</codegen.jooq.minimum.count>
 
         <codegen.api.distdir>${codegen.distdir}/api</codegen.api.distdir>
         <codegen.api.package>${codegen.package}.api</codegen.api.package>
-        <codegen.api.minimum.count>1</codegen.api.minimum.count>
+        <codegen.api.minimum.count>0</codegen.api.minimum.count>
 
     </properties>
 
@@ -98,7 +98,7 @@
                                 </delete>
                                 <!-- 2. execute code generation project, passing required parameters for output -->
                                 <echo>Running Code Generator using project.basedir=${project.basedir}</echo>
-                                <java fork="true" jar="../rksb-api-generator/target/rksb-api-generator-0.1.0-SNAPSHOT.jar">
+                                <java fork="true" jar="../rksb-api-generator/target/rksb-api-generator-${project.version}.jar">
                                     <arg value="--project.basedir=${project.basedir}"/>
                                     <arg value="--project.version=${project.version}"/>
                                 </java>
