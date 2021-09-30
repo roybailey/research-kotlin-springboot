@@ -17,21 +17,27 @@ import javax.servlet.http.HttpServletResponse
 class CatalogueController {
 
     @Autowired
-    lateinit var blueprintCollection:BlueprintCollection
+    lateinit var blueprintCollection: BlueprintCollection
 
 
     @GetMapping
-    fun getIndex(request:HttpServletRequest, response: HttpServletResponse) {
+    fun getIndex(request: HttpServletRequest, response: HttpServletResponse) {
         response.sendRedirect("/catalogue")
     }
 
 
     @GetMapping
-    @RequestMapping("/catatogue")
-    fun getCatalogue(request:HttpServletRequest): ApiResponse<CatalogueModel> {
-        val listEndpoints:List<CatalogueModel> = blueprintCollection.allControllers().map { controllerMapping ->
-            CatalogueModel(controllerMapping.apiPath!!)
-        }
-        return ApiResponse<CatalogueModel>(listEndpoints.size, listEndpoints)
+    @RequestMapping("/catalogue")
+    fun getCatalogue(request: HttpServletRequest): ApiResponse<CatalogueModel> {
+        val listEndpoints: List<CatalogueModel> = blueprintCollection.allControllers().map { controllerMapping ->
+            controllerMapping.endpoints.map { endpointMapping ->
+                CatalogueModel(
+                    request.requestURL.toString().replace("/catalogue", "")
+                    + (controllerMapping.apiPath ?: "")
+                    + endpointMapping.apiPath
+                )
+            }
+        }.flatten()
+        return ApiResponse(listEndpoints.size, listEndpoints)
     }
 }
