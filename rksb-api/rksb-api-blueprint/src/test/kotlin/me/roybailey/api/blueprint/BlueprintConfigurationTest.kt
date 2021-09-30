@@ -162,7 +162,12 @@ open class BlueprintConfigurationTest {
                         "databaseType" : "double precision",
                         "type" : "DOUBLE"
                       } ],
-                      "filters" : [ ]
+                      "filters" : [ {
+                        "type" : "LIKE",
+                        "name" : "title",
+                        "column" : "title",
+                        "params" : { }
+                      } ]
                     } ],
                     "models" : [ {
                       "id" : "codegen-sample-model",

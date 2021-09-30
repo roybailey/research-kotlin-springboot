@@ -32,13 +32,13 @@
     {
       "id": "codegen-sample-table",
       "tableName": "V_TEMP_CODEGEN_SAMPLE",
-      "columnMapping": [
+      "columns": [
         {
           "column": "STARTDATE",
           "testDataStrategy": "datesequence"
         }
       ],
-      "filterMapping": [
+      "filters": [
         {
           "name": "title",
           "column": "TITLE",
