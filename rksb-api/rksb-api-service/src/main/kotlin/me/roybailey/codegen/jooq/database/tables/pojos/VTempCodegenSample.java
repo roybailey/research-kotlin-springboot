@@ -17,7 +17,7 @@ public class VTempCodegenSample implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer        id;
-    private String         name;
+    private String         title;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
     private String         description;
@@ -30,7 +30,7 @@ public class VTempCodegenSample implements Serializable {
 
     public VTempCodegenSample(VTempCodegenSample value) {
         this.id = value.id;
-        this.name = value.name;
+        this.title = value.title;
         this.createdAt = value.createdAt;
         this.updatedAt = value.updatedAt;
         this.description = value.description;
@@ -42,7 +42,7 @@ public class VTempCodegenSample implements Serializable {
 
     public VTempCodegenSample(
         Integer        id,
-        String         name,
+        String         title,
         OffsetDateTime createdAt,
         OffsetDateTime updatedAt,
         String         description,
@@ -52,7 +52,7 @@ public class VTempCodegenSample implements Serializable {
         Double         discount
     ) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.description = description;
@@ -77,17 +77,17 @@ public class VTempCodegenSample implements Serializable {
     }
 
     /**
-     * Getter for <code>public.v_temp_codegen_sample.name</code>.
+     * Getter for <code>public.v_temp_codegen_sample.title</code>.
      */
-    public String getName() {
-        return this.name;
+    public String getTitle() {
+        return this.title;
     }
 
     /**
-     * Setter for <code>public.v_temp_codegen_sample.name</code>.
+     * Setter for <code>public.v_temp_codegen_sample.title</code>.
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
@@ -193,7 +193,7 @@ public class VTempCodegenSample implements Serializable {
         StringBuilder sb = new StringBuilder("VTempCodegenSample (");
 
         sb.append(id);
-        sb.append(", ").append(name);
+        sb.append(", ").append(title);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(updatedAt);
         sb.append(", ").append(description);

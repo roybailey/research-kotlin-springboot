@@ -12,25 +12,24 @@ class ControllerCodeGeneratorTest : BlueprintTestBase() {
     lateinit var controllerCodeGenerator: ControllerCodeGenerator
 
     val expectedCode = """
-package me.roybailey.codegen.api
+package me.roybailey.codegen.api.codegensample
 
 import javax.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import me.roybailey.api.common.BaseController
-import me.roybailey.codegen.service.CodegenSampleService
-import me.roybailey.codegen.model.CodegenSampleModel
+import me.roybailey.codegen.api.codegensample.CodegenSampleService
+import me.roybailey.codegen.api.codegensample.CodegenSampleModel
 
 
-@RestController("/codegen-sample")
+@RestController
+@RequestMapping("/codegen-sample")
 class CodegenSampleController(
     private val codegenSampleService: CodegenSampleService
 ) : BaseController(
     blueprintId = "codegen-sample-blueprint",
-    serviceMappingId = "codegen-sample-service",
-    tableMappingId = "codegen-sample-table",
-    modelMappingId = "codegen-sample-model"
+    controllerMappingId = "codegen-sample-controller"
 ) {
 
     
@@ -38,7 +37,7 @@ class CodegenSampleController(
     @RequestMapping("/full")
     fun getAllData(request:HttpServletRequest): List<CodegenSampleModel> {
         val params = LinkedHashMap(request.parameterMap).apply { 
-            // putAll(apiRequestParameters)
+            putAll(getApiRequestParameters("/full"))
         }
         return codegenSampleService.getAllData(params)
     }
@@ -47,7 +46,7 @@ class CodegenSampleController(
     @RequestMapping("/lite")
     fun getLiteData(request:HttpServletRequest): List<CodegenSampleModel> {
         val params = LinkedHashMap(request.parameterMap).apply { 
-            // putAll(apiRequestParameters)
+            putAll(getApiRequestParameters("/lite"))
         }
         return codegenSampleService.getAllData(params)
     }

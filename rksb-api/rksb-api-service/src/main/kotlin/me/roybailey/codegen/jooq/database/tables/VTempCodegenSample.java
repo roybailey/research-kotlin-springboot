@@ -50,9 +50,9 @@ public class VTempCodegenSample extends TableImpl<VTempCodegenSampleRecord> {
     public final TableField<VTempCodegenSampleRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>public.v_temp_codegen_sample.name</code>.
+     * The column <code>public.v_temp_codegen_sample.title</code>.
      */
-    public final TableField<VTempCodegenSampleRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<VTempCodegenSampleRecord, String> TITLE = createField(DSL.name("title"), SQLDataType.VARCHAR(255), this, "");
 
     /**
      * The column <code>public.v_temp_codegen_sample.created_at</code>.
@@ -94,7 +94,7 @@ public class VTempCodegenSample extends TableImpl<VTempCodegenSampleRecord> {
     }
 
     private VTempCodegenSample(Name alias, Table<VTempCodegenSampleRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("create view \"v_temp_codegen_sample\" as  SELECT temp_codegen_sample.id,\n    temp_codegen_sample.name,\n    temp_codegen_sample.created_at,\n    temp_codegen_sample.updated_at,\n    temp_codegen_sample.description,\n    temp_codegen_sample.periodfrom,\n    temp_codegen_sample.periodupto,\n    temp_codegen_sample.price,\n    temp_codegen_sample.discount\n   FROM temp_codegen_sample;"));
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("create view \"v_temp_codegen_sample\" as  SELECT temp_codegen_sample.id,\n    temp_codegen_sample.title,\n    temp_codegen_sample.created_at,\n    temp_codegen_sample.updated_at,\n    temp_codegen_sample.description,\n    temp_codegen_sample.periodfrom,\n    temp_codegen_sample.periodupto,\n    temp_codegen_sample.price,\n    temp_codegen_sample.discount\n   FROM temp_codegen_sample;"));
     }
 
     /**

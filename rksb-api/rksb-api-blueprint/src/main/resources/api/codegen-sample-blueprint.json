@@ -14,7 +14,7 @@
           "apiPath": "/lite",
           "apiMethodName": "getLiteData",
           "apiRequestParameters": {
-            "title": "5"
+            "title": ["cc"]
           },
           "serviceMethodName": "getAllData"
         }

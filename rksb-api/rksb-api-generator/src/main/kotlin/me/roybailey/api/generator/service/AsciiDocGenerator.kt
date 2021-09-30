@@ -1,8 +1,6 @@
 package me.roybailey.api.generator.service
 
 import com.github.jknack.handlebars.Handlebars
-import me.roybailey.api.blueprint.ApiBlueprint
-import me.roybailey.api.blueprint.ApiBlueprintProperties
 import me.roybailey.api.blueprint.BlueprintCollection
 import me.roybailey.api.generator.configuration.GeneratorFileContent
 import me.roybailey.api.generator.configuration.GeneratorProperties

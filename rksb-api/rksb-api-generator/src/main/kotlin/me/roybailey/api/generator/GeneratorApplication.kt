@@ -1,7 +1,7 @@
 package me.roybailey.api.generator
 
-import me.roybailey.api.blueprint.ApiBlueprintConfiguration
-import me.roybailey.api.blueprint.ApiBlueprintProperties
+import me.roybailey.api.blueprint.BlueprintConfiguration
+import me.roybailey.api.blueprint.BlueprintProperties
 import me.roybailey.api.blueprint.FlywayMigration
 import me.roybailey.api.generator.configuration.GeneratorResult
 import me.roybailey.api.generator.service.AsciiDocGenerator
@@ -32,7 +32,7 @@ import kotlin.system.exitProcess
         R2dbcAutoConfiguration::class,
         FlywayAutoConfiguration::class
     ],
-    scanBasePackageClasses = [ApiBlueprintConfiguration::class],
+    scanBasePackageClasses = [BlueprintConfiguration::class],
     scanBasePackages = ["me.roybailey.api.generator"]
 )
 open class GeneratorApplication : ApplicationRunner {
@@ -40,7 +40,7 @@ open class GeneratorApplication : ApplicationRunner {
     private val logger = KotlinLogging.logger {}
 
     @Autowired
-    lateinit var apiBlueprintProperties: ApiBlueprintProperties
+    lateinit var blueprintProperties: BlueprintProperties
 
     @Autowired
     lateinit var databaseCodeGenerator: DatabaseCodeGenerator
@@ -57,9 +57,9 @@ open class GeneratorApplication : ApplicationRunner {
         logger.info("OptionNames: {}", args.optionNames)
 
         logger.info(
-            "apiBlueprintProperties: {} {}",
-            apiBlueprintProperties.blueprintsDatabaseUrl,
-            apiBlueprintProperties.blueprintsDatabaseUsername
+            "blueprintProperties: {} {}",
+            blueprintProperties.blueprintsDatabaseUrl,
+            blueprintProperties.blueprintsDatabaseUsername
         )
 
         logger.info("############################################################")

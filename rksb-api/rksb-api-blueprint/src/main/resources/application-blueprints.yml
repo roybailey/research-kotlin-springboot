@@ -2,7 +2,20 @@
 blueprints:
   - api/codegen-sample-blueprint.json
 # these properties are used by the code generator
-codegen-base-package: me.roybailey.codegen
+codegen:
+  base-package: me.roybailey.codegen
+  datasource:
+    # when enabled=true the primary dataSource is created from the below properties (only activated by services)
+    enabled: false
+    # these properties are used by the code generator and by derived services to access the main database
+    blueprints:
+      initialization-mode: never
+      platform: postgres
+      url: jdbc:postgresql://localhost:5432/postgres
+      username: postgres
+      password: localhost
+      schema: public
+      excludes: .*schema.*|pg_.*
 # the first type is the internal type, the second are Regex matches from the database type
 column-type-mappings:
   - ID,key
@@ -18,42 +31,3 @@ field-type-mappings:
   - Integer,INTEGER|NUMBER
   - Timestamp,TIMESTAMP
   - Boolean,BOOLEAN
-
-
-
-
-# api.blueprints contains the list of blueprint APIs to code-generate against
-api.blueprints:
-  - api/books-blueprint.json
-  - api/cities-blueprint.json
-
-api:
-  datasource:
-    # when enabled=true the primary dataSource is created from the below properties (only activated by services)
-    enabled: false
-    # these properties are used by the code generator and by derived services to access the main database
-    blueprints:
-      initialization-mode: never
-      platform: postgres
-      url: jdbc:postgresql://localhost:5432/postgres
-      username: postgres
-      password: localhost
-      schema: public
-      excludes: .*schema.*|pg_.*
-  # these properties are used by the code generator
-  codegen-base-package: me.roybailey.codegen
-  # the first type is the internal type, the second are Regex matches from the database type
-  column-type-mappings:
-    - ID,key
-    - TEXT,varchar|text|character
-    - DOUBLE,double|real|decimal|numeric
-    - INTEGER,integer|bigint|smallint|serial
-    - TIMESTAMP,timestamp|date|time|interval
-    - BOOLEAN,boolean
-  # the first type is the internal type, the second are Regex matches from the database type
-  field-type-mappings:
-    - String,ID|TEXT|STRING
-    - Double,DOUBLE
-    - Integer,INTEGER|NUMBER
-    - Timestamp,TIMESTAMP
-    - Boolean,BOOLEAN

@@ -23,7 +23,7 @@ class FlywayMigration(
             logger.info("Flyway Migration Loaded $propertiesFile")
             properties.forEach { logger.info("$it") }
             logger.info("Flyway Migration Parsing DataSource Properties api.datasource.blueprints")
-            val datasourceProperties = ((properties["api"] as Map<*, *>)["datasource"] as Map<*,*>)["blueprints"] as Map<*,*>
+            val datasourceProperties = ((properties["codegen"] as Map<*, *>)["datasource"] as Map<*,*>)["blueprints"] as Map<*,*>
             datasourceProperties.forEach { logger.info("$it") }
             url = datasourceProperties["url"]?.toString()
             username = datasourceProperties["username"]?.toString()

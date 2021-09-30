@@ -23,7 +23,7 @@ management:
       exposure:
         include: health,info,metrics
 
-api:
+codegen:
   datasource:
     # when enabled=true the primary dataSource is created from the below properties (used by runtime services)
     enabled: true

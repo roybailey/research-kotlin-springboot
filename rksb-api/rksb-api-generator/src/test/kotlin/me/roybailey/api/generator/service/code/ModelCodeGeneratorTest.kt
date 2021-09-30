@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class ModelCodeGeneratorTest : BlueprintTestBase() {
 
     val expectedCode = """
-package me.roybailey.codegen.model
+package me.roybailey.codegen.api.codegensample
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.sql.Timestamp
@@ -19,7 +19,7 @@ data class CodegenSampleModel (
     
     @JsonProperty("id") var id: Integer,
     
-    @JsonProperty("name") var name: String,
+    @JsonProperty("title") var title: String,
     
     @JsonProperty("created_at") var created_at: Timestamp,
     

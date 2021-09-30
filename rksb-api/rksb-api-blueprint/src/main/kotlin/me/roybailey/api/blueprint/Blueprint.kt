@@ -40,7 +40,7 @@ data class Blueprint(
 data class ControllerMapping(
     var id: String,
     var namespace: String?,      // defaults to {{../namespace}}
-    var packageName: String?,    // default to {{../packageName}}.api
+    var packageName: String?,    // default to {{../packageName}}.api.{{namespace}}
     var className: String?,      // defaults to {{namespace}}Controller
     var variableName: String?,   // defaults to {{namespace}}Controller
     var serviceMappingId: String,
@@ -50,7 +50,7 @@ data class ControllerMapping(
 
 data class EndpointMapping(
     var apiPath: String,
-    var apiRequestParameters: Map<String, String> = emptyMap(),
+    var apiRequestParameters: Map<String, Array<String>> = emptyMap(),
     var apiMethodName: String = "getAllData",
     var serviceMethodName: String?,  // defaults to {{apiMethodName}}
 )
@@ -58,7 +58,7 @@ data class EndpointMapping(
 data class ServiceMapping(
     var id: String,
     var namespace: String?,      // defaults to {{../namespace}}
-    var packageName: String?,    // default to {{../packageName}}.service
+    var packageName: String?,    // default to {{../packageName}}.api.{{namespace}}
     var className: String?,      // defaults to {{namespace}}Service
     var variableName: String?,   // defaults to {{namespace}}Service
     var tableMappingId: String,
@@ -68,7 +68,7 @@ data class ServiceMapping(
 data class TableMapping(
     var id: String,
     var namespace: String?,      // defaults to {{../namespace}}
-    var packageName: String?,    // default to {{../packageName}}.table
+    var packageName: String?,    // default to {{../packageName}}.api.{{namespace}}
     var className: String?,      // defaults to {{namespace}}Table
     var tableName: String,
     var columns: List<ColumnMapping> = emptyList(),
@@ -96,7 +96,7 @@ data class FilterMapping(
 data class ModelMapping(
     var id: String,
     var namespace: String?,   // defaults to {{../namespace}}
-    var packageName: String?, // default to {{../packageName}}
+    var packageName: String?, // default to {{../packageName}}.api.{{namespace}}
     var className: String?,   // defaults to {{namespace}}Model
     var fields: List<FieldMapping>,
 )

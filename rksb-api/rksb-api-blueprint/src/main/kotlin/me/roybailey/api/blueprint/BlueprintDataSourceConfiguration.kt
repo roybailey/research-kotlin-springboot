@@ -12,21 +12,19 @@ import javax.sql.DataSource
 
 
 @Configuration
-@ConditionalOnProperty(value=["api.datasource.enabled"], havingValue = "true", matchIfMissing = false)
-open class ApiBlueprintDataSourceConfiguration {
-
-    private val logger = KotlinLogging.logger {}
+@ConditionalOnProperty(value=["codegen.datasource.enabled"], havingValue = "true", matchIfMissing = false)
+open class BlueprintDataSourceConfiguration {
 
     @Bean
     @Primary
-    @ConfigurationProperties("api.datasource.blueprints")
+    @ConfigurationProperties("codegen.datasource.blueprints")
     open fun blueprintsDataSourceProperties(): DataSourceProperties {
         return DataSourceProperties()
     }
 
     @Bean
     @Primary // this will override the datasource autoconfiguration and use your own everywhere
-    @ConditionalOnProperty(value=["api.datasource.enabled"], havingValue = "true", matchIfMissing = false)
+    @ConditionalOnProperty(value=["codegen.datasource.enabled"], havingValue = "true", matchIfMissing = false)
     open fun dataSource(): DataSource {
         return blueprintsDataSourceProperties().initializeDataSourceBuilder()
             .type(HikariDataSource::class.java).build()

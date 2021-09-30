@@ -85,7 +85,7 @@ open class BlueprintConfiguration {
             blueprint.controllers = blueprint.controllers.map { controllerMapping ->
                 logger.info("Resolving controllerMapping ${controllerMapping.id}")
                 controllerMapping.namespace = controllerMapping.namespace ?: blueprint.namespace
-                controllerMapping.packageName = controllerMapping.packageName ?: "${blueprint.packageName}.api"
+                controllerMapping.packageName = controllerMapping.packageName ?: "${blueprint.packageName}.api.${controllerMapping.namespace!!.toLowerCase()}"
                 controllerMapping.className = controllerMapping.className ?: "${blueprint.namespace}Controller"
                 controllerMapping.variableName = controllerMapping.variableName
                     ?: controllerMapping.className!!.replaceFirstChar { it.toLowerCase() }
@@ -102,7 +102,7 @@ open class BlueprintConfiguration {
             blueprint.services = blueprint.services.map { serviceMapping ->
                 logger.info("Resolving serviceMapping ${serviceMapping.id}")
                 serviceMapping.namespace = serviceMapping.namespace ?: blueprint.namespace
-                serviceMapping.packageName = serviceMapping.packageName ?: "${blueprint.packageName}.service"
+                serviceMapping.packageName = serviceMapping.packageName ?: "${blueprint.packageName}.api.${serviceMapping.namespace!!.toLowerCase()}"
                 serviceMapping.className = serviceMapping.className ?: "${blueprint.namespace}Service"
                 serviceMapping.variableName =
                     serviceMapping.variableName ?: serviceMapping.className!!.replaceFirstChar { it.toLowerCase() }
@@ -113,7 +113,7 @@ open class BlueprintConfiguration {
             blueprint.tables.forEach { tableMapping ->
                 logger.info("Resolving tableMapping ${tableMapping.id}")
                 tableMapping.namespace = tableMapping.namespace ?: blueprint.namespace
-                tableMapping.packageName = tableMapping.packageName ?: "${blueprint.packageName}.table"
+                tableMapping.packageName = tableMapping.packageName ?: "${blueprint.packageName}.api.${tableMapping.namespace!!.toLowerCase()}"
                 tableMapping.className = tableMapping.className ?: "${blueprint.namespace}Table"
                 // lowercase all database names as this is postgres standard
                 tableMapping.tableName = tableMapping.tableName.toLowerCase()
@@ -136,7 +136,7 @@ open class BlueprintConfiguration {
             blueprint.models = blueprint.models.map { modelMapping ->
                 logger.info("Resolving modelMapping ${modelMapping.id}")
                 modelMapping.namespace = modelMapping.namespace ?: blueprint.namespace
-                modelMapping.packageName = modelMapping.packageName ?: "${blueprint.packageName}.model"
+                modelMapping.packageName = modelMapping.packageName ?: "${blueprint.packageName}.api.${modelMapping.namespace!!.toLowerCase()}"
                 modelMapping.className = modelMapping.className ?: "${blueprint.namespace}Model"
 
                 val serviceMapping = blueprintCollection.allServices().find { it.modelMappingId == modelMapping.id }!!

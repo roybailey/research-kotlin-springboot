@@ -1,14 +1,27 @@
 package me.roybailey.api.common
 
+import me.roybailey.api.blueprint.ControllerMapping
+import javax.annotation.PostConstruct
+
 
 open class BaseController(
     override val blueprintId: String,
-    override val serviceMappingId: String,
-    override val tableMappingId: String,
-    override val modelMappingId: String
-) : AbstractBlueprintComponent(
-    blueprintId,
-    serviceMappingId,
-    tableMappingId,
-    modelMappingId
-)
+    val controllerMappingId: String
+) : AbstractBlueprintComponent(blueprintId) {
+
+    protected lateinit var controllerMapping: ControllerMapping
+
+    @PostConstruct
+    fun initController() {
+        controllerMapping = blueprint.controllers.find { it.id == controllerMappingId }!!
+    }
+
+
+    fun getApiRequestParameters(apiPath: String): Map<out String, Array<String>> {
+        val endpointMapping = this.controllerMapping.endpoints.find { it.apiPath == apiPath }
+        return endpointMapping?.let {
+            it.apiRequestParameters
+        } ?: emptyMap()
+    }
+
+}

@@ -1,13 +1,8 @@
 package me.roybailey.api.generator.service.code
 
-import com.github.jknack.handlebars.Handlebars
-import com.github.jknack.handlebars.Helper
-import com.github.jknack.handlebars.Options
-import com.github.jknack.handlebars.helper.DefaultHelperRegistry
 import me.roybailey.api.generator.configuration.GeneratorFileContent
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
-import java.util.*
 
 
 @Component

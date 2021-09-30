@@ -7,7 +7,7 @@ Module of [**`..`**](../README.md) *parent*
 
 ## Design
 
-Modules to encapsulate all api blueprint definitions.
+Module to encapsulate all blueprint definitions.
 These blueprints provide the following...
 
 * Database Table details
@@ -29,52 +29,44 @@ might use the database column lists to handle common column logic.
 * Finally, add the new blueprint file location into `application-blueprints.yml` to be included in code generation
 
 ```
-api.blueprints:
-  - api/books-blueprint.json
-  - api/cities-blueprint.json
+blueprints:
+  - api/codegen-sample-blueprint.json
+  - api/<api-name>-blueprint.json
 ```
 
-### ApiMappings
+### Blueprint Specification
 
-ApiMappings define an API and output a `Controller` class implementation
+See `Blueprint.kt` source for full data class definition
+See `codegen-sample-blueprint.json` for example of blueprint definition (this is used to test the code generation process)
+
+#### Controller Mappings
+
+ControllerMappings define a RESTful controller class for linking API calls to Service DAO methods.
 
 ```
-  "apiMapping": [
-    {
-      "id": "<unique identifier e.g. books>",
-      "namespace": "<unique namespace in mixed-case format e.g. DrugPrice>",
-      "tableMappingId": "<id value to match against a tableMapping e.g. books>",
-      "apiPath": "<request mapping path for the controller e.g. /books>"
-    },
-  ],
+```
+
+#### Service Mappings
+
+ServiceMappings define a DAO class for loading from the database into an object model.
+
+```
 ```
 
 ### TableMappings
 
-TableMappings define a database table and output a `Service` class implementation
+TableMappings define a database table and is used to generate table/column details directly from the database.
 
 ```
-  "tableMapping": [
-    {
-      "id": "<unique identifier e.g. books>",
-      "table": "<table name in database e.g. BOOKS>",
-      "domain": "<unique namespace in mixed-case format e.g. DrugPrice>",
-      "columnMapping": [
-        {
-          "column": "<database table column name e.g. PUBLICATIONDATE>",
-          "testDataStrategy": "<test data generator implementation strategy e.g. datesequence>"
-        }
-      ],
-      "filterMapping": [
-        {
-          "name": "<filter parameter name e.g. title>",
-          "column": "<database column name e.g. TITLE>",
-          "type": "<type of filter imlpementation e.g. LIKE>"
-        }
-      ]
-    }
-  ]
 ```
+
+#### Model Mappings
+
+ModelMappings define a POJO data class for loading from the database and serving via Services/Controllers.
+
+```
+```
+
 
 ## Developers Guide
 

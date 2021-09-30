@@ -12,11 +12,11 @@ class ServiceCodeGeneratorTest : BlueprintTestBase() {
     lateinit var serviceCodeGenerator: ServiceCodeGenerator
 
     val expectedCode = """
-package me.roybailey.codegen.service
+package me.roybailey.codegen.api.codegensample
 
 import me.roybailey.api.common.BaseService
 import me.roybailey.codegen.jooq.database.Tables.V_TEMP_CODEGEN_SAMPLE
-import me.roybailey.codegen.model.CodegenSampleModel
+import me.roybailey.codegen.api.codegensample.CodegenSampleModel
 
 import org.jooq.*
 import org.jooq.impl.DSL.*

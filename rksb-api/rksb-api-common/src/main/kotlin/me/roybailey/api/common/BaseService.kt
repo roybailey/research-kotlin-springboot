@@ -1,21 +1,32 @@
 package me.roybailey.api.common
 
+import me.roybailey.api.blueprint.ModelMapping
+import me.roybailey.api.blueprint.ServiceMapping
+import me.roybailey.api.blueprint.TableMapping
 import org.jooq.Condition
 import org.jooq.impl.DSL.trueCondition
 import org.jooq.impl.TableImpl
+import javax.annotation.PostConstruct
 
 
 open class BaseService(
     override val blueprintId: String,
-    override val serviceMappingId: String,
-    override val tableMappingId: String,
-    override val modelMappingId: String
-) : AbstractBlueprintComponent(
-    blueprintId,
-    serviceMappingId,
-    tableMappingId,
-    modelMappingId
-) {
+    val serviceMappingId: String,
+    val tableMappingId: String,
+    val modelMappingId: String
+) : AbstractBlueprintComponent(blueprintId) {
+
+    protected lateinit var serviceMapping: ServiceMapping
+    protected lateinit var tableMapping: TableMapping
+    protected lateinit var modelMapping: ModelMapping
+
+
+    @PostConstruct
+    fun initService() {
+        this.serviceMapping = blueprintCollection.allServices().find { it.id == serviceMappingId }!!
+        this.tableMapping = blueprintCollection.allTables().find { it.id == tableMappingId }!!
+        this.modelMapping = blueprintCollection.allModels().find { it.id == modelMappingId }!!
+    }
 
 
     private fun getString(params: Map<String, Any>, name: String): String {
@@ -42,6 +53,5 @@ open class BaseService(
         }
         return result
     }
-
 
 }

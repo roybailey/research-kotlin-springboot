@@ -15,25 +15,25 @@ open class BlueprintProperties {
 
     lateinit var blueprints: List<String>
 
-    @Value("\${api.datasource.blueprints.url}")
+    @Value("\${codegen.datasource.blueprints.url}")
     lateinit var blueprintsDatabaseUrl: String
 
-    @Value("\${api.datasource.blueprints.driver:org.postgresql.Driver}")
+    @Value("\${codegen.datasource.blueprints.driver:org.postgresql.Driver}")
     lateinit var blueprintsDatabaseDriver: String
 
-    @Value("\${api.datasource.blueprints.username}")
+    @Value("\${codegen.datasource.blueprints.username}")
     lateinit var blueprintsDatabaseUsername: String
 
-    @Value("\${api.datasource.blueprints.password}")
+    @Value("\${codegen.datasource.blueprints.password}")
     lateinit var blueprintsDatabasePassword: String
 
-    @Value("\${api.datasource.blueprints.schema}")
+    @Value("\${codegen.datasource.blueprints.schema}")
     lateinit var blueprintsDatabaseSchema: String
 
-    @Value("\${api.datasource.blueprints.excludes}")
+    @Value("\${codegen.datasource.blueprints.excludes}")
     lateinit var blueprintsDatabaseExcludes: String
 
-
+    @Value("\${codegen.base-package}")
     lateinit var codegenBasePackage: String
 
     lateinit var columnTypeMappings: List<String>

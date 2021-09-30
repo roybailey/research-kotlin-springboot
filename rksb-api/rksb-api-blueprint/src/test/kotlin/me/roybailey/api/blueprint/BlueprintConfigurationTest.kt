@@ -13,13 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 
 @SpringBootApplication(
-    scanBasePackageClasses = [BlueprintConfiguration::class],
+    scanBasePackages = ["me.roybailey.api.blueprint"],
     exclude = [FlywayAutoConfiguration::class]
 )
 open class TestBlueprintSpringApplication
 
 @SpringBootTest(classes = [TestBlueprintSpringApplication::class])
-@ActiveProfiles("test")
+@ActiveProfiles("test", "blueprint")
 open class BlueprintConfigurationTest {
 
     @Autowired
@@ -82,7 +82,7 @@ open class BlueprintConfigurationTest {
                     "controllers" : [ {
                       "id" : "codegen-sample-controller",
                       "namespace" : "CodegenSample",
-                      "packageName" : "me.roybailey.codegen.api",
+                      "packageName" : "me.roybailey.codegen.api.codegensample",
                       "className" : "CodegenSampleController",
                       "variableName" : "codegenSampleController",
                       "serviceMappingId" : "codegen-sample-service",
@@ -95,7 +95,7 @@ open class BlueprintConfigurationTest {
                       }, {
                         "apiPath" : "/lite",
                         "apiRequestParameters" : {
-                          "title" : "5"
+                          "title" : [ "cc" ]
                         },
                         "apiMethodName" : "getLiteData",
                         "serviceMethodName" : "getAllData"
@@ -104,7 +104,7 @@ open class BlueprintConfigurationTest {
                     "services" : [ {
                       "id" : "codegen-sample-service",
                       "namespace" : "CodegenSample",
-                      "packageName" : "me.roybailey.codegen.service",
+                      "packageName" : "me.roybailey.codegen.api.codegensample",
                       "className" : "CodegenSampleService",
                       "variableName" : "codegenSampleService",
                       "tableMappingId" : "codegen-sample-table",
@@ -113,7 +113,7 @@ open class BlueprintConfigurationTest {
                     "tables" : [ {
                       "id" : "codegen-sample-table",
                       "namespace" : "CodegenSample",
-                      "packageName" : "me.roybailey.codegen.table",
+                      "packageName" : "me.roybailey.codegen.api.codegensample",
                       "className" : "CodegenSampleTable",
                       "tableName" : "v_temp_codegen_sample",
                       "columns" : [ {
@@ -122,7 +122,7 @@ open class BlueprintConfigurationTest {
                         "databaseType" : "integer",
                         "type" : "INTEGER"
                       }, {
-                        "column" : "name",
+                        "column" : "title",
                         "ordinalPosition" : 2,
                         "databaseType" : "character varying",
                         "type" : "TEXT"
@@ -167,16 +167,16 @@ open class BlueprintConfigurationTest {
                     "models" : [ {
                       "id" : "codegen-sample-model",
                       "namespace" : "CodegenSample",
-                      "packageName" : "me.roybailey.codegen.model",
+                      "packageName" : "me.roybailey.codegen.api.codegensample",
                       "className" : "CodegenSampleModel",
                       "fields" : [ {
                         "fieldName" : "id",
                         "fieldType" : "Integer",
                         "jsonName" : "id"
                       }, {
-                        "fieldName" : "name",
+                        "fieldName" : "title",
                         "fieldType" : "String",
-                        "jsonName" : "name"
+                        "jsonName" : "title"
                       }, {
                         "fieldName" : "created_at",
                         "fieldType" : "Timestamp",

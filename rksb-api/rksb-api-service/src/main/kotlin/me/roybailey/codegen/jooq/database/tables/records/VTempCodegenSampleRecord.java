@@ -37,16 +37,16 @@ public class VTempCodegenSampleRecord extends TableRecordImpl<VTempCodegenSample
     }
 
     /**
-     * Setter for <code>public.v_temp_codegen_sample.name</code>.
+     * Setter for <code>public.v_temp_codegen_sample.title</code>.
      */
-    public void setName(String value) {
+    public void setTitle(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>public.v_temp_codegen_sample.name</code>.
+     * Getter for <code>public.v_temp_codegen_sample.title</code>.
      */
-    public String getName() {
+    public String getTitle() {
         return (String) get(1);
     }
 
@@ -169,7 +169,7 @@ public class VTempCodegenSampleRecord extends TableRecordImpl<VTempCodegenSample
 
     @Override
     public Field<String> field2() {
-        return VTempCodegenSample.V_TEMP_CODEGEN_SAMPLE.NAME;
+        return VTempCodegenSample.V_TEMP_CODEGEN_SAMPLE.TITLE;
     }
 
     @Override
@@ -214,7 +214,7 @@ public class VTempCodegenSampleRecord extends TableRecordImpl<VTempCodegenSample
 
     @Override
     public String component2() {
-        return getName();
+        return getTitle();
     }
 
     @Override
@@ -259,7 +259,7 @@ public class VTempCodegenSampleRecord extends TableRecordImpl<VTempCodegenSample
 
     @Override
     public String value2() {
-        return getName();
+        return getTitle();
     }
 
     @Override
@@ -305,7 +305,7 @@ public class VTempCodegenSampleRecord extends TableRecordImpl<VTempCodegenSample
 
     @Override
     public VTempCodegenSampleRecord value2(String value) {
-        setName(value);
+        setTitle(value);
         return this;
     }
 
@@ -379,11 +379,11 @@ public class VTempCodegenSampleRecord extends TableRecordImpl<VTempCodegenSample
     /**
      * Create a detached, initialised VTempCodegenSampleRecord
      */
-    public VTempCodegenSampleRecord(Integer id, String name, OffsetDateTime createdAt, OffsetDateTime updatedAt, String description, String periodfrom, String periodupto, Double price, Double discount) {
+    public VTempCodegenSampleRecord(Integer id, String title, OffsetDateTime createdAt, OffsetDateTime updatedAt, String description, String periodfrom, String periodupto, Double price, Double discount) {
         super(VTempCodegenSample.V_TEMP_CODEGEN_SAMPLE);
 
         setId(id);
-        setName(name);
+        setTitle(title);
         setCreatedAt(createdAt);
         setUpdatedAt(updatedAt);
         setDescription(description);
@@ -401,7 +401,7 @@ public class VTempCodegenSampleRecord extends TableRecordImpl<VTempCodegenSample
 
         if (value != null) {
             setId(value.getId());
-            setName(value.getName());
+            setTitle(value.getTitle());
             setCreatedAt(value.getCreatedAt());
             setUpdatedAt(value.getUpdatedAt());
             setDescription(value.getDescription());

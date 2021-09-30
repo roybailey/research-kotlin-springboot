@@ -1,7 +1,5 @@
 package me.roybailey.api.generator.service
 
-import me.roybailey.api.blueprint.ApiBlueprint
-import me.roybailey.api.blueprint.ApiBlueprintProperties
 import me.roybailey.api.blueprint.BlueprintCollection
 import me.roybailey.api.blueprint.BlueprintProperties
 import me.roybailey.api.generator.configuration.GeneratorProperties

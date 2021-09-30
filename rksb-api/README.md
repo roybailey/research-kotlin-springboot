@@ -22,7 +22,27 @@ Module          | Description
 [**`rksb-api-service`**](./rksb-api-service/README.md)        |  API generated code output
 
 
-## Getting started
+## User Guide
+
+Add the dependency to the code generated module in your `pom.xml`
+
+```yaml
+    <dependency>
+        <groupId>me.roybailey</groupId>
+        <artifactId>rksb-api-service</artifactId>
+    </dependency>
+```
+
+Enable use of the blueprints datasource in your `application.xml`
+
+```yaml
+codegen:
+  datasource:
+    # when enabled=true the primary dataSource is created from the blueprint properties
+    enabled: true
+```
+
+## Developers Guide
 
 * `mvn clean install` 
 

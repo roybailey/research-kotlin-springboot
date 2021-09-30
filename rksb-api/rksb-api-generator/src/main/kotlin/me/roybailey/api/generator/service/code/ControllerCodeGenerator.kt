@@ -1,20 +1,9 @@
 package me.roybailey.api.generator.service.code
 
 import com.github.jknack.handlebars.Handlebars
-import me.roybailey.api.blueprint.ApiBlueprint
-import me.roybailey.api.blueprint.ApiBlueprintProperties
-import me.roybailey.api.blueprint.ApiMapping
-import me.roybailey.api.blueprint.ApiTableMapping
 import me.roybailey.api.generator.configuration.GeneratorFileContent
-import me.roybailey.api.generator.configuration.GeneratorProperties
-import me.roybailey.api.generator.configuration.GeneratorResult
 import mu.KotlinLogging
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import java.io.File
-import java.nio.file.Files.createDirectories
-import java.nio.file.Path
-import java.util.concurrent.Callable
 
 
 @Component
@@ -34,14 +23,13 @@ import {{serviceMapping.packageName}}.{{serviceMapping.className}}
 import {{modelMapping.packageName}}.{{modelMapping.className}}
 
 
-@RestController("{{controllerMapping.apiPath}}")
+@RestController
+@RequestMapping("{{controllerMapping.apiPath}}")
 class {{controllerMapping.className}}(
     private val {{serviceMapping.variableName}}: {{serviceMapping.className}}
 ) : BaseController(
     blueprintId = "{{blueprint.id}}",
-    serviceMappingId = "{{serviceMapping.id}}",
-    tableMappingId = "{{tableMapping.id}}",
-    modelMappingId = "{{modelMapping.id}}"
+    controllerMappingId = "{{controllerMapping.id}}"
 ) {
 
     {{#each controllerMapping.endpoints}}
@@ -49,7 +37,7 @@ class {{controllerMapping.className}}(
     @RequestMapping("{{apiPath}}")
     fun {{apiMethodName}}(request:HttpServletRequest): List<{{modelMapping.className}}> {
         val params = LinkedHashMap(request.parameterMap).apply { 
-            // putAll(apiRequestParameters)
+            putAll(getApiRequestParameters("{{apiPath}}"))
         }
         return {{serviceMapping.variableName}}.{{serviceMethodName}}(params)
     }
