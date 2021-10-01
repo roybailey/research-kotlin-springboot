@@ -9,6 +9,26 @@
 
 toc::[]
 
+== Controllers 
 
+[cols=5*,options=header]
+|===
+|controller
+|apiPath
+|service
+|table
+|model
 
+|`CodegenSampleController.getAllData`
+|`/codegen-sample/full`
+|`CodegenSampleService.getAllData`
+|`v_temp_codegen_sample`
+|`CodegenSampleModel`
 
+|`CodegenSampleController.getLiteData`
+|`/codegen-sample/lite`
+|`CodegenSampleService.getAllData`
+|`v_temp_codegen_sample`
+|`CodegenSampleModel`
+
+|===

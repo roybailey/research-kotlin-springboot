@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import me.roybailey.api.common.BaseController
+import me.roybailey.api.common.ApiResponse
 import {{serviceMapping.packageName}}.{{serviceMapping.className}}
 import {{modelMapping.packageName}}.{{modelMapping.className}}
 
@@ -35,11 +36,12 @@ class {{controllerMapping.className}}(
     {{#each controllerMapping.endpoints}}
     @GetMapping
     @RequestMapping("{{apiPath}}")
-    fun {{apiMethodName}}(request:HttpServletRequest): List<{{modelMapping.className}}> {
+    fun {{apiMethodName}}(request:HttpServletRequest): ApiResponse<{{modelMapping.className}}> {
         val params = LinkedHashMap(request.parameterMap).apply { 
             putAll(getApiRequestParameters("{{apiPath}}"))
         }
-        return {{serviceMapping.variableName}}.{{serviceMethodName}}(params)
+        val results = {{serviceMapping.variableName}}.{{serviceMethodName}}(params)
+        return ApiResponse(results.size, results)
     }
     {{/each}}
 }

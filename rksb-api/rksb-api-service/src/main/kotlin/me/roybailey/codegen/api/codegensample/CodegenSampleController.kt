@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import me.roybailey.api.common.BaseController
+import me.roybailey.api.common.ApiResponse
 import me.roybailey.codegen.api.codegensample.CodegenSampleService
 import me.roybailey.codegen.api.codegensample.CodegenSampleModel
 
@@ -22,20 +23,22 @@ class CodegenSampleController(
     
     @GetMapping
     @RequestMapping("/full")
-    fun getAllData(request:HttpServletRequest): List<CodegenSampleModel> {
+    fun getAllData(request:HttpServletRequest): ApiResponse<CodegenSampleModel> {
         val params = LinkedHashMap(request.parameterMap).apply { 
             putAll(getApiRequestParameters("/full"))
         }
-        return codegenSampleService.getAllData(params)
+        val results = codegenSampleService.getAllData(params)
+        return ApiResponse(results.size, results)
     }
     
     @GetMapping
     @RequestMapping("/lite")
-    fun getLiteData(request:HttpServletRequest): List<CodegenSampleModel> {
+    fun getLiteData(request:HttpServletRequest): ApiResponse<CodegenSampleModel> {
         val params = LinkedHashMap(request.parameterMap).apply { 
             putAll(getApiRequestParameters("/lite"))
         }
-        return codegenSampleService.getAllData(params)
+        val results = codegenSampleService.getAllData(params)
+        return ApiResponse(results.size, results)
     }
     
 }

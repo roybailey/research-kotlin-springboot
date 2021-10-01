@@ -76,13 +76,14 @@ Any specialist software should be confined to a common library module within
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
-* TODO: Generate clean PoJos for API use
-* TODO: Extend blueprint data classes to include all derived data needed for generators
-* TODO: Make sure everything is overridable
-* TODO: Create Manager catalogue of APIs
 * TODO: Generate AsciiDoc Blueprint report
 * TODO: Add date between two columns complex filter use-case
+* TODO: Support overridable non-standard service methods and mappings from controller
 
+* DONE: Support multiple endpoints for controllers
+* DONE: Generate clean PoJos for API use
+* DONE: Extend blueprint data classes to include all derived data needed for generators
+* DONE: Create Manager catalogue of APIs
 * DONE: Update Demo to test Flyway not required
 * DONE: Map cleaner API path
 * DONE: Add default limit

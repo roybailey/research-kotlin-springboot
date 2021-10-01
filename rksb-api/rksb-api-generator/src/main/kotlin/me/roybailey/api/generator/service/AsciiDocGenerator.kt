@@ -35,26 +35,51 @@ class AsciiDocGenerator : Callable<GeneratorResult> {
 
             toc::[]
 
-            {{#each blueprints}}
-            {{#each apiMapping}}
-            == {{id}}
+            == Controllers 
             
-            [cols=2*]
+            [cols=5*,options=header]
             |===
-            |`apiPath` | `{{apiPath}}`
-            |`tableMappingId` | `tableMappingId`
+            |controller
+            |apiPath
+            |service
+            |table
+            |model
+            {{#each endpoints}}
+            |`{{controller}}`
+            |`{{apiPath}}`
+            |`{{service}}`
+            |`{{table}}`
+            |`{{model}}`
+            {{/each}}
             |===
-            {{/each}}
-            {{/each}}
 
     """.trimIndent()
 
     override fun call(): GeneratorResult {
         logger.info("AsciiDoc Generation - STARTING")
 
+        val endpoints = blueprintCollection.allControllers().map { controllerMapping ->
+            controllerMapping.endpoints.map { endpointMapping ->
+                val serviceMapping =
+                    blueprintCollection.allServices().first { it.id == controllerMapping.serviceMappingId }
+                val tableMapping = blueprintCollection.allTables().first { it.id == serviceMapping.tableMappingId }
+                val modelMapping = blueprintCollection.allModels().first { it.id == serviceMapping.modelMappingId }
+                mapOf(
+                    Pair("controller", controllerMapping.className + "." + endpointMapping.apiMethodName),
+                    Pair("apiPath", controllerMapping.apiPath + endpointMapping.apiPath),
+                    Pair("service", serviceMapping.className + "." + endpointMapping.serviceMethodName),
+                    Pair("table", tableMapping.tableName),
+                    Pair("model", modelMapping.className),
+                )
+            }
+        }.flatten()
         val model = mapOf(
             Pair("title", "Blueprints v${generatorProperties.version}"),
-            Pair("blueprints", blueprintCollection.blueprints),
+            Pair("blueprintCollection", blueprintCollection),
+            Pair("allControllers", blueprintCollection.allControllers()),
+            Pair("allServices", blueprintCollection),
+            Pair("allTables", blueprintCollection),
+            Pair("endpoints", endpoints),
         )
         val handlebars = Handlebars()
         val template = handlebars.compileInline(asciiDocTemplate)
