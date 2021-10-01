@@ -70,9 +70,12 @@ open class BlueprintConfiguration {
                 Blueprint::class.java
             )
             logger.info { blueprint }
+            blueprint.source = blueprintFile
             blueprint
         }.collect(Collectors.toList())
 
+        // this will ensure the database has all the correct DDL without repeating the DDL if executed multiple times
+        FlywayMigration().call()
         val mapApiColumnMapping =
             loadTableColumns(blueprintCollection.allTables().map { it.tableName.toLowerCase() }.toSet())
 

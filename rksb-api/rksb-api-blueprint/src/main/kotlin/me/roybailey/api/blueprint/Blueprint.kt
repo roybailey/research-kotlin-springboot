@@ -29,6 +29,7 @@ data class BlueprintCollection(
 
 data class Blueprint(
     var id: String,
+    var source: String?, // will be the blueprint file
     var namespace: String,
     var packageName: String?, // default to {{../packageName}}
     var controllers: List<ControllerMapping> = emptyList(),

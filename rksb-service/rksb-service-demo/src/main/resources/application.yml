@@ -28,6 +28,9 @@ graphql:
     mapping: /api/graphql
     enabled: true
 
+blueprints:
+  enabled: false
+
 graphiql:
   enabled: true
   mapping: /graphiql

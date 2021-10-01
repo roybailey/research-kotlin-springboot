@@ -97,11 +97,6 @@ fun main(args: Array<String>) {
     println("    EVIDENCE LAB DISTRIBUTION CODE GENERATOR")
     println("")
 
-    // we call the database migration here, outside spring, for couple of reasons
-    // 1. When inside Spring the database migration does not happen before the Blueprint loading queries the database, thus in the first build it fails to generate the migrated database schema
-    // 2. We keep the database migration out of inherited Spring code so only the build and manager projects will control it's execution into an environment
-    // 3. We can load the database properties from application-blueprint.yml instead of having to define them again as spring.flyway.* properties
-    FlywayMigration().call()
     // now the database schema has been updated the database/code generation can start
     runApplication<GeneratorApplication>(*args)
 }

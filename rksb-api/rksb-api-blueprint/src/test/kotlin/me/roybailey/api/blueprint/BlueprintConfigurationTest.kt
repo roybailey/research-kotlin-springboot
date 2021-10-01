@@ -77,6 +77,7 @@ open class BlueprintConfigurationTest {
                   "packageName" : "me.roybailey.codegen",
                   "blueprints" : [ {
                     "id" : "codegen-sample-blueprint",
+                    "source" : "api/codegen-sample-blueprint.json",
                     "namespace" : "CodegenSample",
                     "packageName" : "me.roybailey.codegen",
                     "controllers" : [ {
