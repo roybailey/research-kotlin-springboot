@@ -23,6 +23,9 @@ open class TestBlueprintSpringApplication
 open class BlueprintConfigurationTest {
 
     @Autowired
+    lateinit var mapper: ObjectMapper
+
+    @Autowired
     lateinit var blueprintCollection: BlueprintCollection
 
     @Autowired
@@ -63,14 +66,13 @@ open class BlueprintConfigurationTest {
         assertThat(blueprintCollection.blueprints.size).isEqualTo(blueprintConfiguration.defaultBlueprintCollection().blueprints.size)
 
         // use the first codegensample blueprint to verify the configuration loads and resolves as expected
-        val mapper = ObjectMapper().configure(SerializationFeature.INDENT_OUTPUT, true)
         BlueprintCollection(
             packageName = blueprintCollection.packageName,
             blueprints = listOf(blueprintCollection.blueprints[0])
         ).run {
             val codegenSampleResolved = mapper.writeValueAsString(this)
             println(codegenSampleResolved)
-            assertThat(codegenSampleResolved).isEqualTo(
+            assertThat(codegenSampleResolved.replace("\r\n","\n")).isEqualTo(
                 """
                 {
                   "targetFolder" : "./target/generated-source",
