@@ -91,7 +91,7 @@ open class BlueprintConfiguration {
                 controllerMapping.packageName = controllerMapping.packageName ?: "${blueprint.packageName}.api.${controllerMapping.namespace!!.toLowerCase()}"
                 controllerMapping.className = controllerMapping.className ?: "${blueprint.namespace}Controller"
                 controllerMapping.variableName = controllerMapping.variableName
-                    ?: controllerMapping.className!!.replaceFirstChar { it.toLowerCase() }
+                    ?: controllerMapping.className!!.decapitalize()
                 controllerMapping.endpoints = controllerMapping.endpoints.map { endpointMapping ->
                     logger.info("Resolving endpointMapping ${endpointMapping.apiPath}")
                     endpointMapping.serviceMethodName =
@@ -108,7 +108,7 @@ open class BlueprintConfiguration {
                 serviceMapping.packageName = serviceMapping.packageName ?: "${blueprint.packageName}.api.${serviceMapping.namespace!!.toLowerCase()}"
                 serviceMapping.className = serviceMapping.className ?: "${blueprint.namespace}Service"
                 serviceMapping.variableName =
-                    serviceMapping.variableName ?: serviceMapping.className!!.replaceFirstChar { it.toLowerCase() }
+                    serviceMapping.variableName ?: serviceMapping.className!!.decapitalize()
                 serviceMapping
             }
 
