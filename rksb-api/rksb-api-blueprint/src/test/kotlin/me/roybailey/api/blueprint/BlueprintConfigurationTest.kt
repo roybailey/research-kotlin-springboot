@@ -7,15 +7,17 @@ import com.github.jknack.handlebars.Handlebars
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.SpringBootConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.test.context.ActiveProfiles
 
-@SpringBootApplication(
-    scanBasePackages = ["me.roybailey.api.blueprint"],
-    exclude = [FlywayAutoConfiguration::class]
-)
+@SpringBootConfiguration
+@EnableConfigurationProperties
+@ComponentScan(basePackages = ["me.roybailey.api.blueprint"])
 open class TestBlueprintSpringApplication
 
 @SpringBootTest(classes = [TestBlueprintSpringApplication::class])
@@ -75,7 +77,6 @@ open class BlueprintConfigurationTest {
             assertThat(codegenSampleResolved.replace("\r\n","\n")).isEqualTo(
                 """
                 {
-                  "targetFolder" : "./target/generated-source",
                   "packageName" : "me.roybailey.codegen",
                   "blueprints" : [ {
                     "id" : "codegen-sample-blueprint",

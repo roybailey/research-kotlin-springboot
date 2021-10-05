@@ -18,6 +18,7 @@
     <description>Kotlin SpringBoot API Blueprint</description>
 
     <properties>
+        <jooq.version>3.15.1</jooq.version>
         <handlebars.version>4.1.2</handlebars.version>
     </properties>
 
@@ -49,23 +50,31 @@
             <artifactId>rksb-common-lib-database</artifactId>
         </dependency>
 
-        <!-- we don't want every project that uses the blueprint library to include flyway -->
-        <!-- only the generator and the support manager service will apply the database migrations -->
-        <!-- hence 'provided' scope to make it 'opt-in' for the manager database migration service -->
+        <dependency>
+            <groupId>me.roybailey</groupId>
+            <artifactId>rksb-common-lib-json</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <scope>provided</scope>
         </dependency>
 
+        <!-- JOOQ Database Code Generator and DSL -->
         <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-kotlin</artifactId>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq</artifactId>
+            <version>${jooq.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jooq</artifactId>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-meta</artifactId>
+            <version>${jooq.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-codegen</artifactId>
+            <version>${jooq.version}</version>
         </dependency>
 
         <dependency>
@@ -75,5 +84,25 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <mainClass>me.roybailey.api.codegen.GeneratorApplicationKt</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

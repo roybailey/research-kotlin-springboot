@@ -46,7 +46,7 @@
 
         <dependency>
             <groupId>me.roybailey</groupId>
-            <artifactId>rksb-api-blueprint</artifactId>
+            <artifactId>rksb-common-lib-web</artifactId>
         </dependency>
 
         <dependency>

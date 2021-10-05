@@ -40,6 +40,7 @@ class FlywayMigration(
             .baselineVersion("0001")
             .locations("classpath:ddl")
             .dataSource(url, username, password)
+            .table("api-schema-history")
             .load()
         val migration = flyway.migrate()
         logger.info("FlyWay Database Migration ${migration.initialSchemaVersion} ${migration.targetSchemaVersion}")

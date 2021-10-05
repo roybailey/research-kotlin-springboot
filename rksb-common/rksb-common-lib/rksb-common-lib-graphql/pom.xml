@@ -37,6 +37,13 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>me.roybailey</groupId>
+			<artifactId>rksb-common-lib-test</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- GraphQL -->
 		<dependency>
 			<groupId>com.graphql-java-kickstart</groupId>

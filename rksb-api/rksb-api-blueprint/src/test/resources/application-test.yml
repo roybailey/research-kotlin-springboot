@@ -1,0 +1,3 @@
+codegen:
+  write-files:
+    enabled: false

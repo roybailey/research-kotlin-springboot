@@ -40,8 +40,9 @@
         <!-- database -->
         <flyway.version>7.13.0</flyway.version>
 
-        <!-- code generation database properties can be found in api-blueprint module blueprints.yml -->
-
+        <!-- utilities -->
+        <commons-text.version>1.9</commons-text.version>
+        
     </properties>
 
     <modules>

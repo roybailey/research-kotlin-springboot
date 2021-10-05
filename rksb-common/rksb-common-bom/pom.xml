@@ -88,6 +88,13 @@
                 <version>${spring-boot.version}</version>
             </dependency>
 
+            <!-- Utilities -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>${commons-text.version}</version>
+            </dependency>
+
             <!-- JSON -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -161,6 +168,19 @@
             <dependency>
                 <groupId>me.roybailey</groupId>
                 <artifactId>rksb-common-lib-jooq</artifactId>
+                <type>test-jar</type>
+                <classifier>tests</classifier>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-common-lib-json</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-common-lib-json</artifactId>
                 <type>test-jar</type>
                 <classifier>tests</classifier>
                 <version>${project.version}</version>

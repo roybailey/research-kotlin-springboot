@@ -98,7 +98,7 @@
                                 </delete>
                                 <!-- 2. execute code generation project, passing required parameters for output -->
                                 <echo>Running Code Generator using project.basedir=${project.basedir}</echo>
-                                <java fork="true" jar="../rksb-api-generator/target/rksb-api-generator-${project.version}.jar">
+                                <java fork="true" jar="../rksb-api-blueprint/target/rksb-api-blueprint-${project.version}.jar">
                                     <arg value="--project.basedir=${project.basedir}"/>
                                     <arg value="--project.version=${project.version}"/>
                                 </java>

@@ -1,6 +1,6 @@
 package me.roybailey.service.manager
 
-import me.roybailey.api.blueprint.BlueprintConfiguration
+import me.roybailey.api.common.BlueprintConfiguration
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
@@ -12,7 +12,7 @@ import org.springframework.boot.runApplication
 
 
 @SpringBootApplication(
-// we dont want any of the spring auto datasource as we use the properties directly with jooq only
+// we don't want any of the spring auto datasource as we use the properties directly with jooq only
     exclude = [
         DataSourceAutoConfiguration::class,
         DataSourceTransactionManagerAutoConfiguration::class,

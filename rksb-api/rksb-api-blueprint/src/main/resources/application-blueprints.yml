@@ -3,6 +3,9 @@ blueprints:
   - api/codegen-sample-blueprint.json
 # these properties are used by the code generator
 codegen:
+  write-files:
+    enabled: true
+  blueprint-collection-target: src/main/resources/blueprint-collection.json
   base-package: me.roybailey.codegen
   datasource:
     # when enabled=true the primary dataSource is created from the below properties (only activated by services)

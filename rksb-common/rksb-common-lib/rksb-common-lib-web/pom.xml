@@ -63,6 +63,12 @@
             <version>${spring-boot.version}</version>
         </dependency>
 
+        <!-- JSON -->
+        <dependency>
+            <groupId>me.roybailey</groupId>
+            <artifactId>rksb-common-lib-json</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.PropertySource
-import java.lang.IllegalArgumentException
 
 
 @Configuration
@@ -14,6 +13,9 @@ import java.lang.IllegalArgumentException
 open class BlueprintProperties {
 
     lateinit var blueprints: List<String>
+
+    @Value("\${codegen.write-files.enabled:true}")
+    var codegenWriteFilesEnabled: Boolean = true
 
     @Value("\${codegen.datasource.blueprints.url}")
     lateinit var blueprintsDatabaseUrl: String
@@ -32,6 +34,9 @@ open class BlueprintProperties {
 
     @Value("\${codegen.datasource.blueprints.excludes}")
     lateinit var blueprintsDatabaseExcludes: String
+
+    @Value("\${codegen.blueprint-collection-target}")
+    lateinit var codegenBlueprintCollection: String
 
     @Value("\${codegen.base-package}")
     lateinit var codegenBasePackage: String

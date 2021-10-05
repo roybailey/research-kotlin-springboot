@@ -1,14 +1,11 @@
 package me.roybailey.service.manager
 
-import me.roybailey.api.blueprint.BlueprintCollection
+import me.roybailey.api.common.BlueprintCollection
 import me.roybailey.api.common.ApiResponse
 import javax.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import me.roybailey.api.common.BaseController
-import me.roybailey.codegen.api.codegensample.CodegenSampleService
-import me.roybailey.codegen.api.codegensample.CodegenSampleModel
 import org.springframework.beans.factory.annotation.Autowired
 import javax.servlet.http.HttpServletResponse
 

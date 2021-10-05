@@ -1,58 +1,26 @@
 package me.roybailey.api.blueprint
 
-import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.github.jknack.handlebars.Handlebars
-import com.github.jknack.handlebars.Options
-import com.github.jknack.handlebars.helper.DefaultHelperRegistry
 import mu.KotlinLogging
 import org.jooq.impl.DSL.using
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
+import org.springframework.stereotype.Component
 import java.util.stream.Collectors
-import javax.annotation.PostConstruct
 
 
-@Configuration
-@ConditionalOnProperty(value = ["blueprints.enabled"], havingValue = "true", matchIfMissing = true)
-open class BlueprintConfiguration {
+@Component
+open class BlueprintCompiler {
 
     private val logger = KotlinLogging.logger {}
 
     @Autowired
     lateinit var blueprintProperties: BlueprintProperties
 
-    @Bean
-    open fun jsonMapper() = ObjectMapper()
-        .registerModule(KotlinModule())
-        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        .configure(SerializationFeature.INDENT_OUTPUT, true)
+    @Autowired
+    lateinit var jsonMapper: ObjectMapper
 
-    @Bean
-    open fun handlebars(): Handlebars {
-        val handlebars = Handlebars()
-        val helperRegistry = DefaultHelperRegistry()
 
-        class HelperSource {
-            fun uppercase(context: String, options: Options): String {
-                return context.toUpperCase()
-            }
-
-            fun lowercase(context: String, options: Options): String {
-                return context.toLowerCase()
-            }
-        }
-        helperRegistry.registerHelpers(HelperSource())
-        handlebars.with(helperRegistry)
-        return handlebars
-    }
-
-    @Bean
-    open fun defaultBlueprintCollection(): BlueprintCollection {
+    fun compileBlueprints(): BlueprintCollection {
 
         val blueprintCollection = BlueprintCollection(packageName = blueprintProperties.codegenBasePackage)
         val blueprintFiles = blueprintProperties.blueprints
@@ -66,7 +34,7 @@ open class BlueprintConfiguration {
 
         blueprintCollection.blueprints = blueprintFiles.stream().map { blueprintFile ->
             logger.info { blueprintFile }
-            val blueprint = jsonMapper().readValue(
+            val blueprint = jsonMapper.readValue(
                 this.javaClass.classLoader.getResourceAsStream(blueprintFile),
                 Blueprint::class.java
             )
@@ -75,8 +43,6 @@ open class BlueprintConfiguration {
             blueprint
         }.collect(Collectors.toList())
 
-        // this will ensure the database has all the correct DDL without repeating the DDL if executed multiple times
-        FlywayMigration().call()
         val mapApiColumnMapping =
             loadTableColumns(blueprintCollection.allTables().map { it.tableName.toLowerCase() }.toSet())
 
@@ -89,7 +55,8 @@ open class BlueprintConfiguration {
             blueprint.controllers = blueprint.controllers.map { controllerMapping ->
                 logger.info("Resolving controllerMapping ${controllerMapping.id}")
                 controllerMapping.namespace = controllerMapping.namespace ?: blueprint.namespace
-                controllerMapping.packageName = controllerMapping.packageName ?: "${blueprint.packageName}.api.${controllerMapping.namespace!!.toLowerCase()}"
+                controllerMapping.packageName = controllerMapping.packageName
+                    ?: "${blueprint.packageName}.api.${controllerMapping.namespace!!.toLowerCase()}"
                 controllerMapping.className = controllerMapping.className ?: "${blueprint.namespace}Controller"
                 controllerMapping.variableName = controllerMapping.variableName
                     ?: controllerMapping.className!!.decapitalize()
@@ -106,7 +73,8 @@ open class BlueprintConfiguration {
             blueprint.services = blueprint.services.map { serviceMapping ->
                 logger.info("Resolving serviceMapping ${serviceMapping.id}")
                 serviceMapping.namespace = serviceMapping.namespace ?: blueprint.namespace
-                serviceMapping.packageName = serviceMapping.packageName ?: "${blueprint.packageName}.api.${serviceMapping.namespace!!.toLowerCase()}"
+                serviceMapping.packageName = serviceMapping.packageName
+                    ?: "${blueprint.packageName}.api.${serviceMapping.namespace!!.toLowerCase()}"
                 serviceMapping.className = serviceMapping.className ?: "${blueprint.namespace}Service"
                 serviceMapping.variableName =
                     serviceMapping.variableName ?: serviceMapping.className!!.decapitalize()
@@ -117,7 +85,8 @@ open class BlueprintConfiguration {
             blueprint.tables.forEach { tableMapping ->
                 logger.info("Resolving tableMapping ${tableMapping.id}")
                 tableMapping.namespace = tableMapping.namespace ?: blueprint.namespace
-                tableMapping.packageName = tableMapping.packageName ?: "${blueprint.packageName}.api.${tableMapping.namespace!!.toLowerCase()}"
+                tableMapping.packageName =
+                    tableMapping.packageName ?: "${blueprint.packageName}.api.${tableMapping.namespace!!.toLowerCase()}"
                 tableMapping.className = tableMapping.className ?: "${blueprint.namespace}Table"
                 // lowercase all database names as this is postgres standard
                 tableMapping.tableName = tableMapping.tableName.toLowerCase()
@@ -140,7 +109,8 @@ open class BlueprintConfiguration {
             blueprint.models = blueprint.models.map { modelMapping ->
                 logger.info("Resolving modelMapping ${modelMapping.id}")
                 modelMapping.namespace = modelMapping.namespace ?: blueprint.namespace
-                modelMapping.packageName = modelMapping.packageName ?: "${blueprint.packageName}.api.${modelMapping.namespace!!.toLowerCase()}"
+                modelMapping.packageName =
+                    modelMapping.packageName ?: "${blueprint.packageName}.api.${modelMapping.namespace!!.toLowerCase()}"
                 modelMapping.className = modelMapping.className ?: "${blueprint.namespace}Model"
 
                 val serviceMapping = blueprintCollection.allServices().find { it.modelMappingId == modelMapping.id }!!
