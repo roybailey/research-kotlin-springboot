@@ -7,12 +7,20 @@ spring:
 #    url: jdbc:postgresql://localhost:5432/postgres
 #    username: postgres
 #    password: localhost
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
   jooq:
     sql-dialect: POSTGRES
   servlet:
     multipart:
       enabled: true
       location: /tmp
+  flyway:
+    enabled: false
 
 server:
   port: 5000
@@ -24,6 +32,9 @@ management:
         include: health,info,metrics
 
 blueprints:
+  flyway:
+    # when enabled=true the blueprints database schema migration will be executed on startup against the blueprint datasource
+    enabled: true
   datasource:
     # when enabled=true the primary dataSource is created from the below properties (used by runtime services)
     enabled: true

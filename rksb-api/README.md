@@ -36,15 +36,30 @@ Add the dependency to the code generated module in your `pom.xml`
 Enable use of the blueprints datasource in your `application.xml`
 
 ```yaml
-blueprint:
+blueprints:
   datasource:
-    # when enabled=true the primary dataSource is created from the blueprint properties
+    # when enabled=true the primary dataSource is created from the application-blueprints.yml properties
+    enabled: true
+```
+
+Enable use of the blueprints flyway data migration
+
+```yaml
+spring:
+  flyway:
+    # when enabled=true the spring database schema migration is applied to the flyway datasource
+    enabled: false
+blueprints:
+  flyway:
+    # when enabled=true the blueprints database schema migration is applied to the blueprints datasource
     enabled: true
 ```
 
 ## Developers Guide
 
-Set the environment variable (TODO) `` so that the generator runs as part of the build process
+Set the environment variable `BLUEPRINTS_GENERATOR=true` so that the generator runs as part of the local build process.
+Do not set this for CI/CD builds.  The generated code is intended to be 'checked-in' after local testing and saved
+as committed code.
 
 * `mvn clean install`
 

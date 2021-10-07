@@ -73,20 +73,8 @@ open class GeneratorConfiguration {
     }
 
 
-    @Bean("database-migration")
-    open fun databaseMigration(): BlueprintDatabaseMigration {
-        logger.info("---->>>> databaseMigration()")
-        val databaseMigration = BlueprintDatabaseMigration(
-            url = blueprintProperties.blueprintsDatabaseUrl,
-            username = blueprintProperties.blueprintsDatabaseUsername,
-            password = blueprintProperties.blueprintsDatabasePassword
-        )
-        databaseMigration.call()
-        return databaseMigration
-    }
-
     @Bean("blueprint-compiler")
-    @DependsOn("database-migration")
+    @DependsOn("blueprints-database-migration")
     open fun blueprintCompiler(): BlueprintCollection {
         logger.info("---->>>> blueprintCompiler()")
         val blueprintCollection = blueprintCompiler.compileBlueprintsTemplates()
@@ -102,29 +90,5 @@ open class GeneratorConfiguration {
 
         return blueprintCollection
     }
-
-//    @Bean("database-code-generator")
-//    @DependsOn("blueprint-compiler")
-//    open fun databaseCodeGenerator(): DatabaseCodeGenerator {
-//        logger.info("---->>>> databaseCodeGenerator()")
-//        databaseCodeGenerator.call()
-//        return databaseCodeGenerator
-//    }
-//
-//    @Bean("code-generator")
-//    @DependsOn("blueprint-compiler")
-//    open fun codeGenerator(): CodeGenerator {
-//        logger.info("---->>>> codeGenerator()")
-//        codeGenerator.call()
-//        return codeGenerator
-//    }
-//
-//    @Bean("asciidoc-generator")
-//    @DependsOn("blueprint-compiler")
-//    open fun asciiDocGenerator(): AsciiDocGenerator {
-//        logger.info("---->>>> asciiDocGenerator()")
-//        asciiDocGenerator.call()
-//        return asciiDocGenerator
-//    }
 
 }

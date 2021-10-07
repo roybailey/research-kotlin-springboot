@@ -1,9 +1,12 @@
 spring:
   main:
     web-application-type: none
-# disable production blueprint configuration for the generator
+# disable production blueprint configuration for the generator as it loads the templates instead
 blueprints:
   enabled: false
+  # enable database schema migration
+  flyway:
+    enabled: true
 # these properties are used by the code generator
 codegen:
   write-files:

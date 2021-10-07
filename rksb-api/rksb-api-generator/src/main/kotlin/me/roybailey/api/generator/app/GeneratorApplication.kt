@@ -1,5 +1,6 @@
 package me.roybailey.api.generator.app
 
+import ch.qos.logback.core.util.OptionHelper.getEnv
 import me.roybailey.api.blueprint.BlueprintDatabaseMigration
 import me.roybailey.api.blueprint.BlueprintProperties
 import me.roybailey.api.generator.configuration.GeneratorResult
@@ -30,6 +31,9 @@ open class GeneratorApplication : ApplicationRunner {
     lateinit var blueprintProperties: BlueprintProperties
 
     @Autowired
+    lateinit var blueprintDatabaseMigration: BlueprintDatabaseMigration
+
+    @Autowired
     lateinit var blueprintCompiler: BlueprintCompiler
 
     @Autowired
@@ -43,6 +47,14 @@ open class GeneratorApplication : ApplicationRunner {
 
 
     override fun run(args: ApplicationArguments?) {
+        val envVariableEnabler = "BLUEPRINTS_GENERATOR"
+        val enabled = System.getenv(envVariableEnabler)
+        if("true" != enabled) {
+            logger.info("!!!!!!!!!! Generator exiting as $envVariableEnabler != 'true' but == '$enabled'")
+            logger.info("!!!!!!!!!! this is normal for CI/CD builds")
+            logger.info("!!!!!!!!!! in development you might want to generate code for local builds by assigning $envVariableEnabler=true")
+            exitProcess(0)
+        }
         logger.info("Application started with command-line arguments: {}", args!!.sourceArgs)
         logger.info("NonOptionArgs: {}", args.nonOptionArgs)
         logger.info("OptionNames: {}", args.optionNames)
@@ -62,14 +74,6 @@ open class GeneratorApplication : ApplicationRunner {
             logger.error("!!!!!!!!!! project.basedir not provided - exiting generator")
             exitProcess(-1)
         }
-
-        // prepare the database with the latest schema changes
-        val databaseMigration = BlueprintDatabaseMigration(
-            url = blueprintProperties.blueprintsDatabaseUrl,
-            username = blueprintProperties.blueprintsDatabaseUsername,
-            password = blueprintProperties.blueprintsDatabasePassword
-        )
-        databaseMigration.call()
 
         // compile the blueprints templates into the fully qualified aggregate blueprints collection
         blueprintCompiler.compileBlueprintsTemplates()
