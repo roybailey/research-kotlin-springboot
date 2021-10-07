@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 
-@SpringBootApplication(scanBasePackages = ["me.roybailey.api", "me.roybailey.codegen"])
+@SpringBootApplication(scanBasePackages = ["me.roybailey.service.manager", "me.roybailey.api", "me.roybailey.codegen"])
 open class ManagerApplication
 
 

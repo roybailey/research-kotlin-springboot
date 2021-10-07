@@ -16,7 +16,7 @@
           "apiRequestParameters": {
             "title": ["cc"]
           },
-          "serviceMethodName": "getAllData"
+          "serviceMethodName": "getLiteData"
         }
       ]
     }

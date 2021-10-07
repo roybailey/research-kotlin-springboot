@@ -77,7 +77,7 @@ open class GeneratorConfigurationTest : GeneratorTestBase() {
                           "title" : [ "cc" ]
                         },
                         "apiMethodName" : "getLiteData",
-                        "serviceMethodName" : "getAllData"
+                        "serviceMethodName" : "getLiteData"
                       } ]
                     } ],
                     "services" : [ {

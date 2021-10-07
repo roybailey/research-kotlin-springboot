@@ -15,6 +15,7 @@ class ControllerCodeGenerator : AbstractCodeGenerator() {
 package {{controllerMapping.packageName}}
 
 import javax.servlet.http.HttpServletRequest
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -26,17 +27,18 @@ import {{modelMapping.packageName}}.{{modelMapping.className}}
 
 @RestController
 @RequestMapping("{{controllerMapping.apiPath}}")
-class {{controllerMapping.className}}(
-    private val {{serviceMapping.variableName}}: {{serviceMapping.className}}
-) : BaseController(
+open class {{controllerMapping.className}} : BaseController(
     blueprintId = "{{blueprint.id}}",
     controllerMappingId = "{{controllerMapping.id}}"
 ) {
 
+    @Autowired
+    protected lateinit var {{serviceMapping.variableName}}: {{serviceMapping.className}}
+
     {{#each controllerMapping.endpoints}}
     @GetMapping
     @RequestMapping("{{apiPath}}")
-    fun {{apiMethodName}}(request:HttpServletRequest): ApiResponse<{{modelMapping.className}}> {
+    open fun {{apiMethodName}}(request:HttpServletRequest): ApiResponse<{{modelMapping.className}}> {
         val params = LinkedHashMap(request.parameterMap).apply { 
             putAll(getApiRequestParameters("{{apiPath}}"))
         }

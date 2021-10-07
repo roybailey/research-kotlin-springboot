@@ -23,54 +23,10 @@ e.g. generating classes with String identifiers and let the common base code loo
 
 ## Getting Started
 
-### Database Code Generation
+* Run the `GeneratorApplication` and pass `--project.basedir=.../rksb-api-service --project.version=0.0.0-SNAPSHOT`
 
-This requires database access to be defined in the `application.yml`, or overridden in the program arguments.
-
-### API Specification File
-
-An api specification file should be created in the `../docs` folder named `<domain>-spec.json`.
-This will be parsed and used to generator code.
-e.g.
-
-```
-{
-  "name": "books",
-  "tableMapping": [
-    {
-      "table": "TEMP_BOOKS",
-      "record": "TempBooksRecord",
-      "domain": "TempBooks",
-      "columnMapping": [],
-      "testData": []
-    }
-  ]
-}
-```
-
-### Database Table Create SQL File
-
-A table create sql should be added to the same folder named `<domain>-create.sql`.
-This will be parsed to capture column names and data types.
-e.g.
-
-```
-drop table if exists temp_books;
-
-create table temp_books
-(
-    id              serial not null
-        constraint temp_books_pkey
-            primary key,
-    title           varchar(255),
-    description     text,
-    publicationdate integer,
-    price     double precision
-);
-
-drop view if exists v_temp_books;
-create view v_temp_books as select * from temp_books;
-```
+This uses the database source and blueprint templates defined in the `application-blueprints.yml`
+from the `rksb-api-blueprint` module.  And also applies the database schema migration from the `rksb-api-blueprint` module.  
 
 
 ## Build & Test
@@ -88,6 +44,3 @@ create view v_temp_books as select * from temp_books;
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
-* TODO: Enrich ApiBlueprint object graph to reduce custom model entries for code generation
-* TODO: Pass more parameters into generator
-* TODO: Configurable database schema (not hardcoded to public)

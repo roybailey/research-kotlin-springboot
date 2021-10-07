@@ -7,6 +7,8 @@ import mu.KotlinLogging
 import org.jooq.impl.DSL.using
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.lang.ClassLoader.getSystemResourceAsStream
+import java.lang.IllegalArgumentException
 import java.util.stream.Collectors
 
 
@@ -39,8 +41,10 @@ open class BlueprintCompiler {
 
         blueprintCollection.blueprints = blueprintFiles.stream().map { blueprintFile ->
             logger.info { blueprintFile }
+            val blueprintSource = Blueprint::class.java.classLoader.getResourceAsStream(blueprintFile)
+                ?: throw IllegalArgumentException("Blueprint not found on classpath $blueprintFile")
             val blueprint = jsonMapper.readValue(
-                this.javaClass.classLoader.getResourceAsStream(blueprintFile),
+                blueprintSource,
                 Blueprint::class.java
             )
             logger.info { blueprint }

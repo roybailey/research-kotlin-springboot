@@ -24,27 +24,11 @@ open class GeneratorConfiguration {
 
     private val logger = KotlinLogging.logger {}
 
-//    @Autowired
-//    lateinit var mapper: ObjectMapper
-
-    @Autowired
-    lateinit var blueprintProperties: BlueprintProperties
-
     @Autowired
     lateinit var generatorProperties: GeneratorProperties
 
     @Autowired
     lateinit var blueprintCompiler: BlueprintCompiler
-
-//    @Autowired
-//    lateinit var databaseCodeGenerator: DatabaseCodeGenerator
-//
-//    @Autowired
-//    lateinit var codeGenerator: CodeGenerator
-//
-//    @Autowired
-//    lateinit var asciiDocGenerator: AsciiDocGenerator
-
 
     @Bean
     open fun jsonMapper():ObjectMapper = ObjectMapper()

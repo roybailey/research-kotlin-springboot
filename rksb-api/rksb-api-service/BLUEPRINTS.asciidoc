@@ -27,7 +27,7 @@ toc::[]
 
 |`CodegenSampleController.getLiteData`
 |`/codegen-sample/lite`
-|`CodegenSampleService.getAllData`
+|`CodegenSampleService.getLiteData`
 |`v_temp_codegen_sample`
 |`CodegenSampleModel`
 
