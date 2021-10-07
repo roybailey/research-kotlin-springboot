@@ -1,6 +1,7 @@
 package me.roybailey.service.manager
 
 import me.roybailey.api.blueprint.BlueprintConfiguration
+import me.roybailey.api.blueprint.BlueprintDatabaseMigration
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
@@ -27,5 +28,6 @@ import org.springframework.boot.runApplication
 open class ManagerApplication
 
 fun main(args: Array<String>) {
+    BlueprintDatabaseMigration().call()
     runApplication<ManagerApplication>(*args)
 }
