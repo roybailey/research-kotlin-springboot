@@ -14,11 +14,11 @@ import org.springframework.boot.runApplication
 @SpringBootApplication(
 // we don't want any of the spring auto datasource as we use the properties directly with jooq only
     exclude = [
-        DataSourceAutoConfiguration::class,
-        DataSourceTransactionManagerAutoConfiguration::class,
-        HibernateJpaAutoConfiguration::class,
-        JooqAutoConfiguration::class,
-        R2dbcAutoConfiguration::class,
+//        DataSourceAutoConfiguration::class,
+//        DataSourceTransactionManagerAutoConfiguration::class,
+//        HibernateJpaAutoConfiguration::class,
+//        JooqAutoConfiguration::class,
+//        R2dbcAutoConfiguration::class,
         FlywayAutoConfiguration::class
     ],
     scanBasePackageClasses = [BlueprintConfiguration::class, ManagerConfiguration::class],

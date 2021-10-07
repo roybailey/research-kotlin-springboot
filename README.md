@@ -25,7 +25,8 @@ Module          | Description
 ## Getting Started
 
 * `mvn clean install`
-* `./demo.sh` to run the demo application
+* `./demo.sh` to run the demo application (showcase common libraries)
+* `./manager.sh` to run the manager application (showcase API services)
 
 ### Prerequisites
 
@@ -38,9 +39,10 @@ docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=localhost postgres
 ```
 
 
-### Adding an API Table Blueprint Mapping
+### Adding API Blueprint Templates & Services
 
-See [**`rksb-api/rksb-api-blueprint/README.md`**](rksb-api/rksb-api-blueprint/README.md) for instructions on adding a new API
+See [**`rksb-api/rksb-api-blueprint/README.md`**](rksb-api/rksb-api-blueprint/README.md) for instructions on adding a new API Blueprint Mapping Template
+See [**`rksb-api/rksb-api-service/README.md`**](rksb-api/rksb-api-service/README.md) for instructions on using the API code generated services
 
 
 ### Adding 3rd Party Dependency
@@ -52,7 +54,7 @@ They are then declared using that version property in the **Bill-of-Materials** 
 modules and services to inherit.  This keeps the version definition in one place.
 
 * Update [**`pom.xml`**](./pom.xml) with new dependency library version as a property
-* Update [**Bill-of-Materials**](./rksb-common/rksb-common-bom/pom.xml) with version
+* Update [**Bill-of-Materials**](./rksb-common/rksb-common-bom/pom.xml) with library and version variable
 
 
 ### Adding New Common Library
@@ -65,10 +67,9 @@ Any specialist software should be confined to a common library module within
 * Add the new common library module to the [**Common Libraries**](./rksb-common/rksb-common-lib/pom.xml) `pom.xml`
 
 
-### Modifying Database
+### Database Configuration
 
-* Update `pom.xml` for code generation database properties
-* Update `service-demo/src/main/resources/application.yml` for demo database properties
+* Update [**application-blueprints.yml**](./rksb-api/rksb-api-blueprint/src/main/resources/application-blueprints.yml) for updating database properties
 
 
 ## Handover Suggestions
@@ -76,10 +77,13 @@ Any specialist software should be confined to a common library module within
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
-* TODO: Generate AsciiDoc Blueprint report
+* TODO: Cleanup generator and manager structure/configuration
+* TODO: Generate basic filtering automatically using database columns
 * TODO: Add date between two columns complex filter use-case
+* TODO: Strategy for Loading/Caching meta data (e.g. total records, min/max dates etc.)
 * TODO: Support overridable non-standard service methods and mappings from controller
 
+* DONE: Generate AsciiDoc Blueprint report
 * DONE: Support multiple endpoints for controllers
 * DONE: Generate clean PoJos for API use
 * DONE: Extend blueprint data classes to include all derived data needed for generators
