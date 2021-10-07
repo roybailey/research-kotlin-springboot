@@ -1,12 +1,12 @@
 package me.roybailey.api.generator.service.code
 
-import me.roybailey.api.generator.BlueprintTestBase
+import me.roybailey.api.generator.GeneratorTestBase
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 
-class ModelCodeGeneratorTest : BlueprintTestBase() {
+class ModelCodeGeneratorTest : GeneratorTestBase() {
 
     val expectedCode = """
 package me.roybailey.codegen.api.codegensample

@@ -1,12 +1,12 @@
 package me.roybailey.api.generator.service.code
 
-import me.roybailey.api.generator.BlueprintTestBase
+import me.roybailey.api.generator.GeneratorTestBase
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 
-class ServiceCodeGeneratorTest : BlueprintTestBase() {
+class ServiceCodeGeneratorTest : GeneratorTestBase() {
 
     @Autowired
     lateinit var serviceCodeGenerator: ServiceCodeGenerator

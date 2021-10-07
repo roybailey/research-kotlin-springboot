@@ -1,0 +1,56 @@
+{
+  "id": "codegen-sample-blueprint",
+  "namespace": "CodegenSample",
+  "controllers": [
+    {
+      "id": "codegen-sample-controller",
+      "serviceMappingId": "codegen-sample-service",
+      "apiPath": "/codegen-sample",
+      "endpoints": [
+        {
+          "apiPath": "/full"
+        },
+        {
+          "apiPath": "/lite",
+          "apiMethodName": "getLiteData",
+          "apiRequestParameters": {
+            "title": ["cc"]
+          },
+          "serviceMethodName": "getAllData"
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "id": "codegen-sample-service",
+      "tableMappingId": "codegen-sample-table",
+      "modelMappingId": "codegen-sample-model"
+    }
+  ],
+  "tables": [
+    {
+      "id": "codegen-sample-table",
+      "tableName": "V_TEMP_CODEGEN_SAMPLE",
+      "columns": [
+        {
+          "column": "STARTDATE",
+          "testDataStrategy": "datesequence"
+        }
+      ],
+      "filters": [
+        {
+          "name": "title",
+          "column": "TITLE",
+          "type": "LIKE"
+        }
+      ]
+    }
+  ],
+  "models": [
+    {
+      "id": "codegen-sample-model",
+      "fields": []
+    }
+  ]
+}

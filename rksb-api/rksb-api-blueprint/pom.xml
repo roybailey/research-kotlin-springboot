@@ -19,7 +19,6 @@
 
     <properties>
         <jooq.version>3.15.1</jooq.version>
-        <handlebars.version>4.1.2</handlebars.version>
     </properties>
 
     <dependencyManagement>
@@ -45,6 +44,7 @@
             <artifactId>rksb-common-lib-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>me.roybailey</groupId>
             <artifactId>rksb-common-lib-database</artifactId>
@@ -58,51 +58,9 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-        </dependency>
-
-        <!-- JOOQ Database Code Generator and DSL -->
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq</artifactId>
-            <version>${jooq.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq-meta</artifactId>
-            <version>${jooq.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq-codegen</artifactId>
-            <version>${jooq.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.jknack</groupId>
-            <artifactId>handlebars</artifactId>
-            <version>${handlebars.version}</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                    <mainClass>me.roybailey.api.codegen.GeneratorApplicationKt</mainClass>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

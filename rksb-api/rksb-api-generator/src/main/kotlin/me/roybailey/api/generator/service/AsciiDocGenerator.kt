@@ -85,7 +85,7 @@ class AsciiDocGenerator : Callable<GeneratorResult> {
         val template = handlebars.compileInline(asciiDocTemplate)
         val content = template.apply(model)
 
-        val asciiDocFileName = "${generatorProperties.basedir}/../../BLUEPRINTS.asciidoc"
+        val asciiDocFileName = "${generatorProperties.basedir}/BLUEPRINTS.asciidoc"
         logger.info("asciiDocFileName=$asciiDocFileName")
 
         val asciiDocFile = File(asciiDocFileName)

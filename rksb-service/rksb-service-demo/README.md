@@ -7,7 +7,7 @@ Module of [**`..`**](../README.md) *parent*
 
 ## Design
 
-Package a deployable SpringBoot service to demonstrate all the features of the code-generation libraries.
+Package a deployable SpringBoot service to demonstrate all the features of the common libraries.
 
 
 ## Getting started

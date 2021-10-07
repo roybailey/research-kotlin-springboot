@@ -34,7 +34,7 @@ class DatabaseCodeGenerator : Callable<GeneratorResult> {
         val basedir = generatorProperties.basedir
         val target = generatorProperties.target
         val directory = "${basedir}/${target}"
-        val packageName = "${blueprintProperties.codegenBasePackage}.jooq.database"
+        val packageName = "${blueprintProperties.blueprintsBasePackage}.jooq.database"
         val excludes = blueprintProperties.blueprintsDatabaseExcludes
         val includes = blueprintCollection.allTables()
             .map { tableMapping -> tableMapping.tableName }

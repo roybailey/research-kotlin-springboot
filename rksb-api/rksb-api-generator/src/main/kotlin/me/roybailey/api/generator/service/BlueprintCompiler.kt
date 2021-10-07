@@ -1,6 +1,8 @@
-package me.roybailey.api.blueprint
+package me.roybailey.api.generator.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import me.roybailey.api.blueprint.*
+import me.roybailey.api.generator.configuration.GeneratorProperties
 import mu.KotlinLogging
 import org.jooq.impl.DSL.using
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,13 +19,16 @@ open class BlueprintCompiler {
     lateinit var blueprintProperties: BlueprintProperties
 
     @Autowired
+    lateinit var generatorProperties: GeneratorProperties
+
+    @Autowired
     lateinit var jsonMapper: ObjectMapper
 
 
-    fun compileBlueprints(): BlueprintCollection {
+    fun compileBlueprintsTemplates(): BlueprintCollection {
 
-        val blueprintCollection = BlueprintCollection(packageName = blueprintProperties.codegenBasePackage)
-        val blueprintFiles = blueprintProperties.blueprints
+        val blueprintCollection = BlueprintCollection(packageName = blueprintProperties.blueprintsBasePackage)
+        val blueprintFiles = blueprintProperties.blueprintsTemplates
         logger.info("Loaded api.blueprints as $blueprintFiles")
 
         if (blueprintFiles.isEmpty()) {
@@ -121,7 +126,7 @@ open class BlueprintCompiler {
                         modelMapping.fields = modelMapping.fields.plus(
                             FieldMapping(
                                 fieldName = columnMapping.column,
-                                fieldType = blueprintProperties.getFieldType(columnMapping.type),
+                                fieldType = generatorProperties.getFieldType(columnMapping.type),
                                 jsonName = columnMapping.column
                             )
                         )
@@ -145,7 +150,7 @@ open class BlueprintCompiler {
             blueprintProperties.blueprintsDatabasePassword
         )
         val mapApiColumnMapping = mutableMapOf<String, List<ColumnMapping>>()
-        val mapColumnTypeMappings = blueprintProperties.getColumnTypeMappings()
+        val mapColumnTypeMappings = generatorProperties.getColumnTypeMappings()
 
         // SELECT * FROM information_schema.columns WHERE table_schema = 'public' ORDER BY table_name;
         //
@@ -178,7 +183,7 @@ open class BlueprintCompiler {
                     ColumnMapping(
                         column = columnName,
                         databaseType = dataType,
-                        type = blueprintProperties.getColumnType(dataType),
+                        type = generatorProperties.getColumnType(dataType),
                         ordinalPosition = ordinalPosition
                     )
                 )

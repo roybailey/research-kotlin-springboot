@@ -1,60 +1,37 @@
-package me.roybailey.api.blueprint
+package me.roybailey.api.generator
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import me.roybailey.api.blueprint.BlueprintCollection
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.SpringBootConfiguration
-import org.springframework.boot.context.properties.EnableConfigurationProperties
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.test.context.ActiveProfiles
 
-@SpringBootConfiguration
-@EnableConfigurationProperties
-@ComponentScan(basePackages = ["me.roybailey.api.blueprint"])
-open class TestBlueprintSpringApplication
-
-@SpringBootTest(classes = [TestBlueprintSpringApplication::class])
-@ActiveProfiles("test", "blueprint")
-open class BlueprintConfigurationTest {
+open class GeneratorConfigurationTest : GeneratorTestBase() {
 
     @Autowired
     lateinit var mapper: ObjectMapper
 
-    @Autowired
-    lateinit var blueprintCollection: BlueprintCollection
 
-    @Autowired
-    lateinit var blueprintProperties: BlueprintProperties
+    fun assertPropertyHasValue(property:String) {
+        assertThat(property).isNotNull
+        assertThat(property.length).isGreaterThan(0)
+        assertThat(property).doesNotContain("\${")
+    }
 
-    @Autowired
-    lateinit var blueprintConfiguration: BlueprintConfiguration
-
+    fun assertPropertyHasValue(property:List<String>) {
+        assertThat(property).isNotNull
+        assertThat(property.size).isGreaterThan(0)
+        assertThat(property[0]).doesNotContain("\${")
+    }
 
     @Test
-    fun testBlueprintConfiguration() {
+    fun testGeneratorConfiguration() {
 
-        assertThat(blueprintProperties.blueprintsTemplates).isNotNull
-        assertThat(blueprintProperties.blueprintsTemplates.size).isGreaterThan(0)
-        assertThat(blueprintProperties.blueprintsTemplates[0]).isEqualTo("api/codegen-sample-blueprint.json")
-
-        assertThat(blueprintProperties.blueprintsBasePackage).isNotNull
-        assertThat(blueprintProperties.blueprintsBasePackage.length).isGreaterThan(0)
-
-        assertThat(blueprintProperties.blueprintsCollectionFilename).isNotNull
-        assertThat(blueprintProperties.blueprintsCollectionFilename.length).isGreaterThan(0)
-
-        assertThat(blueprintProperties.blueprintsDatabaseUrl).isNotNull
-        assertThat(blueprintProperties.blueprintsDatabaseUrl.length).isGreaterThan(0)
-
-        assertThat(blueprintProperties.blueprintsDatabaseUsername).isNotNull
-        assertThat(blueprintProperties.blueprintsDatabaseUsername.length).isGreaterThan(0)
-
-        assertThat(blueprintProperties.blueprintsDatabaseSchema).isNotNull
-        assertThat(blueprintProperties.blueprintsDatabaseSchema.length).isGreaterThan(0)
-
-        assertThat(blueprintProperties.blueprintsDatabaseExcludes).isNotNull
+        assertPropertyHasValue(generatorProperties.basedir)
+        assertPropertyHasValue(generatorProperties.target)
+        assertPropertyHasValue(generatorProperties.codegenBlueprintCollection)
+        assertPropertyHasValue(generatorProperties.columnTypeMappings)
+        assertPropertyHasValue(generatorProperties.fieldTypeMappings)
     }
 
 
@@ -63,9 +40,9 @@ open class BlueprintConfigurationTest {
 
         assertThat(blueprintCollection).isNotNull
         assertThat(blueprintCollection.packageName).isNotBlank
-        assertThat(blueprintCollection.blueprints.size).isEqualTo(blueprintConfiguration.defaultBlueprintCollection().blueprints.size)
+        assertThat(blueprintCollection.blueprints.size).isEqualTo(blueprintProperties.blueprintsTemplates.size)
 
-        // use the first codegensample blueprint to verify the configuration loads and resolves as expected
+        // use the first codegen-sample blueprint to verify the configuration loads and resolves as expected
         BlueprintCollection(
             packageName = blueprintCollection.packageName,
             blueprints = listOf(blueprintCollection.blueprints[0])
@@ -219,5 +196,28 @@ open class BlueprintConfigurationTest {
             """.trimIndent()
             )
         }
+    }
+
+
+    @Test
+    fun testBlueprintColumnTypeMappingsParser() {
+
+        val mapColumnTypeMappings = generatorProperties.getColumnTypeMappings()
+        val keyMatch = mapColumnTypeMappings.filter { "primary key".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
+        val doubleMatch =
+            mapColumnTypeMappings.filter { "double precision".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
+        val varcharMatch =
+            mapColumnTypeMappings.filter { "variable character".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
+        val integerMatch = mapColumnTypeMappings.filter { "integer".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
+        val timestampMatch =
+            mapColumnTypeMappings.filter { "timestamp".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
+        val unknownMatch = mapColumnTypeMappings.filter { "unknown".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
+
+        assertThat(keyMatch.keys.first()).isEqualTo("ID")
+        assertThat(doubleMatch.keys.first()).isEqualTo("DOUBLE")
+        assertThat(varcharMatch.keys.first()).isEqualTo("TEXT")
+        assertThat(integerMatch.keys.first()).isEqualTo("INTEGER")
+        assertThat(timestampMatch.keys.first()).isEqualTo("TIMESTAMP")
+        assertThat(unknownMatch.size).isEqualTo(0)
     }
 }

@@ -6,7 +6,14 @@ import org.yaml.snakeyaml.Yaml
 import java.util.concurrent.Callable
 
 
-class FlywayMigration(
+/**
+ * Database migration is kept outside Spring so it can be controlled by selective services
+ * In theory the only services that run the migration are
+ * 1) the code generator (as it needs the latest database schema to generate correct code)
+ * 2) the manager service (as this will publish the schema changes through UAT and into PROD)
+ * all other services should not seek to manipulate the database schema used by blueprints
+ */
+class BlueprintDatabaseMigration(
     var url: String? = null,
     var username: String? = null,
     var password: String? = null
@@ -40,7 +47,7 @@ class FlywayMigration(
             .baselineVersion("0001")
             .locations("classpath:ddl")
             .dataSource(url, username, password)
-            .table("api-schema-history")
+            .table("blueprints-schema-history")
             .load()
         val migration = flyway.migrate()
         logger.info("FlyWay Database Migration ${migration.initialSchemaVersion} ${migration.targetSchemaVersion}")

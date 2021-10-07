@@ -1,6 +1,6 @@
 package me.roybailey.service.manager
 
-import me.roybailey.api.common.BlueprintCollection
+import me.roybailey.api.blueprint.BlueprintCollection
 import me.roybailey.api.common.ApiResponse
 import javax.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.GetMapping

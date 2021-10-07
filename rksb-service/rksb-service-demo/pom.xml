@@ -45,11 +45,6 @@
 
 		<dependency>
 			<groupId>me.roybailey</groupId>
-			<artifactId>rksb-api-service</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>me.roybailey</groupId>
 			<artifactId>rksb-common-lib-graphql</artifactId>
 		</dependency>
 		<dependency>

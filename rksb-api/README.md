@@ -36,7 +36,7 @@ Add the dependency to the code generated module in your `pom.xml`
 Enable use of the blueprints datasource in your `application.xml`
 
 ```yaml
-codegen:
+blueprint:
   datasource:
     # when enabled=true the primary dataSource is created from the blueprint properties
     enabled: true
@@ -44,7 +44,9 @@ codegen:
 
 ## Developers Guide
 
-* `mvn clean install` 
+Set the environment variable (TODO) `` so that the generator runs as part of the build process
+
+* `mvn clean install`
 
 ### Prerequisites
 

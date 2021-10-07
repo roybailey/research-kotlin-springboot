@@ -1,5 +1,8 @@
 package me.roybailey.api.common
 
+import me.roybailey.api.blueprint.ModelMapping
+import me.roybailey.api.blueprint.ServiceMapping
+import me.roybailey.api.blueprint.TableMapping
 import org.jooq.Condition
 import org.jooq.impl.DSL.trueCondition
 import org.jooq.impl.TableImpl

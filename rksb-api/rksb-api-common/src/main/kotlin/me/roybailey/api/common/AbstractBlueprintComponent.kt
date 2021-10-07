@@ -1,5 +1,7 @@
 package me.roybailey.api.common
 
+import me.roybailey.api.blueprint.Blueprint
+import me.roybailey.api.blueprint.BlueprintCollection
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import javax.annotation.PostConstruct

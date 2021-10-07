@@ -23,7 +23,7 @@ management:
       exposure:
         include: health,info,metrics
 
-codegen:
+blueprints:
   datasource:
     # when enabled=true the primary dataSource is created from the below properties (used by runtime services)
     enabled: true

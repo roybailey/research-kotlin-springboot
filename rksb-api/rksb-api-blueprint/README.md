@@ -1,35 +1,44 @@
 # API Blueprint
 
-**Module containing API Blueprint Definitions**
+**Module containing API Blueprint Templates**
 
 Module of [**`..`**](../README.md) *parent*
 
 
 ## Design
 
-Module to encapsulate all blueprint definitions.
+Module to encapsulate all blueprint templates.
 These blueprints provide the following...
 
-* Database Table details
-* API details
+* Controller API Endpoints
+* DAO Services with Filtering
+* Database Schema Changes
+* Database Table Details
+* Data Models for loading from Database and serving as JSON
 
 These are stored in the `resources` folder so they can be used both by the build system
 for code generation and loaded at runtime for common code logic.
 
 For example:  The build system can code generate a `RestController` while the runtime
-might use the database column lists to handle common column logic.
+might use the database column lists to provide generic column logic.
 
-`ApiBlueprintConfiguration` contains the SpringBoot beans that load the blueprints and merge with database schema
+### Blueprint Database Schema Migration
 
+This module contains the Flyway Database Migration schema DDLs and code to apply to a target database.
+
+It is kept outside Spring and only called by the code generator (in DEV to ensure code is generated against the target database state)
+and the manager service to apply the schema migration through all environments (UAT and PROD)
 
 ## User Guide
 
-* Add new API Blueprint to `src/main/resources/api` folder (or subfolder)
-* Add `<api-name>-blueprint.json`
-* Finally, add the new blueprint file location into `application-blueprints.yml` to be included in code generation
+* `src/main/resources/api` folder, add new Blueprint template file
+  * e.g. `<api-name>-blueprint.json` file, create and populate accordingly
+* `src/main/resources/ddl` folder, add new Database schema view
+  * e.g. `V0003__<api-name>.sql` file and populate accordingly (using next free sequence number)
+* `application-blueprints.yml`, add `- api/<api-name>-blueprint.json` to `blueprints.templates` list 
 
 ```
-blueprints:
+blueprints-templates:
   - api/codegen-sample-blueprint.json
   - api/<api-name>-blueprint.json
 ```
@@ -37,6 +46,7 @@ blueprints:
 ### Blueprint Specification
 
 See `Blueprint.kt` source for full data class definition
+
 See `codegen-sample-blueprint.json` for example of blueprint definition (this is used to test the code generation process)
 
 #### Controller Mappings

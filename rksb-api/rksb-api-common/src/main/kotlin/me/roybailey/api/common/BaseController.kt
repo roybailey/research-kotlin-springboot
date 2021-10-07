@@ -1,5 +1,6 @@
 package me.roybailey.api.common
 
+import me.roybailey.api.blueprint.ControllerMapping
 import javax.annotation.PostConstruct
 
 
