@@ -24,7 +24,7 @@
           "title" : [ "cc" ]
         },
         "apiMethodName" : "getLiteData",
-        "serviceMethodName" : "getAllData"
+        "serviceMethodName" : "getLiteData"
       } ]
     } ],
     "services" : [ {
@@ -68,12 +68,12 @@
         "databaseType" : "text",
         "type" : "TEXT"
       }, {
-        "column" : "periodfrom",
+        "column" : "period_from",
         "ordinalPosition" : 6,
         "databaseType" : "character varying",
         "type" : "TEXT"
       }, {
-        "column" : "periodupto",
+        "column" : "period_upto",
         "ordinalPosition" : 7,
         "databaseType" : "character varying",
         "type" : "TEXT"
@@ -85,14 +85,21 @@
       }, {
         "column" : "discount",
         "ordinalPosition" : 9,
-        "databaseType" : "double precision",
-        "type" : "DOUBLE"
+        "databaseType" : "integer",
+        "type" : "INTEGER"
       } ],
       "filters" : [ {
         "type" : "LIKE",
-        "name" : "title",
-        "column" : "title",
+        "name" : "description",
+        "column" : "description",
         "params" : { }
+      }, {
+        "type" : "BETWEEN",
+        "name" : "period",
+        "column" : "period_from",
+        "params" : {
+          "column2" : "PERIOD_UPTO"
+        }
       } ]
     } ],
     "models" : [ {
@@ -102,39 +109,39 @@
       "className" : "CodegenSampleModel",
       "fields" : [ {
         "fieldName" : "id",
-        "fieldType" : "Integer",
+        "fieldType" : "INTEGER",
         "jsonName" : "id"
       }, {
         "fieldName" : "title",
-        "fieldType" : "String",
+        "fieldType" : "STRING",
         "jsonName" : "title"
       }, {
         "fieldName" : "created_at",
-        "fieldType" : "Timestamp",
-        "jsonName" : "created_at"
+        "fieldType" : "TIMESTAMP",
+        "jsonName" : "createdAt"
       }, {
         "fieldName" : "updated_at",
-        "fieldType" : "Timestamp",
-        "jsonName" : "updated_at"
+        "fieldType" : "TIMESTAMP",
+        "jsonName" : "updatedAt"
       }, {
         "fieldName" : "description",
-        "fieldType" : "String",
+        "fieldType" : "STRING",
         "jsonName" : "description"
       }, {
-        "fieldName" : "periodfrom",
-        "fieldType" : "String",
-        "jsonName" : "periodfrom"
+        "fieldName" : "period_from",
+        "fieldType" : "STRING",
+        "jsonName" : "periodFrom"
       }, {
-        "fieldName" : "periodupto",
-        "fieldType" : "String",
-        "jsonName" : "periodupto"
+        "fieldName" : "period_upto",
+        "fieldType" : "STRING",
+        "jsonName" : "periodUpto"
       }, {
         "fieldName" : "price",
-        "fieldType" : "Double",
+        "fieldType" : "DOUBLE",
         "jsonName" : "price"
       }, {
         "fieldName" : "discount",
-        "fieldType" : "Double",
+        "fieldType" : "INTEGER",
         "jsonName" : "discount"
       } ]
     } ]

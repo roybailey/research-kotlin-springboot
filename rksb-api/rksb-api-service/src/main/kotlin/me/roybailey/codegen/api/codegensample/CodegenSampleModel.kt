@@ -2,7 +2,6 @@
 package me.roybailey.codegen.api.codegensample
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import java.sql.Timestamp
 
 
 data class CodegenSampleModel (
@@ -11,9 +10,9 @@ data class CodegenSampleModel (
     
     @JsonProperty("title") var title: String,
     
-    @JsonProperty("createdAt") var created_at: Timestamp,
+    @JsonProperty("createdAt") var created_at: java.sql.Timestamp,
     
-    @JsonProperty("updatedAt") var updated_at: Timestamp,
+    @JsonProperty("updatedAt") var updated_at: java.sql.Timestamp,
     
     @JsonProperty("description") var description: String,
     

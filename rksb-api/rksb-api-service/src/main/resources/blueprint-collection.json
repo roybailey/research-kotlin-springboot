@@ -109,39 +109,39 @@
       "className" : "CodegenSampleModel",
       "fields" : [ {
         "fieldName" : "id",
-        "fieldType" : "Integer",
+        "fieldType" : "INTEGER",
         "jsonName" : "id"
       }, {
         "fieldName" : "title",
-        "fieldType" : "String",
+        "fieldType" : "STRING",
         "jsonName" : "title"
       }, {
         "fieldName" : "created_at",
-        "fieldType" : "Timestamp",
+        "fieldType" : "TIMESTAMP",
         "jsonName" : "createdAt"
       }, {
         "fieldName" : "updated_at",
-        "fieldType" : "Timestamp",
+        "fieldType" : "TIMESTAMP",
         "jsonName" : "updatedAt"
       }, {
         "fieldName" : "description",
-        "fieldType" : "String",
+        "fieldType" : "STRING",
         "jsonName" : "description"
       }, {
         "fieldName" : "period_from",
-        "fieldType" : "String",
+        "fieldType" : "STRING",
         "jsonName" : "periodFrom"
       }, {
         "fieldName" : "period_upto",
-        "fieldType" : "String",
+        "fieldType" : "STRING",
         "jsonName" : "periodUpto"
       }, {
         "fieldName" : "price",
-        "fieldType" : "Double",
+        "fieldType" : "DOUBLE",
         "jsonName" : "price"
       }, {
         "fieldName" : "discount",
-        "fieldType" : "Integer",
+        "fieldType" : "INTEGER",
         "jsonName" : "discount"
       } ]
     } ]

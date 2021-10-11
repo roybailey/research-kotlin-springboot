@@ -29,13 +29,13 @@ open class BlueprintConfiguration {
     @Bean
     open fun defaultBlueprintCollection(): BlueprintCollection {
         try {
-            logger.info("Loading BlueprintCollection [$blueprintProperties.blueprintCollectionFilename]...")
+            logger.info("Loading BlueprintCollection [${blueprintProperties.blueprintsCollectionFilename}]...")
             return jsonMapper().readValue(
                 this.javaClass.classLoader.getResourceAsStream(blueprintProperties.blueprintsCollectionFilename),
                 BlueprintCollection::class.java
             )
         } catch (err: Exception) {
-            throw RuntimeException("Failed to load BlueprintCollection [$blueprintProperties.blueprintCollectionFilename] with [${err.message}]", err)
+            throw RuntimeException("Failed to load BlueprintCollection [${blueprintProperties.blueprintsCollectionFilename}] with [${err.message}]", err)
         }
     }
 }

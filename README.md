@@ -77,9 +77,9 @@ Any specialist software should be confined to a common library module within
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
-* TODO: Filter and column types as enum class values
 * TODO: Strategy for Loading/Caching meta data (e.g. total records, min/max dates etc.)
 
+* DONE: Filter and column types as enum class values
 * DONE: Camel case JSON object fields
 * DONE: Generate basic filtering automatically using database columns
 * DONE: Add date between two columns complex filter use-case
