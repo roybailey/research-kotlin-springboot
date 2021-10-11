@@ -26,8 +26,14 @@ might use the database column lists to provide generic column logic.
 
 This module contains the Flyway Database Migration schema DDLs and code to apply to a target database.
 
-It is kept outside Spring and only called by the code generator (in DEV to ensure code is generated against the target database state)
-and the manager service to apply the schema migration through all environments (UAT and PROD)
+It uses a custom migration table `blueprint-schema-history` and is enabled via a property `blueprints.flyway.enabled=true`
+
+Only called by the code generator (in DEV to ensure code is generated against the target database state)
+and by the manager service to apply the schema migration through all environments (UAT and PROD)
+
+NOTE: the schema files should be idempotent, meaning you can destroy the `blueprint-schema-history` table and
+re-run all the schema changes to arrive at the correct schema state without errors.
+e.g. use DROP IF EXISTS, then CREATE
 
 ## User Guide
 

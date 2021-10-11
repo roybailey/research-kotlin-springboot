@@ -1,11 +1,14 @@
 package me.roybailey.api.common
 
+import me.roybailey.api.blueprint.FilterType
 import me.roybailey.api.blueprint.ModelMapping
 import me.roybailey.api.blueprint.ServiceMapping
 import me.roybailey.api.blueprint.TableMapping
 import org.jooq.Condition
 import org.jooq.impl.DSL.trueCondition
 import org.jooq.impl.TableImpl
+import java.lang.Double.parseDouble
+import java.lang.Integer.parseInt
 import javax.annotation.PostConstruct
 
 
@@ -38,19 +41,56 @@ open class BaseService(
 
 
     protected fun getFilterCondition(
-        params: Map<String, Any>,
+        parameters: Map<String, Any>,
         table: TableImpl<*>
     ): Condition {
+        val params = HashMap<String, Any>(parameters)
         var result: Condition = trueCondition()
+        // first search for custom or overridden filters
         tableMapping.filters.forEach { filterMapping ->
             if (params.contains(filterMapping.name)) {
-                logger.info("Building filter ${filterMapping.name}")
-                result = result.and(
-                    table.field(filterMapping.column.toLowerCase())!!
-                        .like("%" + getString(params, filterMapping.name) + "%")
-                )
+                logger.info("Building filter ${filterMapping.name}=${params[filterMapping.name]}")
+                result = when (filterMapping.type) {
+                    FilterType.EQUAL -> result.and(
+                        "${table.field(filterMapping.column.toLowerCase())!!} = ${getString(params, filterMapping.name)}"
+                    )
+                    FilterType.BETWEEN -> result.and(
+                        "${table.field(filterMapping.column.toLowerCase())!!} <= '${getString(params, filterMapping.name)}'"
+                    ).and(
+                        "${table.field((filterMapping.params["column2"] as String).toLowerCase())!!} > '${getString(params, filterMapping.name)}'"
+                    )
+                    else ->
+                        result.and(
+                            table.field(filterMapping.column.toLowerCase())!!
+                                .like("%" + getString(params, filterMapping.name) + "%")
+                        )
+                }
+                params.remove(filterMapping.name)
             }
         }
+        // second search for generic column filters
+        tableMapping.columns.forEach { columnMapping ->
+            if (params.contains(columnMapping.column)) {
+                logger.info("Building column filter ${columnMapping.column}=${params[columnMapping.column]}")
+                result = when (columnMapping.type) {
+                    "INTEGER" ->
+                        result.and(
+                            "${table.field(columnMapping.column.toLowerCase())!!} = ${getString(params, columnMapping.column)}"
+                        )
+                    "DOUBLE" ->
+                        result.and(
+                            "${table.field(columnMapping.column.toLowerCase())!!} = ${getString(params, columnMapping.column)}"
+                        )
+                    else ->
+                        result.and(
+                            table.field(columnMapping.column.toLowerCase())!!
+                                .like("%" + getString(params, columnMapping.column) + "%")
+                        )
+                }
+                params.remove(columnMapping.column)
+            }
+        }
+        logger.info("Filter assigned as: [$result]")
         return result
     }
 

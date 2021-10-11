@@ -11,19 +11,19 @@ data class CodegenSampleModel (
     
     @JsonProperty("title") var title: String,
     
-    @JsonProperty("created_at") var created_at: Timestamp,
+    @JsonProperty("createdAt") var created_at: Timestamp,
     
-    @JsonProperty("updated_at") var updated_at: Timestamp,
+    @JsonProperty("updatedAt") var updated_at: Timestamp,
     
     @JsonProperty("description") var description: String,
     
-    @JsonProperty("periodfrom") var periodfrom: String,
+    @JsonProperty("periodFrom") var period_from: String,
     
-    @JsonProperty("periodupto") var periodupto: String,
+    @JsonProperty("periodUpto") var period_upto: String,
     
     @JsonProperty("price") var price: Double,
     
-    @JsonProperty("discount") var discount: Double,
+    @JsonProperty("discount") var discount: Integer,
     
 )
 

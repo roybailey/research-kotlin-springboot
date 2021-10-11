@@ -32,17 +32,19 @@
     {
       "id": "codegen-sample-table",
       "tableName": "V_TEMP_CODEGEN_SAMPLE",
-      "columns": [
-        {
-          "column": "STARTDATE",
-          "testDataStrategy": "datesequence"
-        }
-      ],
       "filters": [
         {
-          "name": "title",
-          "column": "TITLE",
+          "name": "description",
+          "column": "DESCRIPTION",
           "type": "LIKE"
+        },
+        {
+          "name": "period",
+          "column": "PERIOD_FROM",
+          "type": "BETWEEN",
+          "params": {
+            "column2": "PERIOD_UPTO"
+          }
         }
       ]
     }

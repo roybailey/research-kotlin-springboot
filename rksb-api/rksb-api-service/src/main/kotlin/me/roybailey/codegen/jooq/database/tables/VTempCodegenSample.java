@@ -52,7 +52,7 @@ public class VTempCodegenSample extends TableImpl<VTempCodegenSampleRecord> {
     /**
      * The column <code>public.v_temp_codegen_sample.title</code>.
      */
-    public final TableField<VTempCodegenSampleRecord, String> TITLE = createField(DSL.name("title"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<VTempCodegenSampleRecord, String> TITLE = createField(DSL.name("title"), SQLDataType.VARCHAR(64), this, "");
 
     /**
      * The column <code>public.v_temp_codegen_sample.created_at</code>.
@@ -70,14 +70,14 @@ public class VTempCodegenSample extends TableImpl<VTempCodegenSampleRecord> {
     public final TableField<VTempCodegenSampleRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>public.v_temp_codegen_sample.periodfrom</code>.
+     * The column <code>public.v_temp_codegen_sample.period_from</code>.
      */
-    public final TableField<VTempCodegenSampleRecord, String> PERIODFROM = createField(DSL.name("periodfrom"), SQLDataType.VARCHAR(10), this, "");
+    public final TableField<VTempCodegenSampleRecord, String> PERIOD_FROM = createField(DSL.name("period_from"), SQLDataType.VARCHAR(10), this, "");
 
     /**
-     * The column <code>public.v_temp_codegen_sample.periodupto</code>.
+     * The column <code>public.v_temp_codegen_sample.period_upto</code>.
      */
-    public final TableField<VTempCodegenSampleRecord, String> PERIODUPTO = createField(DSL.name("periodupto"), SQLDataType.VARCHAR(10), this, "");
+    public final TableField<VTempCodegenSampleRecord, String> PERIOD_UPTO = createField(DSL.name("period_upto"), SQLDataType.VARCHAR(10), this, "");
 
     /**
      * The column <code>public.v_temp_codegen_sample.price</code>.
@@ -87,14 +87,14 @@ public class VTempCodegenSample extends TableImpl<VTempCodegenSampleRecord> {
     /**
      * The column <code>public.v_temp_codegen_sample.discount</code>.
      */
-    public final TableField<VTempCodegenSampleRecord, Double> DISCOUNT = createField(DSL.name("discount"), SQLDataType.DOUBLE, this, "");
+    public final TableField<VTempCodegenSampleRecord, Integer> DISCOUNT = createField(DSL.name("discount"), SQLDataType.INTEGER, this, "");
 
     private VTempCodegenSample(Name alias, Table<VTempCodegenSampleRecord> aliased) {
         this(alias, aliased, null);
     }
 
     private VTempCodegenSample(Name alias, Table<VTempCodegenSampleRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("create view \"v_temp_codegen_sample\" as  SELECT temp_codegen_sample.id,\n    temp_codegen_sample.title,\n    temp_codegen_sample.created_at,\n    temp_codegen_sample.updated_at,\n    temp_codegen_sample.description,\n    temp_codegen_sample.periodfrom,\n    temp_codegen_sample.periodupto,\n    temp_codegen_sample.price,\n    temp_codegen_sample.discount\n   FROM temp_codegen_sample;"));
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("create view \"v_temp_codegen_sample\" as  SELECT temp_codegen_sample.id,\n    temp_codegen_sample.title,\n    temp_codegen_sample.created_at,\n    temp_codegen_sample.updated_at,\n    temp_codegen_sample.description,\n    temp_codegen_sample.period_from,\n    temp_codegen_sample.period_upto,\n    temp_codegen_sample.price,\n    temp_codegen_sample.discount\n   FROM temp_codegen_sample;"));
     }
 
     /**
@@ -160,7 +160,7 @@ public class VTempCodegenSample extends TableImpl<VTempCodegenSampleRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Integer, String, OffsetDateTime, OffsetDateTime, String, String, String, Double, Double> fieldsRow() {
+    public Row9<Integer, String, OffsetDateTime, OffsetDateTime, String, String, String, Double, Integer> fieldsRow() {
         return (Row9) super.fieldsRow();
     }
 }

@@ -87,6 +87,11 @@
             <version>${handlebars.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -68,12 +68,12 @@
         "databaseType" : "text",
         "type" : "TEXT"
       }, {
-        "column" : "periodfrom",
+        "column" : "period_from",
         "ordinalPosition" : 6,
         "databaseType" : "character varying",
         "type" : "TEXT"
       }, {
-        "column" : "periodupto",
+        "column" : "period_upto",
         "ordinalPosition" : 7,
         "databaseType" : "character varying",
         "type" : "TEXT"
@@ -85,14 +85,21 @@
       }, {
         "column" : "discount",
         "ordinalPosition" : 9,
-        "databaseType" : "double precision",
-        "type" : "DOUBLE"
+        "databaseType" : "integer",
+        "type" : "INTEGER"
       } ],
       "filters" : [ {
         "type" : "LIKE",
-        "name" : "title",
-        "column" : "title",
+        "name" : "description",
+        "column" : "description",
         "params" : { }
+      }, {
+        "type" : "BETWEEN",
+        "name" : "period",
+        "column" : "period_from",
+        "params" : {
+          "column2" : "PERIOD_UPTO"
+        }
       } ]
     } ],
     "models" : [ {
@@ -111,30 +118,30 @@
       }, {
         "fieldName" : "created_at",
         "fieldType" : "Timestamp",
-        "jsonName" : "created_at"
+        "jsonName" : "createdAt"
       }, {
         "fieldName" : "updated_at",
         "fieldType" : "Timestamp",
-        "jsonName" : "updated_at"
+        "jsonName" : "updatedAt"
       }, {
         "fieldName" : "description",
         "fieldType" : "String",
         "jsonName" : "description"
       }, {
-        "fieldName" : "periodfrom",
+        "fieldName" : "period_from",
         "fieldType" : "String",
-        "jsonName" : "periodfrom"
+        "jsonName" : "periodFrom"
       }, {
-        "fieldName" : "periodupto",
+        "fieldName" : "period_upto",
         "fieldType" : "String",
-        "jsonName" : "periodupto"
+        "jsonName" : "periodUpto"
       }, {
         "fieldName" : "price",
         "fieldType" : "Double",
         "jsonName" : "price"
       }, {
         "fieldName" : "discount",
-        "fieldType" : "Double",
+        "fieldType" : "Integer",
         "jsonName" : "discount"
       } ]
     } ]

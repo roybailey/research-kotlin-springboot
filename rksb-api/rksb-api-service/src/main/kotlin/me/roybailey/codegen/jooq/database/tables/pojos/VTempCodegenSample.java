@@ -21,10 +21,10 @@ public class VTempCodegenSample implements Serializable {
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
     private String         description;
-    private String         periodfrom;
-    private String         periodupto;
+    private String         periodFrom;
+    private String         periodUpto;
     private Double         price;
-    private Double         discount;
+    private Integer        discount;
 
     public VTempCodegenSample() {}
 
@@ -34,8 +34,8 @@ public class VTempCodegenSample implements Serializable {
         this.createdAt = value.createdAt;
         this.updatedAt = value.updatedAt;
         this.description = value.description;
-        this.periodfrom = value.periodfrom;
-        this.periodupto = value.periodupto;
+        this.periodFrom = value.periodFrom;
+        this.periodUpto = value.periodUpto;
         this.price = value.price;
         this.discount = value.discount;
     }
@@ -46,18 +46,18 @@ public class VTempCodegenSample implements Serializable {
         OffsetDateTime createdAt,
         OffsetDateTime updatedAt,
         String         description,
-        String         periodfrom,
-        String         periodupto,
+        String         periodFrom,
+        String         periodUpto,
         Double         price,
-        Double         discount
+        Integer        discount
     ) {
         this.id = id;
         this.title = title;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.description = description;
-        this.periodfrom = periodfrom;
-        this.periodupto = periodupto;
+        this.periodFrom = periodFrom;
+        this.periodUpto = periodUpto;
         this.price = price;
         this.discount = discount;
     }
@@ -133,31 +133,31 @@ public class VTempCodegenSample implements Serializable {
     }
 
     /**
-     * Getter for <code>public.v_temp_codegen_sample.periodfrom</code>.
+     * Getter for <code>public.v_temp_codegen_sample.period_from</code>.
      */
-    public String getPeriodfrom() {
-        return this.periodfrom;
+    public String getPeriodFrom() {
+        return this.periodFrom;
     }
 
     /**
-     * Setter for <code>public.v_temp_codegen_sample.periodfrom</code>.
+     * Setter for <code>public.v_temp_codegen_sample.period_from</code>.
      */
-    public void setPeriodfrom(String periodfrom) {
-        this.periodfrom = periodfrom;
+    public void setPeriodFrom(String periodFrom) {
+        this.periodFrom = periodFrom;
     }
 
     /**
-     * Getter for <code>public.v_temp_codegen_sample.periodupto</code>.
+     * Getter for <code>public.v_temp_codegen_sample.period_upto</code>.
      */
-    public String getPeriodupto() {
-        return this.periodupto;
+    public String getPeriodUpto() {
+        return this.periodUpto;
     }
 
     /**
-     * Setter for <code>public.v_temp_codegen_sample.periodupto</code>.
+     * Setter for <code>public.v_temp_codegen_sample.period_upto</code>.
      */
-    public void setPeriodupto(String periodupto) {
-        this.periodupto = periodupto;
+    public void setPeriodUpto(String periodUpto) {
+        this.periodUpto = periodUpto;
     }
 
     /**
@@ -177,14 +177,14 @@ public class VTempCodegenSample implements Serializable {
     /**
      * Getter for <code>public.v_temp_codegen_sample.discount</code>.
      */
-    public Double getDiscount() {
+    public Integer getDiscount() {
         return this.discount;
     }
 
     /**
      * Setter for <code>public.v_temp_codegen_sample.discount</code>.
      */
-    public void setDiscount(Double discount) {
+    public void setDiscount(Integer discount) {
         this.discount = discount;
     }
 
@@ -197,8 +197,8 @@ public class VTempCodegenSample implements Serializable {
         sb.append(", ").append(createdAt);
         sb.append(", ").append(updatedAt);
         sb.append(", ").append(description);
-        sb.append(", ").append(periodfrom);
-        sb.append(", ").append(periodupto);
+        sb.append(", ").append(periodFrom);
+        sb.append(", ").append(periodUpto);
         sb.append(", ").append(price);
         sb.append(", ").append(discount);
 

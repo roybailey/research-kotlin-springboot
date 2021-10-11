@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import me.roybailey.api.blueprint.*
 import me.roybailey.api.generator.configuration.GeneratorProperties
 import mu.KotlinLogging
+import org.apache.commons.text.CaseUtils
 import org.jooq.impl.DSL.using
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -131,7 +132,7 @@ open class BlueprintCompiler {
                             FieldMapping(
                                 fieldName = columnMapping.column,
                                 fieldType = generatorProperties.getFieldType(columnMapping.type),
-                                jsonName = columnMapping.column
+                                jsonName = CaseUtils.toCamelCase(columnMapping.column, false, '_')
                             )
                         )
                 }
