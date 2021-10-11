@@ -216,7 +216,7 @@ open class BlueprintCompiler {
         val apiColumnMapping = specColumn ?: databaseColumn
         apiColumnMapping.databaseType = databaseColumn.databaseType
         if (apiColumnMapping.type == null)
-            apiColumnMapping.type = databaseColumn.databaseType
+            apiColumnMapping.type = ColumnType.valueOf(databaseColumn.databaseType!!)
         logger.info("Column merged as [$apiColumnMapping]")
         apiColumnMapping
     }

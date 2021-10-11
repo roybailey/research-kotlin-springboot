@@ -76,11 +76,21 @@ data class TableMapping(
     var filters: List<FilterMapping> = emptyList(),
 )
 
+// database column types are 'normalised' into an internal column type for easier handling
+enum class ColumnType(val databaseRegex: String) {
+    ID("key"),
+    TEXT("varchar|text|character"),
+    DOUBLE("double|real|decimal|numeric"),
+    INTEGER("integer|bigint|smallint|serial"),
+    TIMESTAMP("timestamp|date|time|interval"),
+    BOOLEAN("boolean");
+}
+
 data class ColumnMapping(
     var column: String,
     var ordinalPosition: Int = 0,
     var databaseType: String? = null,
-    var type: String? = null
+    var type: ColumnType? = null
 )
 
 enum class FilterType {

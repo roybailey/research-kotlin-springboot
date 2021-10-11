@@ -77,12 +77,12 @@ Any specialist software should be confined to a common library module within
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
 
-* TODO: Camel case JSON object fields
 * TODO: Filter and column types as enum class values
-* TODO: Generate basic filtering automatically using database columns
-* TODO: Add date between two columns complex filter use-case
 * TODO: Strategy for Loading/Caching meta data (e.g. total records, min/max dates etc.)
 
+* DONE: Camel case JSON object fields
+* DONE: Generate basic filtering automatically using database columns
+* DONE: Add date between two columns complex filter use-case
 * DONE: Support overridable non-standard service methods and mappings from controller
 * DONE: Cleanup generator and manager structure/configuration
 * DONE: Generate AsciiDoc Blueprint report

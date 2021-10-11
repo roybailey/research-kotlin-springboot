@@ -1,9 +1,6 @@
 package me.roybailey.api.common
 
-import me.roybailey.api.blueprint.FilterType
-import me.roybailey.api.blueprint.ModelMapping
-import me.roybailey.api.blueprint.ServiceMapping
-import me.roybailey.api.blueprint.TableMapping
+import me.roybailey.api.blueprint.*
 import org.jooq.Condition
 import org.jooq.impl.DSL.trueCondition
 import org.jooq.impl.TableImpl
@@ -73,11 +70,11 @@ open class BaseService(
             if (params.contains(columnMapping.column)) {
                 logger.info("Building column filter ${columnMapping.column}=${params[columnMapping.column]}")
                 result = when (columnMapping.type) {
-                    "INTEGER" ->
+                    ColumnType.INTEGER ->
                         result.and(
                             "${table.field(columnMapping.column.toLowerCase())!!} = ${getString(params, columnMapping.column)}"
                         )
-                    "DOUBLE" ->
+                    ColumnType.DOUBLE ->
                         result.and(
                             "${table.field(columnMapping.column.toLowerCase())!!} = ${getString(params, columnMapping.column)}"
                         )

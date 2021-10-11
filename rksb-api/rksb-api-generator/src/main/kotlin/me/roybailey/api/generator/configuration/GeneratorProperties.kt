@@ -1,5 +1,6 @@
 package me.roybailey.api.generator.configuration
 
+import me.roybailey.api.blueprint.ColumnType
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Configuration
@@ -31,12 +32,12 @@ open class GeneratorProperties {
         pair[0] to pair[1]
     }.toMap()
 
-    fun getColumnType(dataType: String?): String {
+    fun getColumnType(dataType: String?): ColumnType {
         if (dataType == null) {
             throw IllegalArgumentException("NULL database type found when mapping to column-type-mapping properties")
         }
         val columnTypeMapping =
-            getColumnTypeMappings().filter { dataType.contains(Regex(it.value, RegexOption.IGNORE_CASE)) }.keys
+            ColumnType.values().filter { dataType.contains(Regex(it.databaseRegex, RegexOption.IGNORE_CASE)) }
         if (columnTypeMapping.isEmpty()) {
             throw IllegalArgumentException("Unknown database type [$dataType] found.  Add the matching Regex entry to the column-type-mapping properties")
         }
@@ -53,12 +54,12 @@ open class GeneratorProperties {
         pair[0] to pair[1]
     }.toMap()
 
-    fun getFieldType(columnType: String?): String {
+    fun getFieldType(columnType: ColumnType?): String {
         if (columnType == null) {
             throw IllegalArgumentException("[NULL] column type when mapping to field-type-mapping properties")
         }
         val fieldTypeMapping =
-            getFieldTypeMappings().filter { columnType.contains(Regex(it.value, RegexOption.IGNORE_CASE)) }.keys
+            getFieldTypeMappings().filter { columnType.toString().contains(Regex(it.value, RegexOption.IGNORE_CASE)) }.keys
         if (fieldTypeMapping.isEmpty()) {
             throw IllegalArgumentException("Unknown column type [$columnType]. Add the matching Regex entry to the field-type-mapping properties")
         }
