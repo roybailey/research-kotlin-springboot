@@ -155,7 +155,6 @@ open class BlueprintCompiler {
             blueprintProperties.blueprintsDatabasePassword
         )
         val mapApiColumnMapping = mutableMapOf<String, List<ColumnMapping>>()
-        val mapColumnTypeMappings = generatorProperties.getColumnTypeMappings()
 
         // SELECT * FROM information_schema.columns WHERE table_schema = 'public' ORDER BY table_name;
         //

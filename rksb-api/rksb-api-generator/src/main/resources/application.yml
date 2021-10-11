@@ -15,20 +15,3 @@ codegen:
     target: src/main/resources/blueprint-collection.json
   blueprint-asciidoc:
     target: BLUEPRINTS.asciidoc
-
-# the first type is the internal type, the second are Regex matches from the database type
-column-type-mappings:
-  - ID,key
-  - TEXT,varchar|text|character
-  - DOUBLE,double|real|decimal|numeric
-  - INTEGER,integer|bigint|smallint|serial
-  - TIMESTAMP,timestamp|date|time|interval
-  - BOOLEAN,boolean
-
-# the first type is the java type, the second are Regex matches from the internal type
-field-type-mappings:
-  - String,ID|TEXT|STRING
-  - Double,DOUBLE
-  - Integer,INTEGER|NUMBER
-  - Timestamp,TIMESTAMP
-  - Boolean,BOOLEAN

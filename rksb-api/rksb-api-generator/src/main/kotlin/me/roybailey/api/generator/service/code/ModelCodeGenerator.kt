@@ -15,12 +15,11 @@ class ModelCodeGenerator : AbstractCodeGenerator() {
 package {{modelMapping.packageName}}
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import java.sql.Timestamp
 
 
 data class {{modelMapping.className}} (
     {{#each modelMapping.fields}}
-    @JsonProperty("{{jsonName}}") var {{fieldName}}: {{fieldType}},
+    @JsonProperty("{{jsonName}}") var {{fieldName}}: {{fieldType.javaClass}},
     {{/each}}
 )
 

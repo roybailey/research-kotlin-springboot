@@ -91,25 +91,4 @@ open class BaseService(
         return result
     }
 
-    /*
-fun condition(request:Map<String,Any>) {
-    val result = trueCondition()
-
-    if (params.contains("COLUMN")) {
-        result = result.and(Tables.TABLE_NAME.COLUMN_NAME.like("%"+params.get("COLUMN")+"%"))
-    }
-
-    if (params.contains("COLUMN")) {
-        result = result.and(Tables.TABLE_NAME.COLUMN_NAME.eq(Integer.parseInt(params.get("COLUMN"))))
-    }
-
-    if (params.contains("COLUMN")) {
-        result = result.and(toDate(Tables.TABLE_NAME.COLUMN_NAME_START, "YYYY-MM-DD").lessOrEqual(toDate(params.get("COLUMN_NAME", "YYYY-MM-DD"))
-        result = result.and(toDate(Tables.TABLE_NAME.COLUMN_NAME_END, "YYYY-MM-DD").greaterOrEqual(toDate(params.get("COLUMN_NAME", "YYYY-MM-DD"))
-    }
-
-    result
-}
- */
-
 }

@@ -2,7 +2,10 @@ package me.roybailey.api.generator
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import me.roybailey.api.blueprint.BlueprintCollection
+import me.roybailey.api.blueprint.ColumnType
+import me.roybailey.api.blueprint.FieldType
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.fail
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -12,13 +15,13 @@ open class GeneratorConfigurationTest : GeneratorTestBase() {
     lateinit var mapper: ObjectMapper
 
 
-    fun assertPropertyHasValue(property:String) {
+    fun assertPropertyHasValue(property: String) {
         assertThat(property).isNotNull
         assertThat(property.length).isGreaterThan(0)
         assertThat(property).doesNotContain("\${")
     }
 
-    fun assertPropertyHasValue(property:List<String>) {
+    fun assertPropertyHasValue(property: List<String>) {
         assertThat(property).isNotNull
         assertThat(property.size).isGreaterThan(0)
         assertThat(property[0]).doesNotContain("\${")
@@ -30,8 +33,6 @@ open class GeneratorConfigurationTest : GeneratorTestBase() {
         assertPropertyHasValue(generatorProperties.basedir)
         assertPropertyHasValue(generatorProperties.target)
         assertPropertyHasValue(generatorProperties.codegenBlueprintCollection)
-        assertPropertyHasValue(generatorProperties.columnTypeMappings)
-        assertPropertyHasValue(generatorProperties.fieldTypeMappings)
     }
 
 
@@ -49,7 +50,7 @@ open class GeneratorConfigurationTest : GeneratorTestBase() {
         ).run {
             val codegenSampleResolved = mapper.writeValueAsString(this)
             println(codegenSampleResolved)
-            assertThat(codegenSampleResolved.replace("\r\n","\n")).isEqualTo(
+            assertThat(codegenSampleResolved.replace("\r\n", "\n")).isEqualTo(
                 """
 {
   "packageName" : "me.roybailey.codegen",
@@ -162,39 +163,39 @@ open class GeneratorConfigurationTest : GeneratorTestBase() {
       "className" : "CodegenSampleModel",
       "fields" : [ {
         "fieldName" : "id",
-        "fieldType" : "Integer",
+        "fieldType" : "INTEGER",
         "jsonName" : "id"
       }, {
         "fieldName" : "title",
-        "fieldType" : "String",
+        "fieldType" : "STRING",
         "jsonName" : "title"
       }, {
         "fieldName" : "created_at",
-        "fieldType" : "Timestamp",
+        "fieldType" : "TIMESTAMP",
         "jsonName" : "createdAt"
       }, {
         "fieldName" : "updated_at",
-        "fieldType" : "Timestamp",
+        "fieldType" : "TIMESTAMP",
         "jsonName" : "updatedAt"
       }, {
         "fieldName" : "description",
-        "fieldType" : "String",
+        "fieldType" : "STRING",
         "jsonName" : "description"
       }, {
         "fieldName" : "period_from",
-        "fieldType" : "String",
+        "fieldType" : "STRING",
         "jsonName" : "periodFrom"
       }, {
         "fieldName" : "period_upto",
-        "fieldType" : "String",
+        "fieldType" : "STRING",
         "jsonName" : "periodUpto"
       }, {
         "fieldName" : "price",
-        "fieldType" : "Double",
+        "fieldType" : "DOUBLE",
         "jsonName" : "price"
       }, {
         "fieldName" : "discount",
-        "fieldType" : "Integer",
+        "fieldType" : "INTEGER",
         "jsonName" : "discount"
       } ]
     } ]
@@ -207,24 +208,31 @@ open class GeneratorConfigurationTest : GeneratorTestBase() {
 
 
     @Test
-    fun testBlueprintColumnTypeMappingsParser() {
-
-        val mapColumnTypeMappings = generatorProperties.getColumnTypeMappings()
-        val keyMatch = mapColumnTypeMappings.filter { "primary key".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
-        val doubleMatch =
-            mapColumnTypeMappings.filter { "double precision".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
-        val varcharMatch =
-            mapColumnTypeMappings.filter { "variable character".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
-        val integerMatch = mapColumnTypeMappings.filter { "integer".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
-        val timestampMatch =
-            mapColumnTypeMappings.filter { "timestamp".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
-        val unknownMatch = mapColumnTypeMappings.filter { "unknown".contains(Regex(it.value, RegexOption.IGNORE_CASE)) }
-
-        assertThat(keyMatch.keys.first()).isEqualTo("ID")
-        assertThat(doubleMatch.keys.first()).isEqualTo("DOUBLE")
-        assertThat(varcharMatch.keys.first()).isEqualTo("TEXT")
-        assertThat(integerMatch.keys.first()).isEqualTo("INTEGER")
-        assertThat(timestampMatch.keys.first()).isEqualTo("TIMESTAMP")
-        assertThat(unknownMatch.size).isEqualTo(0)
+    fun testColumnMappings() {
+        assertThat(generatorProperties.getColumnType("primary key")).isEqualTo(ColumnType.ID)
+        assertThat(generatorProperties.getColumnType("text")).isEqualTo(ColumnType.TEXT)
+        assertThat(generatorProperties.getColumnType("variable character")).isEqualTo(ColumnType.TEXT)
+        assertThat(generatorProperties.getColumnType("uuid")).isEqualTo(ColumnType.TEXT)
+        assertThat(generatorProperties.getColumnType("xml")).isEqualTo(ColumnType.TEXT)
+        assertThat(generatorProperties.getColumnType("json")).isEqualTo(ColumnType.TEXT)
+        assertThat(generatorProperties.getColumnType("double precision")).isEqualTo(ColumnType.DOUBLE)
+        assertThat(generatorProperties.getColumnType("numeric")).isEqualTo(ColumnType.DOUBLE)
+        assertThat(generatorProperties.getColumnType("real")).isEqualTo(ColumnType.DOUBLE)
+        assertThat(generatorProperties.getColumnType("integer")).isEqualTo(ColumnType.INTEGER)
+        try {
+            assertThat(generatorProperties.getColumnType("UNKNOWN"))
+            fail("UNKNOWN database column type failed to throw IllegalArgumentException")
+        } catch (iae: IllegalArgumentException) {
+            // expected and correct
+        }
     }
+
+
+    @Test
+    fun testFieldMappings() {
+        assertThat(generatorProperties.getFieldType(ColumnType.ID)).isEqualTo(FieldType.STRING)
+        assertThat(generatorProperties.getFieldType(ColumnType.TIMESTAMP)).isEqualTo(FieldType.TIMESTAMP)
+    }
+
+
 }

@@ -79,7 +79,7 @@ data class TableMapping(
 // database column types are 'normalised' into an internal column type for easier handling
 enum class ColumnType(val databaseRegex: String) {
     ID("key"),
-    TEXT("varchar|text|character"),
+    TEXT("varchar|text|character|uuid|xml|json"),
     DOUBLE("double|real|decimal|numeric"),
     INTEGER("integer|bigint|smallint|serial"),
     TIMESTAMP("timestamp|date|time|interval"),
@@ -112,8 +112,17 @@ data class ModelMapping(
     var fields: List<FieldMapping>,
 )
 
+// field types are mapped from internal column types using a Regex match
+enum class FieldType(val javaClass:String, val columnTypeRegex: String) {
+    STRING("String","ID|TEXT|STRING"),
+    DOUBLE("Double", "DOUBLE"),
+    INTEGER("Integer", "INTEGER|NUMBER"),
+    TIMESTAMP("java.sql.Timestamp", "TIMESTAMP"),
+    BOOLEAN("Boolean", "BOOLEAN");
+}
+
 data class FieldMapping(
     var fieldName: String,
-    var fieldType: String,
+    var fieldType: FieldType,
     var jsonName: String? = null,
 )
