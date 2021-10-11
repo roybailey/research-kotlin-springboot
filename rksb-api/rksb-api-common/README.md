@@ -7,18 +7,11 @@ Module of [**`..`**](../README.md) *parent*
 
 ## Design
 
-Modules to encapsulate all common api code,
-including reading and handling api blueprint definitions.
+Encapsulate all common api code, including base classes for Controllers and Services.
 
-* API Blueprint definition and parsing
+* `ApiResponse` for standard API response object (meta data and result array)
 * `BaseController` for default Rest Controller code
-* `BaseService` for default Data Service code
-
-
-## User Guide
-
-* add dependency
-* add api blueprint configuration to your springboot application 
+* `BaseService` for default Service code
 
 
 ## Developers Guide

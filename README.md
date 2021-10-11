@@ -31,7 +31,7 @@ Module          | Description
 ### Prerequisites
 
 * **Java11**, this project contains 3rd party libraries that require Java11 or above 
-* **Postgres** access for code generation, see `pom.xml` for properties to assign
+* **Postgres** access for code generation, see [**`application-blueprint.yml`**](rksb-api/rksb-api-blueprint/src/main/resources/application-blueprint.yml) for properties
 * **Docker**, optionally used by test-containers for testing 3rd party databases (excluded by default using JUnit5 tag `test-containers`) 
 
 ```

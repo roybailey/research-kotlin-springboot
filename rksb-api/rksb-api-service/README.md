@@ -1,23 +1,29 @@
 # API Service
 
-**Module containing API service library code, both generated and custom library code**
+**Module containing API service generated code library**
 
 Module of [**`..`**](../README.md) *parent*
 
 
 ## Design
 
-Modules to generate all API code from Blueprints using the Generator and package into jar.
+There is no code, this module runs the generator application as part of the maven build which populates the project.
 
-There is no code, the module runs the generator application as part of the build which populates the src
+* `BLUEPRINT.asciidoc` a humanly readable blueprints collection report.
+* `src/main/resources/blueprint-collection.json` the compiled runtime blueprints collection configuration.
+* `src/main/kotlin/.../api` all api related code generation source.
+* `src/main/kotlin/.../jooq` all jooq database related code generation source.
 
 
 ## Getting Started
+
+See parent [**`README`**](../README.md)
 
 
 ## Developers Guide
 
 * `mvn clean install` 
+
 
 ### Prerequisites
 
