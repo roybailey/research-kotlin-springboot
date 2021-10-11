@@ -1,10 +1,11 @@
-blueprints-templates:
+blueprint-templates:
   - api/codegen-sample-blueprint.json
-blueprints:
-  # contains the list of blueprints for aggregation and code generation
+blueprint:
+  # the compiled blueprint templates used for code generation and for runtime services
+  collection: blueprint-collection.json
   # base package for source code generation
   base-package: me.roybailey.codegen
-  # datasource for blueprints
+  # datasource for blueprint database
   datasource:
     # when enabled=true the primary dataSource is created from the below properties (only activated by services)
     enabled: false

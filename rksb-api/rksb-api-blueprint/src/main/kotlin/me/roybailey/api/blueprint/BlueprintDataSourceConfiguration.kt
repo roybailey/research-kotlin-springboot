@@ -11,21 +11,21 @@ import javax.sql.DataSource
 
 
 @Configuration
-@ConditionalOnProperty(value=["blueprints.datasource.enabled"], havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(value=["blueprint.datasource.enabled"], havingValue = "true", matchIfMissing = false)
 open class BlueprintDataSourceConfiguration {
 
     @Bean
     @Primary
-    @ConfigurationProperties("blueprints.datasource")
-    open fun blueprintsDataSourceProperties(): DataSourceProperties {
+    @ConfigurationProperties("blueprint.datasource")
+    open fun blueprintDataSourceProperties(): DataSourceProperties {
         return DataSourceProperties()
     }
 
     @Bean
     @Primary // this will override the datasource autoconfiguration and use your own everywhere
-    @ConditionalOnProperty(value=["blueprints.datasource.enabled"], havingValue = "true", matchIfMissing = false)
+    @ConditionalOnProperty(value=["blueprint.datasource.enabled"], havingValue = "true", matchIfMissing = false)
     open fun dataSource(): DataSource {
-        return blueprintsDataSourceProperties().initializeDataSourceBuilder()
+        return blueprintDataSourceProperties().initializeDataSourceBuilder()
             .type(HikariDataSource::class.java).build()
     }
 

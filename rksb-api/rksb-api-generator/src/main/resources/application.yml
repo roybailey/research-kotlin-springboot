@@ -2,7 +2,7 @@ spring:
   main:
     web-application-type: none
 # disable production blueprint configuration for the generator as it loads the templates instead
-blueprints:
+blueprint:
   enabled: false
   # enable database schema migration
   flyway:

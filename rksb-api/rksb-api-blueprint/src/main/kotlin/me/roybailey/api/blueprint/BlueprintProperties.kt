@@ -9,34 +9,34 @@ import org.springframework.context.annotation.PropertySource
 
 @Configuration
 @ConfigurationProperties
-@PropertySource(value = ["classpath:application-blueprints.yml"], factory = YamlPropertySourceFactory::class)
+@PropertySource(value = ["classpath:application-blueprint.yml"], factory = YamlPropertySourceFactory::class)
 open class BlueprintProperties {
 
-    //@Value("\${blueprints-templates}")
-    lateinit var blueprintsTemplates: List<String>
+    //@Value("\${blueprint-templates}")
+    lateinit var blueprintTemplates: List<String>
 
-    @Value("\${blueprints.base-package}")
-    lateinit var blueprintsBasePackage: String
+    @Value("\${blueprint.base-package}")
+    lateinit var blueprintBasePackage: String
 
-    @Value("\${blueprints.collection:blueprint-collection.json}")
-    lateinit var blueprintsCollectionFilename: String
+    @Value("\${blueprint.collection:blueprint-collection.json}")
+    lateinit var blueprintCollectionFilename: String
 
-    @Value("\${blueprints.datasource.url:}")
-    lateinit var blueprintsDatabaseUrl: String
+    @Value("\${blueprint.datasource.url:}")
+    lateinit var blueprintDatabaseUrl: String
 
-    @Value("\${blueprints.datasource.driver:org.postgresql.Driver}")
-    lateinit var blueprintsDatabaseDriver: String
+    @Value("\${blueprint.datasource.driver:org.postgresql.Driver}")
+    lateinit var blueprintDatabaseDriver: String
 
-    @Value("\${blueprints.datasource.username:}")
-    lateinit var blueprintsDatabaseUsername: String
+    @Value("\${blueprint.datasource.username:}")
+    lateinit var blueprintDatabaseUsername: String
 
-    @Value("\${blueprints.datasource.password:}")
-    lateinit var blueprintsDatabasePassword: String
+    @Value("\${blueprint.datasource.password:}")
+    lateinit var blueprintDatabasePassword: String
 
-    @Value("\${blueprints.datasource.schema:}")
-    lateinit var blueprintsDatabaseSchema: String
+    @Value("\${blueprint.datasource.schema:}")
+    lateinit var blueprintDatabaseSchema: String
 
-    @Value("\${blueprints.datasource.excludes}")
-    lateinit var blueprintsDatabaseExcludes: String
+    @Value("\${blueprint.datasource.excludes}")
+    lateinit var blueprintDatabaseExcludes: String
 
 }

@@ -16,7 +16,7 @@ import org.springframework.test.context.ActiveProfiles
 open class TestBlueprintSpringApplication
 
 @SpringBootTest(classes = [TestBlueprintSpringApplication::class])
-@ActiveProfiles("test", "blueprints")
+@ActiveProfiles("test", "blueprint")
 open class BlueprintConfigurationTest {
 
     @Autowired
@@ -35,26 +35,26 @@ open class BlueprintConfigurationTest {
     @Test
     fun testBlueprintConfiguration() {
 
-        assertThat(blueprintProperties.blueprintsTemplates).isNotNull
-        assertThat(blueprintProperties.blueprintsTemplates.size).isGreaterThan(0)
-        assertThat(blueprintProperties.blueprintsTemplates[0]).isEqualTo("api/codegen-sample-blueprint.json")
+        assertThat(blueprintProperties.blueprintTemplates).isNotNull
+        assertThat(blueprintProperties.blueprintTemplates.size).isGreaterThan(0)
+        assertThat(blueprintProperties.blueprintTemplates[0]).isEqualTo("api/codegen-sample-blueprint.json")
 
-        assertThat(blueprintProperties.blueprintsBasePackage).isNotNull
-        assertThat(blueprintProperties.blueprintsBasePackage.length).isGreaterThan(0)
+        assertThat(blueprintProperties.blueprintBasePackage).isNotNull
+        assertThat(blueprintProperties.blueprintBasePackage.length).isGreaterThan(0)
 
-        assertThat(blueprintProperties.blueprintsCollectionFilename).isNotNull
-        assertThat(blueprintProperties.blueprintsCollectionFilename.length).isGreaterThan(0)
+        assertThat(blueprintProperties.blueprintCollectionFilename).isNotNull
+        assertThat(blueprintProperties.blueprintCollectionFilename.length).isGreaterThan(0)
 
-        assertThat(blueprintProperties.blueprintsDatabaseUrl).isNotNull
-        assertThat(blueprintProperties.blueprintsDatabaseUrl.length).isGreaterThan(0)
+        assertThat(blueprintProperties.blueprintDatabaseUrl).isNotNull
+        assertThat(blueprintProperties.blueprintDatabaseUrl.length).isGreaterThan(0)
 
-        assertThat(blueprintProperties.blueprintsDatabaseUsername).isNotNull
-        assertThat(blueprintProperties.blueprintsDatabaseUsername.length).isGreaterThan(0)
+        assertThat(blueprintProperties.blueprintDatabaseUsername).isNotNull
+        assertThat(blueprintProperties.blueprintDatabaseUsername.length).isGreaterThan(0)
 
-        assertThat(blueprintProperties.blueprintsDatabaseSchema).isNotNull
-        assertThat(blueprintProperties.blueprintsDatabaseSchema.length).isGreaterThan(0)
+        assertThat(blueprintProperties.blueprintDatabaseSchema).isNotNull
+        assertThat(blueprintProperties.blueprintDatabaseSchema.length).isGreaterThan(0)
 
-        assertThat(blueprintProperties.blueprintsDatabaseExcludes).isNotNull
+        assertThat(blueprintProperties.blueprintDatabaseExcludes).isNotNull
     }
 
 

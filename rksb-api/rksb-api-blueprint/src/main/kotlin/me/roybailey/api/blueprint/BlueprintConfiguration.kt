@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration
 
 
 @Configuration
-@ConditionalOnProperty(value = ["blueprints.enabled"], havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = ["blueprint.enabled"], havingValue = "true", matchIfMissing = true)
 open class BlueprintConfiguration {
 
     private val logger = KotlinLogging.logger {}
@@ -29,13 +29,13 @@ open class BlueprintConfiguration {
     @Bean
     open fun defaultBlueprintCollection(): BlueprintCollection {
         try {
-            logger.info("Loading BlueprintCollection [${blueprintProperties.blueprintsCollectionFilename}]...")
+            logger.info("Loading BlueprintCollection [${blueprintProperties.blueprintCollectionFilename}]...")
             return jsonMapper().readValue(
-                this.javaClass.classLoader.getResourceAsStream(blueprintProperties.blueprintsCollectionFilename),
+                this.javaClass.classLoader.getResourceAsStream(blueprintProperties.blueprintCollectionFilename),
                 BlueprintCollection::class.java
             )
         } catch (err: Exception) {
-            throw RuntimeException("Failed to load BlueprintCollection [${blueprintProperties.blueprintsCollectionFilename}] with [${err.message}]", err)
+            throw RuntimeException("Failed to load BlueprintCollection [${blueprintProperties.blueprintCollectionFilename}] with [${err.message}]", err)
         }
     }
 }

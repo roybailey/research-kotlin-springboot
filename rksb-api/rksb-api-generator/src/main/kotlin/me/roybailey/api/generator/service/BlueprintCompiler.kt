@@ -8,7 +8,6 @@ import org.apache.commons.text.CaseUtils
 import org.jooq.impl.DSL.using
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import java.lang.ClassLoader.getSystemResourceAsStream
 import java.lang.IllegalArgumentException
 import java.util.stream.Collectors
 
@@ -28,11 +27,11 @@ open class BlueprintCompiler {
     lateinit var jsonMapper: ObjectMapper
 
 
-    fun compileBlueprintsTemplates(): BlueprintCollection {
+    fun compileBlueprintTemplates(): BlueprintCollection {
 
-        val blueprintCollection = BlueprintCollection(packageName = blueprintProperties.blueprintsBasePackage)
-        val blueprintFiles = blueprintProperties.blueprintsTemplates
-        logger.info("Loaded api.blueprints as $blueprintFiles")
+        val blueprintCollection = BlueprintCollection(packageName = blueprintProperties.blueprintBasePackage)
+        val blueprintFiles = blueprintProperties.blueprintTemplates
+        logger.info("Compiling blueprint-templates as $blueprintFiles")
 
         if (blueprintFiles.isEmpty()) {
             logger.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -148,11 +147,11 @@ open class BlueprintCompiler {
      * Loads column type information into ApiColumnMapping objects directly from database schema
      */
     private fun loadTableColumns(tableNames: Set<String>): Map<String, List<ColumnMapping>> {
-        logger.info("loading columns from ${blueprintProperties.blueprintsDatabaseUrl} for schema=${blueprintProperties.blueprintsDatabaseSchema}")
+        logger.info("loading columns from ${blueprintProperties.blueprintDatabaseUrl} for schema=${blueprintProperties.blueprintDatabaseSchema}")
         val jooq = using(
-            blueprintProperties.blueprintsDatabaseUrl,
-            blueprintProperties.blueprintsDatabaseUsername,
-            blueprintProperties.blueprintsDatabasePassword
+            blueprintProperties.blueprintDatabaseUrl,
+            blueprintProperties.blueprintDatabaseUsername,
+            blueprintProperties.blueprintDatabasePassword
         )
         val mapApiColumnMapping = mutableMapOf<String, List<ColumnMapping>>()
 
@@ -169,7 +168,7 @@ open class BlueprintCompiler {
         // generation_expression, is_updatable
         val fetch = jooq.select()
             .from("information_schema.columns")
-            .where("table_schema='${blueprintProperties.blueprintsDatabaseSchema}'")
+            .where("table_schema='${blueprintProperties.blueprintDatabaseSchema}'")
             .fetch()
 
         fetch.forEach { record ->

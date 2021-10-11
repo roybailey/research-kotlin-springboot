@@ -8,8 +8,6 @@ import com.github.jknack.handlebars.Handlebars
 import com.github.jknack.handlebars.Options
 import com.github.jknack.handlebars.helper.DefaultHelperRegistry
 import me.roybailey.api.blueprint.BlueprintCollection
-import me.roybailey.api.blueprint.BlueprintDatabaseMigration
-import me.roybailey.api.blueprint.BlueprintProperties
 import me.roybailey.api.generator.service.BlueprintCompiler
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
@@ -58,10 +56,10 @@ open class GeneratorConfiguration {
 
 
     @Bean("blueprint-compiler")
-    @DependsOn("blueprints-database-migration")
+    @DependsOn("blueprint-database-migration")
     open fun blueprintCompiler(): BlueprintCollection {
         logger.info("---->>>> blueprintCompiler()")
-        val blueprintCollection = blueprintCompiler.compileBlueprintsTemplates()
+        val blueprintCollection = blueprintCompiler.compileBlueprintTemplates()
 
         if(generatorProperties.codegenWriteFilesEnabled) {
             File(generatorProperties.basedir+"/"+generatorProperties.codegenBlueprintCollection)

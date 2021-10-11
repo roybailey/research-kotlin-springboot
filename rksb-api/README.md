@@ -5,10 +5,14 @@
 
 ## Design
 
-Modules intended to generate boilerplate code through layering of code generation steps as follows
+Modules to generate boilerplate code for supporting RESTful APIs mapped to database tables.
 
-1. Build the api domain configurations (e.g. definition of all requirements and configurations for code generation)
-1. Run generator process to update the database schema and generate typesafe Java database schema
+* Blueprint templates are used to define modular and high level Controller, Service, Table and Data Model mappings
+* Blueprint templates are compiled into a single aggregate blueprint collection
+* The blueprint compiler populates derived values (e.g. package names, class names) and fields taken from a database table
+* The generated code is checked-in to allow for the same audit trail and diff comparisons as the blueprints grow or evolve
+* The generated code is part of the maven build but only executes when enabled (intended for local development only)
+* Flyway is used to control an idempotent database schema used to generate code at (local) build time before being checked-in
 
 
 ## Modules
@@ -16,10 +20,10 @@ Modules intended to generate boilerplate code through layering of code generatio
 Module          | Description
 --------------- | ------------- 
 [**`..`**](../README.md) | *parent*
-[**`rksb-api-blueprint`**](./rksb-api-blueprint/README.md)    |  API blueprints, definitions and documentation
-[**`rksb-api-common`**](./rksb-api-common/README.md)          |  API common custom code library (base classes, utilities)
-[**`rksb-api-generator`**](./rksb-api-generator/README.md)    |  API database and code generation tooling
-[**`rksb-api-service`**](./rksb-api-service/README.md)        |  API generated code output
+[**`rksb-api-blueprint`**](./rksb-api-blueprint/README.md)    |  API blueprint templates and runtime SpringBoot configuration
+[**`rksb-api-common`**](./rksb-api-common/README.md)          |  API common code library (base classes, utilities)
+[**`rksb-api-generator`**](./rksb-api-generator/README.md)    |  API database and code generation tool
+[**`rksb-api-service`**](./rksb-api-service/README.md)        |  API service generated code output
 
 
 ## User Guide
@@ -33,31 +37,31 @@ Add the dependency to the code generated module in your `pom.xml`
     </dependency>
 ```
 
-Enable use of the blueprints datasource in your `application.xml`
+Enable use of the blueprint datasource in your `application.xml`
 
 ```yaml
-blueprints:
+blueprint:
   datasource:
-    # when enabled=true the primary dataSource is created from the application-blueprints.yml properties
+    # when enabled=true the primary dataSource is created from the application-blueprint.yml properties
     enabled: true
 ```
 
-Enable use of the blueprints flyway data migration
+Enable use of the blueprint flyway data migration (typically disable for auto-configured spring)
 
 ```yaml
 spring:
   flyway:
     # when enabled=true the spring database schema migration is applied to the flyway datasource
     enabled: false
-blueprints:
+blueprint:
   flyway:
-    # when enabled=true the blueprints database schema migration is applied to the blueprints datasource
+    # when enabled=true the blueprint database schema migration is applied to the blueprint datasource
     enabled: true
 ```
 
 ## Developers Guide
 
-Set the environment variable `BLUEPRINTS_GENERATOR=true` so that the generator runs as part of the local build process.
+Set the environment variable `BLUEPRINT_GENERATOR=true` so that the generator runs as part of the local build process.
 Do not set this for CI/CD builds.  The generated code is intended to be 'checked-in' after local testing and saved
 as committed code.
 

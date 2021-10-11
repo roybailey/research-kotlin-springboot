@@ -16,7 +16,7 @@ These blueprints provide the following...
 * Database Table Details
 * Data Models for loading from Database and serving as JSON
 
-These are stored in the `resources` folder so they can be used both by the build system
+These are stored in the `resources` folder so that they can be used both by the build system
 for code generation and loaded at runtime for common code logic.
 
 For example:  The build system can code generate a `RestController` while the runtime
@@ -41,10 +41,10 @@ e.g. use DROP IF EXISTS, then CREATE
   * e.g. `<api-name>-blueprint.json` file, create and populate accordingly
 * `src/main/resources/ddl` folder, add new Database schema view
   * e.g. `V0003__<api-name>.sql` file and populate accordingly (using next free sequence number)
-* `application-blueprints.yml`, add `- api/<api-name>-blueprint.json` to `blueprints.templates` list 
+* `application-blueprint.yml`, add `- api/<api-name>-blueprint.json` to `blueprint-templates` list 
 
 ```
-blueprints-templates:
+blueprint-templates:
   - api/codegen-sample-blueprint.json
   - api/<api-name>-blueprint.json
 ```

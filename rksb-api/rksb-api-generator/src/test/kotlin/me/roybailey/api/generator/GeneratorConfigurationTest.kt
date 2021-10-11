@@ -41,7 +41,7 @@ open class GeneratorConfigurationTest : GeneratorTestBase() {
 
         assertThat(blueprintCollection).isNotNull
         assertThat(blueprintCollection.packageName).isNotBlank
-        assertThat(blueprintCollection.blueprints.size).isEqualTo(blueprintProperties.blueprintsTemplates.size)
+        assertThat(blueprintCollection.blueprints.size).isEqualTo(blueprintProperties.blueprintTemplates.size)
 
         // use the first codegen-sample blueprint to verify the configuration loads and resolves as expected
         BlueprintCollection(

@@ -25,7 +25,7 @@ e.g. generating classes with String identifiers and let the common base code loo
 
 * Run the `GeneratorApplication` and pass `--project.basedir=.../rksb-api-service --project.version=0.0.0-SNAPSHOT`
 
-This uses the database source and blueprint templates defined in the `application-blueprints.yml`
+This uses the database source and blueprint templates defined in the `application-blueprint.yml`
 from the `rksb-api-blueprint` module.  And also applies the database schema migration from the `rksb-api-blueprint` module.  
 
 

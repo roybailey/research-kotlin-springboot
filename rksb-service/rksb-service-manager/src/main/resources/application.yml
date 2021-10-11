@@ -31,9 +31,9 @@ management:
       exposure:
         include: health,info,metrics
 
-blueprints:
+blueprint:
   flyway:
-    # when enabled=true the blueprints database schema migration will be executed on startup against the blueprint datasource
+    # when enabled=true the blueprint database schema migration will be executed on startup against the blueprint datasource
     enabled: true
   datasource:
     # when enabled=true the primary dataSource is created from the below properties (used by runtime services)

@@ -1,6 +1,5 @@
 package me.roybailey.api.generator.app
 
-import ch.qos.logback.core.util.OptionHelper.getEnv
 import me.roybailey.api.blueprint.BlueprintDatabaseMigration
 import me.roybailey.api.blueprint.BlueprintProperties
 import me.roybailey.api.generator.configuration.GeneratorResult
@@ -47,22 +46,14 @@ open class GeneratorApplication : ApplicationRunner {
 
 
     override fun run(args: ApplicationArguments?) {
-        val envVariableEnabler = "BLUEPRINTS_GENERATOR"
-        val enabled = System.getenv(envVariableEnabler)
-        if("true" != enabled) {
-            logger.info("!!!!!!!!!! Generator exiting as $envVariableEnabler != 'true' but == '$enabled'")
-            logger.info("!!!!!!!!!! this is normal for CI/CD builds")
-            logger.info("!!!!!!!!!! in development you might want to generate code for local builds by assigning $envVariableEnabler=true")
-            exitProcess(0)
-        }
         logger.info("Application started with command-line arguments: {}", args!!.sourceArgs)
         logger.info("NonOptionArgs: {}", args.nonOptionArgs)
         logger.info("OptionNames: {}", args.optionNames)
 
         logger.info(
             "blueprintProperties: {} {}",
-            blueprintProperties.blueprintsDatabaseUrl,
-            blueprintProperties.blueprintsDatabaseUsername
+            blueprintProperties.blueprintDatabaseUrl,
+            blueprintProperties.blueprintDatabaseUsername
         )
 
         logger.info("############################################################")
@@ -75,10 +66,10 @@ open class GeneratorApplication : ApplicationRunner {
             exitProcess(-1)
         }
 
-        // compile the blueprints templates into the fully qualified aggregate blueprints collection
-        blueprintCompiler.compileBlueprintsTemplates()
+        // compile the blueprint templates into the fully qualified aggregate blueprint collection
+        blueprintCompiler.compileBlueprintTemplates()
 
-        // run the code generators now the database and blueprints are updated
+        // run the code generators now the database is updated and blueprint collection compiled
         val generators = listOf(databaseCodeGenerator, codeGenerator, asciiDocGenerator)
         val mapGeneratorResult = mutableListOf<GeneratorResult>()
         generators.forEach { generator ->
@@ -100,10 +91,21 @@ fun main(args: Array<String>) {
     println("    ##|  \\##\\##/--/  ##|\\####|##/--/  ##/--##\\##/--##|   ##|   ##|  ##|##/--##\\")
     println("    \\######//#######\\##| \\###|#######\\##|  ##|##|  ##|   ##|   \\#####//##|  ##|")
     println("     \\-----/ \\------/\\-/  \\--/\\------/\\-/  \\-/\\-/  \\-/   \\-/    \\----/ \\-/  \\-/")
-    println("    EVIDENCE LAB DISTRIBUTION CODE GENERATOR")
+    println("    CODE GENERATOR")
     println("")
 
-    // now the database schema has been updated the database/code generation can start
-    runApplication<GeneratorApplication>(*args)
+    val envVariableEnabler = "BLUEPRINT_GENERATOR"
+    val enabled = System.getenv(envVariableEnabler)
+
+    if("true" == enabled) {
+        runApplication<GeneratorApplication>(*args)
+    } else {
+        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        println("!!!!!!!!!! Generator exiting as $envVariableEnabler != 'true' but == '$enabled'")
+        println("!!!!!!!!!! this is normal for CI/CD builds")
+        println("!!!!!!!!!! in development you might want to generate code for local builds by assigning $envVariableEnabler=true")
+        println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    }
+
 }
 

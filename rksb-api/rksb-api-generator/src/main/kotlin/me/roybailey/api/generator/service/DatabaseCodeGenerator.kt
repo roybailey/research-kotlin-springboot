@@ -34,8 +34,8 @@ class DatabaseCodeGenerator : Callable<GeneratorResult> {
         val basedir = generatorProperties.basedir
         val target = generatorProperties.target
         val directory = "${basedir}/${target}"
-        val packageName = "${blueprintProperties.blueprintsBasePackage}.jooq.database"
-        val excludes = blueprintProperties.blueprintsDatabaseExcludes
+        val packageName = "${blueprintProperties.blueprintBasePackage}.jooq.database"
+        val excludes = blueprintProperties.blueprintDatabaseExcludes
         val includes = blueprintCollection.allTables()
             .map { tableMapping -> tableMapping.tableName }
             .toList()
@@ -51,10 +51,10 @@ class DatabaseCodeGenerator : Callable<GeneratorResult> {
         var configuration = org.jooq.meta.jaxb.Configuration()
             .withJdbc(
                 Jdbc()
-                    .withDriver(blueprintProperties.blueprintsDatabaseDriver)
-                    .withUrl(blueprintProperties.blueprintsDatabaseUrl)
-                    .withUser(blueprintProperties.blueprintsDatabaseUsername)
-                    .withPassword(blueprintProperties.blueprintsDatabasePassword)
+                    .withDriver(blueprintProperties.blueprintDatabaseDriver)
+                    .withUrl(blueprintProperties.blueprintDatabaseUrl)
+                    .withUser(blueprintProperties.blueprintDatabaseUsername)
+                    .withPassword(blueprintProperties.blueprintDatabasePassword)
             )
             .withGenerator(
                 Generator()
@@ -72,7 +72,7 @@ class DatabaseCodeGenerator : Callable<GeneratorResult> {
                             .withName("org.jooq.meta.postgres.PostgresDatabase")
                             .withIncludes(includes)
                             .withExcludes(excludes)
-                            .withInputSchema(blueprintProperties.blueprintsDatabaseSchema)
+                            .withInputSchema(blueprintProperties.blueprintDatabaseSchema)
                     )
                     .withTarget(
                         Target()

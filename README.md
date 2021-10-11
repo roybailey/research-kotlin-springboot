@@ -69,7 +69,7 @@ Any specialist software should be confined to a common library module within
 
 ### Database Configuration
 
-* Update [**application-blueprints.yml**](./rksb-api/rksb-api-blueprint/src/main/resources/application-blueprints.yml) for updating database properties
+* Update [**application-blueprint.yml**](./rksb-api/rksb-api-blueprint/src/main/resources/application-blueprint.yml) for updating database properties
 
 
 ## Handover Suggestions

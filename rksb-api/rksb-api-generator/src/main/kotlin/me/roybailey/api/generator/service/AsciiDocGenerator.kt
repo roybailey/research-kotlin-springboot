@@ -35,7 +35,7 @@ class AsciiDocGenerator : Callable<GeneratorResult> {
 
             toc::[]
 
-            == Controllers 
+            == Blueprint  
             
             [cols=5*,options=header]
             |===

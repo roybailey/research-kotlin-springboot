@@ -5,13 +5,11 @@ import org.flywaydb.core.Flyway
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.stereotype.Component
-import org.yaml.snakeyaml.Yaml
-import java.util.concurrent.Callable
 import javax.annotation.PostConstruct
 
 
-@Component("blueprints-database-migration")
-@ConditionalOnProperty(value=["blueprints.flyway.enabled"], havingValue = "true", matchIfMissing = false)
+@Component("blueprint-database-migration")
+@ConditionalOnProperty(value=["blueprint.flyway.enabled"], havingValue = "true", matchIfMissing = false)
 class BlueprintDatabaseMigration {
 
     private val logger = KotlinLogging.logger {}
@@ -28,11 +26,11 @@ class BlueprintDatabaseMigration {
             .baselineVersion("0001")
             .locations("classpath:ddl")
             .dataSource(
-                blueprintProperties.blueprintsDatabaseUrl,
-                blueprintProperties.blueprintsDatabaseUsername,
-                blueprintProperties.blueprintsDatabasePassword
+                blueprintProperties.blueprintDatabaseUrl,
+                blueprintProperties.blueprintDatabaseUsername,
+                blueprintProperties.blueprintDatabasePassword
             )
-            .table("blueprints-schema-history")
+            .table("blueprint-schema-history")
             .load()
         val migration = flyway.migrate()
         logger.info("FlyWay Database Migration ${migration.initialSchemaVersion} ${migration.targetSchemaVersion}")
