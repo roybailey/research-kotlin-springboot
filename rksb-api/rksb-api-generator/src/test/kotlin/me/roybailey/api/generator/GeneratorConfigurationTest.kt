@@ -76,7 +76,7 @@ open class GeneratorConfigurationTest : GeneratorTestBase() {
       }, {
         "apiPath" : "/lite",
         "apiRequestParameters" : {
-          "title" : [ "cc" ]
+          "title" : [ "ccc" ]
         },
         "apiMethodName" : "getLiteData",
         "serviceMethodName" : "getLiteData"

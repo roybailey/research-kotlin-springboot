@@ -2,10 +2,10 @@ package me.roybailey.api.common
 
 import me.roybailey.api.blueprint.*
 import org.jooq.Condition
+import org.jooq.Field
+import org.jooq.Table
 import org.jooq.impl.DSL.trueCondition
 import org.jooq.impl.TableImpl
-import java.lang.Double.parseDouble
-import java.lang.Integer.parseInt
 import javax.annotation.PostConstruct
 
 
@@ -41,54 +41,103 @@ open class BaseService(
         parameters: Map<String, Any>,
         table: TableImpl<*>
     ): Condition {
-        val params = HashMap<String, Any>(parameters)
+        val filterParams = HashMap<String, Any>(parameters)
         var result: Condition = trueCondition()
         // first search for custom or overridden filters
         tableMapping.filters.forEach { filterMapping ->
-            if (params.contains(filterMapping.name)) {
-                logger.info("Building filter ${filterMapping.name}=${params[filterMapping.name]}")
+            if (filterParams.contains(filterMapping.name)) {
+                logger.info("Building filter ${filterMapping.name}=${filterParams[filterMapping.name]}")
                 result = when (filterMapping.type) {
-                    FilterType.EQUAL -> result.and(
-                        "${table.field(filterMapping.column.toLowerCase())!!} = ${getString(params, filterMapping.name)}"
+                    FilterType.EQUAL -> conditionEquals(
+                        result,
+                        table,
+                        filterMapping.column,
+                        filterMapping.name,
+                        filterParams
                     )
-                    FilterType.BETWEEN -> result.and(
-                        "${table.field(filterMapping.column.toLowerCase())!!} <= '${getString(params, filterMapping.name)}'"
-                    ).and(
-                        "${table.field((filterMapping.params["column2"] as String).toLowerCase())!!} > '${getString(params, filterMapping.name)}'"
+                    FilterType.LIKE -> conditionLike(
+                        result,
+                        table,
+                        filterMapping.column,
+                        filterMapping.name,
+                        filterParams
                     )
-                    else ->
-                        result.and(
-                            table.field(filterMapping.column.toLowerCase())!!
-                                .like("%" + getString(params, filterMapping.name) + "%")
-                        )
+                    FilterType.BETWEEN -> conditionBetween(result, table, filterMapping, filterParams)
                 }
-                params.remove(filterMapping.name)
+                filterParams.remove(filterMapping.name)
             }
         }
         // second search for generic column filters
         tableMapping.columns.forEach { columnMapping ->
-            if (params.contains(columnMapping.column)) {
-                logger.info("Building column filter ${columnMapping.column}=${params[columnMapping.column]}")
-                result = when (columnMapping.type) {
-                    ColumnType.INTEGER ->
-                        result.and(
-                            "${table.field(columnMapping.column.toLowerCase())!!} = ${getString(params, columnMapping.column)}"
-                        )
-                    ColumnType.DOUBLE ->
-                        result.and(
-                            "${table.field(columnMapping.column.toLowerCase())!!} = ${getString(params, columnMapping.column)}"
-                        )
-                    else ->
-                        result.and(
-                            table.field(columnMapping.column.toLowerCase())!!
-                                .like("%" + getString(params, columnMapping.column) + "%")
-                        )
-                }
-                params.remove(columnMapping.column)
+            if (filterParams.contains(columnMapping.column)) {
+                logger.info("Building column filter ${columnMapping.column}=${filterParams[columnMapping.column]}")
+                result =
+                    conditionEquals(result, table, columnMapping, columnMapping.column, filterParams)
+                filterParams.remove(columnMapping.column)
             }
         }
         logger.info("Filter assigned as: [$result]")
         return result
+    }
+
+
+    private fun conditionEquals(
+        result: Condition,
+        table: Table<*>,
+        columnMapping: ColumnMapping,
+        filterName: String,
+        filterParams: HashMap<String, Any>
+    ): Condition {
+        val tableField = table.field(columnMapping.column)!!
+        return when (columnMapping.type) {
+            ColumnType.TEXT -> result.and("$tableField = '${getString(filterParams, filterName)}'")
+            else -> result.and("$tableField = ${getString(filterParams, filterName)}")
+        }
+    }
+
+
+    private fun conditionEquals(
+        result: Condition,
+        table: Table<*>,
+        columnName: String,
+        filterName: String,
+        filterParams: HashMap<String, Any>
+    ): Condition {
+        val tableField = table.field(columnName)!!
+        return when {
+            getString(filterParams, filterName).contains("%") ->
+                result.and(tableField.like("%" + getString(filterParams, filterName) + "%"))
+            // todo add IN clause handling for multiple values
+            else ->
+                result.and("$tableField = ${getString(filterParams, filterName)}")
+        }
+    }
+
+
+    private fun conditionLike(
+        result: Condition,
+        table: Table<*>,
+        columnName: String,
+        filterName: String,
+        filterParams: HashMap<String, Any>
+    ): Condition {
+        val tableField = table.field(columnName)!!
+        return result.and(tableField.like("%" + getString(filterParams, filterName) + "%"))
+    }
+
+
+    private fun conditionBetween(
+        result: Condition,
+        table: Table<*>,
+        filterMapping: FilterMapping,
+        filterParams: HashMap<String, Any>
+    ): Condition {
+        // TODO this is one use-case, needs expanding to handle other types
+        val tableField1 = table.field(filterMapping.column)!!
+        val tableField2 = table.field((filterMapping.params["column2"] as String).toLowerCase())!!
+        return result
+            .and("$tableField1 <= '${getString(filterParams, filterMapping.name)}'")
+            .and("$tableField2 > '${getString(filterParams, filterMapping.name)}'")
     }
 
 }
