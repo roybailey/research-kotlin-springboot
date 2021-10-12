@@ -1,6 +1,7 @@
 package me.roybailey.api.blueprint
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import me.roybailey.common.util.unixEOL
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -72,7 +73,7 @@ open class BlueprintConfigurationTest {
         ).run {
             val codegenSampleResolved = mapper.writeValueAsString(this)
             println(codegenSampleResolved)
-            assertThat(codegenSampleResolved.replace("\r\n","\n")).isEqualTo(
+            assertThat(codegenSampleResolved.unixEOL()).isEqualTo(
                 """
 {
   "packageName" : "me.roybailey.codegen",
@@ -223,7 +224,7 @@ open class BlueprintConfigurationTest {
     } ]
   } ]
 }
-            """.trimIndent()
+            """.trimIndent().unixEOL()
             )
         }
     }

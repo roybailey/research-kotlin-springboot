@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import me.roybailey.api.blueprint.BlueprintCollection
 import me.roybailey.api.blueprint.ColumnType
 import me.roybailey.api.blueprint.FieldType
+import me.roybailey.common.util.unixEOL
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.fail
 import org.junit.jupiter.api.Test
@@ -50,7 +51,7 @@ open class GeneratorConfigurationTest : GeneratorTestBase() {
         ).run {
             val codegenSampleResolved = mapper.writeValueAsString(this)
             println(codegenSampleResolved)
-            assertThat(codegenSampleResolved.replace("\r\n", "\n")).isEqualTo(
+            assertThat(codegenSampleResolved.unixEOL()).isEqualTo(
                 """
 {
   "packageName" : "me.roybailey.codegen",
@@ -201,7 +202,7 @@ open class GeneratorConfigurationTest : GeneratorTestBase() {
     } ]
   } ]
 }
-            """.trimIndent()
+            """.trimIndent().unixEOL()
             )
         }
     }

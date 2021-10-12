@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import me.roybailey.common.util.unixEOL
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -23,14 +24,14 @@ class JacksonTest {
     @Test
     fun whenSerializeMovie_thenSuccess() {
         val movie = Movie("Endgame", "Marvel", 9.2f)
-        val serialized = mapper.writeValueAsString(movie)
+        val serialized = mapper.writeValueAsString(movie).unixEOL()
 
         val json = """
       {
         "name" : "Endgame",
         "studio" : "Marvel",
         "rating" : 9.2
-      }""".trimIndent()
+      }""".trimIndent().unixEOL()
         assertThat(serialized).isEqualTo(json)
     }
 
