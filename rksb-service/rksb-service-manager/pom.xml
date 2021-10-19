@@ -1,85 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>me.roybailey</groupId>
-		<artifactId>rksb-service</artifactId>
-		<version>0.1.0-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>me.roybailey</groupId>
+        <artifactId>rksb-service</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
 
-	<groupId>me.roybailey</groupId>
-	<artifactId>rksb-service-manager</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <groupId>me.roybailey</groupId>
+    <artifactId>rksb-service-manager</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-	<name>Research Kotlin SpringBoot Service Manager</name>
-	<description>Research Kotlin SpringBoot Service Manager Application</description>
+    <name>Research Kotlin SpringBoot Service Manager</name>
+    <description>Research Kotlin SpringBoot Service Manager Application</description>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>me.roybailey</groupId>
-				<artifactId>rksb-common-bom</artifactId>
-				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+    <properties>
+        <docker.image.prefix>${project.groupId}</docker.image.prefix>
+        <docker.image.name>${project.artifactId}</docker.image.name>
+    </properties>
 
-	<dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>me.roybailey</groupId>
+                <artifactId>rksb-common-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-		<dependency>
-			<groupId>me.roybailey</groupId>
-			<artifactId>rksb-common-starter</artifactId>
-			<version>${project.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-data-jpa</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>me.roybailey</groupId>
-			<artifactId>rksb-common-starter-test</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
-		</dependency>
+    <dependencies>
 
-		<dependency>
-			<groupId>me.roybailey</groupId>
-			<artifactId>rksb-api-service</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>me.roybailey</groupId>
+            <artifactId>rksb-common-starter</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-jpa</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>me.roybailey</groupId>
+            <artifactId>rksb-common-starter-test</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>me.roybailey</groupId>
+            <artifactId>rksb-api-service</artifactId>
+        </dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring-boot.version}</version>
-				<configuration>
-					<fork>true</fork>
-					<mainClass>me.roybailey.service.manager.ManagerApplicationKt</mainClass>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <fork>true</fork>
+                    <mainClass>me.roybailey.service.manager.ManagerApplicationKt</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <verbose>true</verbose>
+                    <images>
+                        <image>
+                            <name>${docker.image.prefix}/${docker.image.name}</name>
+                            <build>
+                                <from>fabric8/java-alpine-openjdk11-jdk</from>
+                                <assembly>
+                                    <descriptorRef>artifact</descriptorRef>
+                                    <targetDir>/</targetDir>
+                                    <inline>
+                                        <files>
+                                            <file>
+                                                <source>${project.basedir}/target/${project.artifactId}-${project.version}.jar</source>
+                                                <outputDirectory>deployments</outputDirectory>
+                                                <fileMode>0777</fileMode>
+                                            </file>
+                                        </files>
+                                    </inline>
+                                </assembly>
+                                <env>
+                                    <blueprint.datasource.url>jdbc:postgresql://host.docker.internal:5432/postgres
+                                    </blueprint.datasource.url>
+                                </env>
+                                <tags>
+                                    <tag>${project.version}</tag>
+                                </tags>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>5000:5000</port>
+                                </ports>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>package-docker-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
