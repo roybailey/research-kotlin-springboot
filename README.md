@@ -22,7 +22,9 @@ Module          | Description
 [**`rksb-service`**](./rksb-service/README.md)  |  Deployable Services (inc. Manager for database schema migration)
 
 
-## Getting Started
+## Developer Guide
+
+Also see [Change Log](./CHANGELOG.md) for recent changes.
 
 * `mvn clean install`
 * `./demo.sh` to run the demo application (showcase common libraries)
@@ -76,30 +78,4 @@ Any specialist software should be confined to a common library module within
 
 _Nuggets of Knowledge and Thinking from last people to work on the project._
 _e.g. suggestions for technical debt reduction, simplification or enhancements_
-
-* TODO: Strategy for Loading/Caching meta data (e.g. total records, min/max dates etc.)
-
-* DONE: Filter and column types as enum class values
-* DONE: Camel case JSON object fields
-* DONE: Generate basic filtering automatically using database columns
-* DONE: Add date between two columns complex filter use-case
-* DONE: Support overridable non-standard service methods and mappings from controller
-* DONE: Cleanup generator and manager structure/configuration
-* DONE: Generate AsciiDoc Blueprint report
-* DONE: Support multiple endpoints for controllers
-* DONE: Generate clean PoJos for API use
-* DONE: Extend blueprint data classes to include all derived data needed for generators
-* DONE: Create Manager catalogue of APIs
-* DONE: Update Demo to test Flyway not required
-* DONE: Map cleaner API path
-* DONE: Add default limit
-* DONE: Create Flyway Database Migration Manager
-* DONE: Create Database Column Schema as part of Code Generation
-* DONE: Create API Basic Filtering Config/Hooks
-* DONE: Create API Controller Code Generator
-* DONE: Create API Service Code Generator
-* DONE: Create API Jooq Database Code Generator
-* DONE: Create Demo application able to showcase code generated service
-* DONE: Create API Code Generation module wired into Maven build
-* DONE: Create Common Library module with BOM and Starter
 
